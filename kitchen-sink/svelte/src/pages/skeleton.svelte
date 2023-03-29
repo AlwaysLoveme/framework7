@@ -8,7 +8,6 @@
     ListItem,
     Card,
     SkeletonBlock,
-    Row,
     Button,
   } from 'framework7-svelte';
 
@@ -28,7 +27,7 @@
 <!-- svelte-ignore a11y-missing-attribute -->
 <Page>
   <Navbar title="Skeleton Elements" backLink="Back" />
-  <Block strong>
+  <Block strongIos outlineIos>
     <p>
       Skeleton (or Ghost) elements designed to improve perceived performance and make app feels
       faster.
@@ -43,11 +42,12 @@
   </Block>
 
   <BlockTitle>Skeleton List</BlockTitle>
-  <List mediaList class="skeleton-text">
+  <List strongIos outlineIos dividersIos mediaList class="skeleton-text">
     <ListItem
       title="Title"
       subtitle="Subtitle"
-      text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis et massa ac interdum.">
+      text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis et massa ac interdum."
+    >
       <span slot="media">
         <SkeletonBlock style="width: 40px; height: 40px; border-radius: 50%" />
       </span>
@@ -55,7 +55,8 @@
     <ListItem
       title="Title"
       subtitle="Subtitle"
-      text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis et massa ac interdum.">
+      text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis et massa ac interdum."
+    >
       <span slot="media">
         <SkeletonBlock style="width: 40px; height: 40px; border-radius: 50%" />
       </span>
@@ -64,29 +65,32 @@
 
   <BlockTitle>Skeleton Card</BlockTitle>
   <Card
+    outline
     class="skeleton-text"
     title="Card Header"
     content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis et massa ac interdum. Cras consequat felis at consequat hendrerit."
-    footer="Card Footer" />
+    footer="Card Footer"
+  />
 
   <BlockTitle>Loading Effects</BlockTitle>
-  <Block strong>
+  <Block strongIos outlineIos>
     <p>It supports few loading effects:</p>
-    <Row tag="p">
-      <Button fill small round class="col" onClick={() => load('fade')}>Fade</Button>
-      <Button fill small round class="col" onClick={() => load('wave')}>Wave</Button>
-      <Button fill small round class="col" onClick={() => load('pulse')}>Pulse</Button>
-    </Row>
+    <p class="grid grid-cols-3 grid-gap">
+      <Button fill small round onClick={() => load('fade')}>Fade</Button>
+      <Button fill small round onClick={() => load('wave')}>Wave</Button>
+      <Button fill small round onClick={() => load('pulse')}>Pulse</Button>
+    </p>
   </Block>
   {#if loading}
-    <List mediaList v-if="loading">
+    <List strongIos outlineIos dividersIos mediaList v-if="loading">
       {#each [1, 2, 3] as n}
         <ListItem
           key={n}
           class={`skeleton-text skeleton-effect-${effect}`}
           title="Full Name"
           subtitle="Position"
-          text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis et massa ac interdum. Cras consequat felis at consequat hendrerit. Aliquam vestibulum vitae lorem ac iaculis. Praesent nec pharetra massa, at blandit lectus. Sed tincidunt, lectus eu convallis elementum, nibh nisi aliquet urna, nec imperdiet felis sapien at enim.">
+          text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis et massa ac interdum. Cras consequat felis at consequat hendrerit. Aliquam vestibulum vitae lorem ac iaculis. Praesent nec pharetra massa, at blandit lectus. Sed tincidunt, lectus eu convallis elementum, nibh nisi aliquet urna, nec imperdiet felis sapien at enim."
+        >
           <span slot="media">
             <SkeletonBlock style="width: 40px; height: 40px; border-radius: 50%" />
           </span>
@@ -94,33 +98,39 @@
       {/each}
     </List>
   {:else}
-    <List mediaList>
+    <List strongIos outlineIos dividersIos mediaList>
       <ListItem
         title="John Doe"
         subtitle="CEO"
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis et massa ac interdum. Cras consequat felis at consequat hendrerit. Aliquam vestibulum vitae lorem ac iaculis. Praesent nec pharetra massa, at blandit lectus. Sed tincidunt, lectus eu convallis elementum, nibh nisi aliquet urna, nec imperdiet felis sapien at enim.">
+        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis et massa ac interdum. Cras consequat felis at consequat hendrerit. Aliquam vestibulum vitae lorem ac iaculis. Praesent nec pharetra massa, at blandit lectus. Sed tincidunt, lectus eu convallis elementum, nibh nisi aliquet urna, nec imperdiet felis sapien at enim."
+      >
         <img
           src="https://placeimg.com/80/80/people/1"
           style="width: 40px; height: 40px; border-radius: 50%"
-          slot="media" />
+          slot="media"
+        />
       </ListItem>
       <ListItem
         title="Jane Doe"
         subtitle="Marketing"
-        text="Cras consequat felis at consequat hendrerit. Aliquam vestibulum vitae lorem ac iaculis. Praesent nec pharetra massa, at blandit lectus. Sed tincidunt, lectus eu convallis elementum, nibh nisi aliquet urna, nec imperdiet felis sapien at enim.">
+        text="Cras consequat felis at consequat hendrerit. Aliquam vestibulum vitae lorem ac iaculis. Praesent nec pharetra massa, at blandit lectus. Sed tincidunt, lectus eu convallis elementum, nibh nisi aliquet urna, nec imperdiet felis sapien at enim."
+      >
         <img
           src="https://placeimg.com/80/80/people/2"
           style="width: 40px; height: 40px; border-radius: 50%"
-          slot="media" />
+          slot="media"
+        />
       </ListItem>
       <ListItem
         title="Kate Johnson"
         subtitle="Admin"
-        text="Sed tincidunt, lectus eu convallis elementum, nibh nisi aliquet urna, nec imperdiet felis sapien at enim.">
+        text="Sed tincidunt, lectus eu convallis elementum, nibh nisi aliquet urna, nec imperdiet felis sapien at enim."
+      >
         <img
           src="https://placeimg.com/80/80/people/3"
           style="width: 40px; height: 40px; border-radius: 50%"
-          slot="media" />
+          slot="media"
+        />
       </ListItem>
     </List>
   {/if}

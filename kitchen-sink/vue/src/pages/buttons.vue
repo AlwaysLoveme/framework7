@@ -3,78 +3,57 @@
     <f7-navbar title="Buttons" back-link="Back"></f7-navbar>
 
     <f7-block-title>Usual Buttons</f7-block-title>
-    <f7-block strong>
-      <f7-row>
-        <f7-col>
-          <f7-button>Button</f7-button>
-        </f7-col>
-        <f7-col>
-          <f7-button>Button</f7-button>
-        </f7-col>
-        <f7-col>
-          <f7-button round>Round</f7-button>
-        </f7-col>
-      </f7-row>
+    <f7-block strong outline-ios>
+      <div class="grid grid-cols-3 grid-gap">
+        <f7-button>Button</f7-button>
+        <f7-button>Button</f7-button>
+        <f7-button round>Round</f7-button>
+      </div>
+    </f7-block>
+
+    <f7-block-title>Tonal Buttons</f7-block-title>
+    <f7-block strong outline-ios>
+      <div class="grid grid-cols-3 grid-gap">
+        <f7-button tonal>Button</f7-button>
+        <f7-button tonal>Button</f7-button>
+        <f7-button tonal round>Round</f7-button>
+      </div>
     </f7-block>
 
     <f7-block-title>Fill Buttons</f7-block-title>
-    <f7-block strong>
-      <f7-row>
-        <f7-col>
-          <f7-button fill>Button</f7-button>
-        </f7-col>
-        <f7-col>
-          <f7-button fill>Button</f7-button>
-        </f7-col>
-        <f7-col>
-          <f7-button fill round>Round</f7-button>
-        </f7-col>
-      </f7-row>
+    <f7-block strong outline-ios>
+      <div class="grid grid-cols-3 grid-gap">
+        <f7-button fill>Button</f7-button>
+        <f7-button fill>Button</f7-button>
+        <f7-button fill round>Round</f7-button>
+      </div>
     </f7-block>
 
     <f7-block-title>Outline Buttons</f7-block-title>
-    <f7-block strong>
-      <f7-row>
-        <f7-col>
-          <f7-button outline>Button</f7-button>
-        </f7-col>
-        <f7-col>
-          <f7-button outline>Button</f7-button>
-        </f7-col>
-        <f7-col>
-          <f7-button outline round>Round</f7-button>
-        </f7-col>
-      </f7-row>
+    <f7-block strong outline-ios>
+      <div class="grid grid-cols-3 grid-gap">
+        <f7-button outline>Button</f7-button>
+        <f7-button outline>Button</f7-button>
+        <f7-button outline round>Round</f7-button>
+      </div>
     </f7-block>
 
     <f7-block-title>Raised Buttons</f7-block-title>
-    <f7-block strong>
-      <f7-row tag="p">
-        <f7-col tag="span">
-          <f7-button raised>Button</f7-button>
-        </f7-col>
-        <f7-col tag="span">
-          <f7-button raised fill>Fill</f7-button>
-        </f7-col>
-        <f7-col tag="span">
-          <f7-button raised outline>Outline</f7-button>
-        </f7-col>
-      </f7-row>
-      <f7-row tag="p">
-        <f7-col tag="span">
-          <f7-button raised round>Round</f7-button>
-        </f7-col>
-        <f7-col tag="span">
-          <f7-button raised fill round>Fill</f7-button>
-        </f7-col>
-        <f7-col tag="span">
-          <f7-button raised outline round>Outline</f7-button>
-        </f7-col>
-      </f7-row>
+    <f7-block strong outline-ios>
+      <p class="grid grid-cols-3 grid-gap">
+        <f7-button raised>Button</f7-button>
+        <f7-button raised fill>Fill</f7-button>
+        <f7-button raised outline>Outline</f7-button>
+      </p>
+      <p class="grid grid-cols-3 grid-gap">
+        <f7-button raised round>Round</f7-button>
+        <f7-button raised fill round>Fill</f7-button>
+        <f7-button raised outline round>Outline</f7-button>
+      </p>
     </f7-block>
 
     <f7-block-title>Segmented</f7-block-title>
-    <f7-block strong>
+    <f7-block strong outline-ios>
       <f7-segmented tag="p">
         <f7-button>Button</f7-button>
         <f7-button>Button</f7-button>
@@ -114,100 +93,73 @@
     </f7-block>
 
     <f7-block-title>Large Buttons</f7-block-title>
-    <f7-block strong>
-      <f7-row tag="p">
-        <f7-col tag="span">
-          <f7-button large>Button</f7-button>
-        </f7-col>
-        <f7-col tag="span">
-          <f7-button large fill>Fill</f7-button>
-        </f7-col>
-      </f7-row>
-      <f7-row tag="p">
-        <f7-col tag="span">
-          <f7-button large raised>Raised</f7-button>
-        </f7-col>
-        <f7-col tag="span">
-          <f7-button large raised fill>Raised Fill</f7-button>
-        </f7-col>
-      </f7-row>
+    <f7-block strong outline-ios>
+      <p class="grid grid-cols-2 grid-gap">
+        <f7-button large>Button</f7-button>
+        <f7-button large fill>Fill</f7-button>
+      </p>
+      <p class="grid grid-cols-2 grid-gap">
+        <f7-button large raised>Raised</f7-button>
+        <f7-button large raised fill>Raised Fill</f7-button>
+      </p>
     </f7-block>
 
     <f7-block-title>Small Buttons</f7-block-title>
-    <f7-block strong>
-      <f7-row tag="p">
-        <f7-col tag="span">
-          <f7-button small>Button</f7-button>
-        </f7-col>
-        <f7-col tag="span">
-          <f7-button small outline>Outline</f7-button>
-        </f7-col>
-        <f7-col tag="span">
-          <f7-button small fill>Fill</f7-button>
-        </f7-col>
-      </f7-row>
-      <f7-row tag="p">
-        <f7-col tag="span">
-          <f7-button small round>Button</f7-button>
-        </f7-col>
-        <f7-col tag="span">
-          <f7-button small outline round>Outline</f7-button>
-        </f7-col>
-        <f7-col tag="span">
-          <f7-button small fill round>Fill</f7-button>
-        </f7-col>
-      </f7-row>
+    <f7-block strong outline-ios>
+      <p class="grid grid-cols-3 grid-gap">
+        <f7-button small>Button</f7-button>
+        <f7-button small outline>Outline</f7-button>
+        <f7-button small fill>Fill</f7-button>
+      </p>
+      <p class="grid grid-cols-3 grid-gap">
+        <f7-button small round>Button</f7-button>
+        <f7-button small outline round>Outline</f7-button>
+        <f7-button small fill round>Fill</f7-button>
+      </p>
     </f7-block>
 
     <f7-block-title>Preloader Buttons</f7-block-title>
-    <f7-block strong>
-      <f7-row tag="p">
-        <f7-col tag="span">
-          <f7-button preloader :loading="isLoading1" large @click="load1"> Load </f7-button>
-        </f7-col>
-        <f7-col tag="span">
-          <f7-button preloader :loading="isLoading2" large fill @click="load2"> Load </f7-button>
-        </f7-col>
-      </f7-row>
+    <f7-block strong outline-ios>
+      <p class="grid grid-cols-2 grid-gap">
+        <f7-button preloader :loading="isLoading1" large @click="load1"> Load </f7-button>
+        <f7-button preloader :loading="isLoading2" large fill @click="load2"> Load </f7-button>
+      </p>
     </f7-block>
 
     <f7-block-title>Color Buttons</f7-block-title>
-    <f7-block strong>
-      <f7-row>
-        <f7-col>
-          <f7-button color="red">Red</f7-button>
-        </f7-col>
-        <f7-col>
-          <f7-button color="green">Green</f7-button>
-        </f7-col>
-        <f7-col>
-          <f7-button color="blue">Blue</f7-button>
-        </f7-col>
-      </f7-row>
+    <f7-block strong outline-ios>
+      <div class="grid grid-cols-3 grid-gap">
+        <f7-button color="red">Red</f7-button>
+        <f7-button color="green">Green</f7-button>
+        <f7-button color="blue">Blue</f7-button>
+      </div>
     </f7-block>
 
     <f7-block-title>Color Fill Buttons</f7-block-title>
-    <f7-block strong>
-      <f7-row>
-        <f7-col>
-          <f7-button fill color="red">Red</f7-button>
-        </f7-col>
-        <f7-col>
-          <f7-button fill color="green">Green</f7-button>
-        </f7-col>
-        <f7-col>
-          <f7-button fill color="blue">Blue</f7-button>
-        </f7-col>
-      </f7-row>
+    <f7-block strong outline-ios>
+      <p class="grid grid-cols-3 grid-gap">
+        <f7-button color="red">Red</f7-button>
+        <f7-button color="green">Green</f7-button>
+        <f7-button color="blue">Blue</f7-button>
+      </p>
+      <p class="grid grid-cols-3 grid-gap">
+        <f7-button color="pink">Pink</f7-button>
+        <f7-button color="yellow">Yellow</f7-button>
+        <f7-button color="orange">Orange</f7-button>
+      </p>
+      <p class="grid grid-cols-3 grid-gap">
+        <f7-button color="black">Black</f7-button>
+        <f7-button color="white">White</f7-button>
+      </p>
     </f7-block>
 
     <f7-block-title>List-Block Buttons</f7-block-title>
-    <f7-list inset>
+    <f7-list inset strong>
       <f7-list-button title="List Button 1"></f7-list-button>
       <f7-list-button title="List Button 2"></f7-list-button>
       <f7-list-button title="List Button 3"></f7-list-button>
     </f7-list>
-    <f7-list inset>
+    <f7-list inset strong>
       <f7-list-button title="Large Red Button" color="red"></f7-list-button>
     </f7-list>
   </f7-page>
@@ -220,8 +172,6 @@ import {
   f7BlockTitle,
   f7Block,
   f7List,
-  f7Row,
-  f7Col,
   f7ListButton,
   f7Button,
   f7Segmented,
@@ -234,8 +184,6 @@ export default {
     f7BlockTitle,
     f7Block,
     f7List,
-    f7Row,
-    f7Col,
     f7ListButton,
     f7Button,
     f7Segmented,

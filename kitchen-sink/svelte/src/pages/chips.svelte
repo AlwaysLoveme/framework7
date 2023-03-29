@@ -11,9 +11,9 @@
 
 <!-- svelte-ignore a11y-missing-attribute -->
 <Page>
-  <Navbar title="Chips" backLink="Back"></Navbar>
+  <Navbar title="Chips" backLink="Back" />
   <BlockTitle>Chips With Text</BlockTitle>
-  <Block strong>
+  <Block strongIos outlineIos>
     <Chip text="Example Chip" />
     <Chip text="Another Chip" />
     <Chip text="One More Chip" />
@@ -21,7 +21,7 @@
     <Chip text="Last One" />
   </Block>
   <BlockTitle>Outline Chips</BlockTitle>
-  <Block strong>
+  <Block strongIos outlineIos>
     <Chip outline text="Example Chip" />
     <Chip outline text="Another Chip" />
     <Chip outline text="One More Chip" />
@@ -29,13 +29,18 @@
     <Chip outline text="Last One" />
   </Block>
   <BlockTitle>Icon Chips</BlockTitle>
-  <Block strong>
-    <Chip text="Add Contact" mediaBgColor="blue" iconIos="f7:plus_circle" iconAurora="f7:plus_circle" iconMd="material:add_circle" />
-    <Chip text="London" mediaBgColor="green" iconIos="f7:compass" iconAurora="f7:compass" iconMd="material:location_on" />
-    <Chip text="John Doe" mediaBgColor="red" iconIos="f7:person" iconAurora="f7:person" iconMd="material:person" />
+  <Block strongIos outlineIos>
+    <Chip
+      text="Add Contact"
+      mediaBgColor="blue"
+      iconIos="f7:plus_circle"
+      iconMd="material:add_circle"
+    />
+    <Chip text="London" mediaBgColor="green" iconIos="f7:compass" iconMd="material:location_on" />
+    <Chip text="John Doe" mediaBgColor="red" iconIos="f7:person" iconMd="material:person" />
   </Block>
   <BlockTitle>Contact Chips</BlockTitle>
-  <Block strong>
+  <Block strongIos outlineIos>
     <Chip text="Jane Doe">
       <img slot="media" src="https://cdn.framework7.io/placeholder/people-100x100-9.jpg" />
     </Chip>
@@ -50,20 +55,27 @@
     <Chip text="Kate" mediaBgColor="red" media="K" />
   </Block>
   <BlockTitle>Deletable Chips / Tags</BlockTitle>
-  <Block strong>
+  <Block strongIos outlineIos>
     <Chip text="Example Chip" deleteable onDelete={deleteChip} />
-    <Chip text="Chris" media="C" mediaBgColor="orange" textColor="black" deleteable onDelete={deleteChip} />
+    <Chip
+      text="Chris"
+      media="C"
+      mediaBgColor="orange"
+      textColor="black"
+      deleteable
+      onDelete={deleteChip}
+    />
     <Chip text="Jane Doe" deleteable onDelete={deleteChip}>
-      <img slot="media" src="https://cdn.framework7.io/placeholder/people-100x100-9.jpg"/>
+      <img slot="media" src="https://cdn.framework7.io/placeholder/people-100x100-9.jpg" />
     </Chip>
     <Chip text="One More Chip" deleteable onDelete={deleteChip} />
     <Chip text="Jennifer" mediaBgColor="pink" media="J" deleteable onDelete={deleteChip} />
     <Chip text="Adam Smith" deleteable onDelete={deleteChip}>
-      <img slot="media" src="https://cdn.framework7.io/placeholder/people-100x100-7.jpg"/>
+      <img slot="media" src="https://cdn.framework7.io/placeholder/people-100x100-7.jpg" />
     </Chip>
   </Block>
   <BlockTitle>Color Chips</BlockTitle>
-  <Block strong>
+  <Block strongIos outlineIos>
     <Chip text="Red Chip" color="red" />
     <Chip text="Green Chip" color="green" />
     <Chip text="Blue Chip" color="blue" />

@@ -8,48 +8,51 @@
 <Page>
   <Navbar title="Menu List" backLink="Back" />
 
-  <Block strong>
+  <Block>
     <p>
       Menu list unlike usual links list is designed to indicate currently active screen (or section)
       of your app. Think about it like a Tabbar but in a form of a list.
     </p>
   </Block>
 
-  <List menuList>
+  <List outlineIos strongIos menuList>
     <ListItem link title="Home" selected={selected === 'home'} onClick={() => (selected = 'home')}>
       <span slot="media">
-        <Icon md="material:home" aurora="f7:house_fill" ios="f7:house_fill" />
+        <Icon md="material:home" ios="f7:house_fill" />
       </span>
     </ListItem>
     <ListItem
       link
       title="Profile"
       selected={selected === 'profile'}
-      onClick={() => (selected = 'profile')}>
+      onClick={() => (selected = 'profile')}
+    >
       <span slot="media">
-        <Icon md="material:person" aurora="f7:person_fill" ios="f7:person_fill" />
+        <Icon md="material:person" ios="f7:person_fill" />
       </span>
     </ListItem>
     <ListItem
       link
       title="Settings"
       selected={selected === 'settings'}
-      onClick={() => (selected = 'settings')}>
+      onClick={() => (selected = 'settings')}
+    >
       <span slot="media">
-        <Icon md="material:settings" aurora="f7:gear_alt_fill" ios="f7:gear_alt_fill" />
+        <Icon md="material:settings" ios="f7:gear_alt_fill" />
       </span>
     </ListItem>
   </List>
 
-  <List menuList mediaList>
+  <List outlineIos strongIos menuList mediaList>
     <ListItem
       link
       title="Home"
       subtitle="Home subtitle"
       selected={selectedMedia === 'home'}
-      onClick={() => (selectedMedia = 'home')}>
+      onClick={() => (selectedMedia = 'home')}
+    >
       <span slot="media">
-        <Icon md="material:home" aurora="f7:house_fill" ios="f7:house_fill" />
+        <Icon md="material:home" ios="f7:house_fill" />
       </span>
     </ListItem>
     <ListItem
@@ -57,9 +60,10 @@
       title="Profile"
       subtitle="Profile subtitle"
       selected={selectedMedia === 'profile'}
-      onClick={() => (selectedMedia = 'profile')}>
+      onClick={() => (selectedMedia = 'profile')}
+    >
       <span slot="media">
-        <Icon md="material:person" aurora="f7:person_fill" ios="f7:person_fill" />
+        <Icon md="material:person" ios="f7:person_fill" />
       </span>
     </ListItem>
     <ListItem
@@ -67,9 +71,10 @@
       title="Settings"
       subtitle="Settings subtitle"
       selected={selectedMedia === 'settings'}
-      onClick={() => (selectedMedia = 'settings')}>
+      onClick={() => (selectedMedia = 'settings')}
+    >
       <span slot="media">
-        <Icon md="material:settings" aurora="f7:gear_alt_fill" ios="f7:gear_alt_fill" />
+        <Icon md="material:settings" ios="f7:gear_alt_fill" />
       </span>
     </ListItem>
   </List>

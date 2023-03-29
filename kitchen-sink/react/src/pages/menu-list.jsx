@@ -8,21 +8,21 @@ export default () => {
     <Page>
       <Navbar title="Menu List" backLink="Back"></Navbar>
 
-      <Block strong>
+      <Block>
         <p>
           Menu list unlike usual links list is designed to indicate currently active screen (or
           section) of your app. Think about it like a Tabbar but in a form of a list.
         </p>
       </Block>
 
-      <List menuList>
+      <List menuList outlineIos strongIos>
         <ListItem
           link
           title="Home"
           selected={selected === 'home'}
           onClick={() => setSelected('home')}
         >
-          <Icon md="material:home" aurora="f7:house_fill" ios="f7:house_fill" slot="media" />
+          <Icon md="material:home" ios="f7:house_fill" slot="media" />
         </ListItem>
         <ListItem
           link
@@ -30,7 +30,7 @@ export default () => {
           selected={selected === 'profile'}
           onClick={() => setSelected('profile')}
         >
-          <Icon md="material:person" aurora="f7:person_fill" ios="f7:person_fill" slot="media" />
+          <Icon md="material:person" ios="f7:person_fill" slot="media" />
         </ListItem>
         <ListItem
           link
@@ -38,16 +38,11 @@ export default () => {
           selected={selected === 'settings'}
           onClick={() => setSelected('settings')}
         >
-          <Icon
-            md="material:settings"
-            aurora="f7:gear_alt_fill"
-            ios="f7:gear_alt_fill"
-            slot="media"
-          />
+          <Icon md="material:settings" ios="f7:gear_alt_fill" slot="media" />
         </ListItem>
       </List>
 
-      <List menuList mediaList>
+      <List menuList mediaList outlineIos strongIos>
         <ListItem
           link
           title="Home"
@@ -55,7 +50,7 @@ export default () => {
           selected={selectedMedia === 'home'}
           onClick={() => setSelectedMedia('home')}
         >
-          <Icon md="material:home" aurora="f7:house_fill" ios="f7:house_fill" slot="media" />
+          <Icon md="material:home" ios="f7:house_fill" slot="media" />
         </ListItem>
         <ListItem
           link
@@ -64,7 +59,7 @@ export default () => {
           selected={selectedMedia === 'profile'}
           onClick={() => setSelectedMedia('profile')}
         >
-          <Icon md="material:person" aurora="f7:person_fill" ios="f7:person_fill" slot="media" />
+          <Icon md="material:person" ios="f7:person_fill" slot="media" />
         </ListItem>
         <ListItem
           link
@@ -73,12 +68,7 @@ export default () => {
           selected={selectedMedia === 'settings'}
           onClick={() => setSelectedMedia('settings')}
         >
-          <Icon
-            md="material:settings"
-            aurora="f7:gear_alt_fill"
-            ios="f7:gear_alt_fill"
-            slot="media"
-          />
+          <Icon md="material:settings" ios="f7:gear_alt_fill" slot="media" />
         </ListItem>
       </List>
     </Page>

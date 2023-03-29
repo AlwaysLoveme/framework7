@@ -23,8 +23,7 @@
   export let title = undefined;
   export let subtitle = undefined;
   export let hidden = false;
-  export let noShadow = false;
-  export let noHairline = false;
+  export let outline = true;
   export let innerClass = undefined;
   export let innerClassName = undefined;
   export let large = false;
@@ -67,9 +66,7 @@
   $: hasTitleLargeSlots = $$slots['title-large'];
 
   $: addLeftTitleClass = theme && theme.ios && app.f7 && !app.f7.params.navbar.iosCenterTitle;
-  $: addCenterTitleClass =
-    (theme && theme.md && app.f7 && app.f7.params.navbar.mdCenterTitle) ||
-    (theme && theme.aurora && app.f7 && app.f7.params.navbar.auroraCenterTitle);
+  $: addCenterTitleClass = theme && theme.md && app.f7 && app.f7.params.navbar.mdCenterTitle;
 
   $: isLarge = large || largeTransparent;
   $: isTransparent = transparent || (isLarge && largeTransparent);
@@ -89,8 +86,7 @@
       'navbar-master-detail': routerNavbarRole === 'detail',
       'navbar-master-detail-root': routerNavbarRoleDetailRoot === true,
       'navbar-master-stacked': routerNavbarMasterStack === true,
-      'no-shadow': noShadow,
-      'no-hairline': noHairline,
+      'no-outline': !outline,
     },
     colorClasses($$props),
   );

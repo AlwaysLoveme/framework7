@@ -1,7 +1,11 @@
 // eslint-disable-next-line
 import Swiper from 'swiper/bundle';
+// eslint-disable-next-line
+import { register } from 'swiper/element/bundle';
 import $ from '../../shared/dom7.js';
 import ConstructorMethods from '../../shared/constructor-methods.js';
+
+register();
 
 // UMD_ONLY_START
 /* eslint-disable */
@@ -15,19 +19,14 @@ function initSwiper(swiperEl) {
   const app = this;
   const $swiperEl = $(swiperEl);
   if ($swiperEl.length === 0) return;
-  if ($swiperEl[0].swiper) return;
+  const isElement = $swiperEl[0].swiper && $swiperEl[0].swiper.isElement;
+  if ($swiperEl[0].swiper && !$swiperEl[0].swiper.isElement) return;
   let initialSlide;
   let params = {};
   let isTabs;
   let isRoutableTabs;
-  if ($swiperEl.hasClass('tabs-swipeable-wrap')) {
-    $swiperEl
-      .addClass('swiper')
-      .children('.tabs')
-      .addClass('swiper-wrapper')
-      .children('.tab')
-      .addClass('swiper-slide');
-    initialSlide = $swiperEl.children('.tabs').children('.tab-active').index();
+  if ($swiperEl.hasClass('tabs')) {
+    initialSlide = $swiperEl.children('swiper-slide').indexOf($swiperEl.children('.tab-active')[0]);
     isTabs = true;
     isRoutableTabs = $swiperEl.find('.tabs-routable').length > 0;
   }
@@ -48,19 +47,26 @@ function initSwiper(swiperEl) {
       }
     });
   }
+
   if (typeof params.initialSlide === 'undefined' && typeof initialSlide !== 'undefined') {
     params.initialSlide = initialSlide;
   }
 
-  const swiper = app.swiper.create($swiperEl[0], params);
+  const swiper = isElement ? $swiperEl[0].swiper : app.swiper.create($swiperEl[0], params);
+
+  if (isElement) {
+    swiper.slideTo(initialSlide, 0);
+  }
+
   function updateSwiper() {
     swiper.update();
   }
+
   const $tabEl = $swiperEl
     .parents('.tab')
     .filter((tabEl) => {
       return (
-        $(tabEl).parent('.tabs').parent('.tabs-animated-wrap, .tabs-swipeable-wrap').length === 0
+        $(tabEl).parent('.tabs').parent('.tabs-animated-wrap, swiper-container.tabs').length === 0
       );
     })
     .eq(0);
@@ -85,7 +91,7 @@ function initSwiper(swiperEl) {
         let view = app.views.get($swiperEl.parents('.view'));
         if (!view) view = app.views.main;
         const router = view.router;
-        const tabRouteUrl = router.findTabRouteUrl(swiper.slides.eq(swiper.activeIndex)[0]);
+        const tabRouteUrl = router.findTabRouteUrl($(swiper.slides).eq(swiper.activeIndex)[0]);
         if (tabRouteUrl) {
           setTimeout(() => {
             router.navigate(tabRouteUrl);
@@ -93,7 +99,7 @@ function initSwiper(swiperEl) {
         }
       } else {
         app.tab.show({
-          tabEl: swiper.slides.eq(swiper.activeIndex),
+          tabEl: $(swiper.slides).eq(swiper.activeIndex),
         });
       }
     });
@@ -114,27 +120,21 @@ export default {
     });
   },
   on: {
-    pageBeforeRemove(page) {
-      const app = this;
-      page.$el.find('.swiper-init, .tabs-swipeable-wrap').each((swiperEl) => {
-        app.swiper.destroy(swiperEl);
-      });
-    },
     pageMounted(page) {
       const app = this;
-      page.$el.find('.tabs-swipeable-wrap').each((swiperEl) => {
+      page.$el.find('swiper-container.tabs').each((swiperEl) => {
         initSwiper.call(app, swiperEl);
       });
     },
     pageInit(page) {
       const app = this;
-      page.$el.find('.swiper-init, .tabs-swipeable-wrap').each((swiperEl) => {
+      page.$el.find('swiper-container.tabs').each((swiperEl) => {
         initSwiper.call(app, swiperEl);
       });
     },
     pageReinit(page) {
       const app = this;
-      page.$el.find('.swiper-init, .tabs-swipeable-wrap').each((swiperEl) => {
+      page.$el.find('swiper-container.tabs').each((swiperEl) => {
         const swiper = app.swiper.get(swiperEl);
         if (swiper && swiper.update) swiper.update();
       });
@@ -142,7 +142,7 @@ export default {
     tabMounted(tabEl) {
       const app = this;
       $(tabEl)
-        .find('.swiper-init, .tabs-swipeable-wrap')
+        .find('swiper-container.tabs')
         .each((swiperEl) => {
           initSwiper.call(app, swiperEl);
         });
@@ -150,7 +150,7 @@ export default {
     tabShow(tabEl) {
       const app = this;
       $(tabEl)
-        .find('.swiper-init, .tabs-swipeable-wrap')
+        .find('swiper-container.tabs')
         .each((swiperEl) => {
           const swiper = app.swiper.get(swiperEl);
           if (swiper && swiper.update) swiper.update();
@@ -159,36 +159,10 @@ export default {
     tabBeforeRemove(tabEl) {
       const app = this;
       $(tabEl)
-        .find('.swiper-init, .tabs-swipeable-wrap')
+        .find('swiper-container.tabs')
         .each((swiperEl) => {
           app.swiper.destroy(swiperEl);
         });
-    },
-  },
-  vnode: {
-    'swiper-init': {
-      insert(vnode) {
-        const app = this;
-        const swiperEl = vnode.elm;
-        initSwiper.call(app, swiperEl);
-      },
-      destroy(vnode) {
-        const app = this;
-        const swiperEl = vnode.elm;
-        app.swiper.destroy(swiperEl);
-      },
-    },
-    'tabs-swipeable-wrap': {
-      insert(vnode) {
-        const app = this;
-        const swiperEl = vnode.elm;
-        initSwiper.call(app, swiperEl);
-      },
-      destroy(vnode) {
-        const app = this;
-        const swiperEl = vnode.elm;
-        app.swiper.destroy(swiperEl);
-      },
     },
   },
 };

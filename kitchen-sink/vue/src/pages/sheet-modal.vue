@@ -1,25 +1,25 @@
 <template>
   <f7-page @page:beforeremove="onPageBeforeRemove" @page:beforeout="onPageBeforeOut">
     <f7-navbar title="Sheet Modal" back-link="Back"></f7-navbar>
-    <f7-block strong>
+    <f7-block strong-ios outline-ios>
       <p>
         Sheet Modals slide up from the bottom of the screen to reveal more content. Such modals
         allow to create custom overlays with custom content.
       </p>
-      <f7-row tag="p">
-        <f7-button class="col" fill sheet-open=".demo-sheet">Open Sheet</f7-button>
-        <f7-button class="col" fill @click="createSheet">Create Dynamic Sheet</f7-button>
-      </f7-row>
-      <p>
-        <f7-button class="col" fill sheet-open=".demo-sheet-top">Top Sheet</f7-button>
+      <p class="grid grid-cols-2 grid-gap">
+        <f7-button fill sheet-open=".demo-sheet">Open Sheet</f7-button>
+        <f7-button fill @click="createSheet">Dynamic Sheet</f7-button>
       </p>
       <p>
-        <f7-button class="col" fill @click="sheetOpened = true">Open Via Prop Change</f7-button>
+        <f7-button fill sheet-open=".demo-sheet-top">Top Sheet</f7-button>
+      </p>
+      <p>
+        <f7-button fill @click="sheetOpened = true">Open Via Prop Change</f7-button>
       </p>
     </f7-block>
 
     <f7-block-title>Push View</f7-block-title>
-    <f7-block strong>
+    <f7-block strong-ios outline-ios>
       <p>
         Sheet can push view behind on open. By default it has effect only when `safe-area-inset-top`
         is more than zero (iOS fullscreen webapp or iOS cordova app)
@@ -30,7 +30,7 @@
     </f7-block>
 
     <f7-block-title>Swipeable Sheet</f7-block-title>
-    <f7-block strong>
+    <f7-block strong-ios outline-ios>
       <p>
         Sheet modal can be closed with swipe to top (for top Sheet) or bottom (for default Bottom
         sheet):
@@ -201,7 +201,7 @@
         </div>
       </div>
       <f7-block-title medium class="margin-top">Your order:</f7-block-title>
-      <f7-list no-hairlines>
+      <f7-list>
         <f7-list-item title="Item 1">
           <template #after>
             <b class="text-color-black">$200</b>
@@ -232,7 +232,6 @@ import {
   f7Block,
   f7Button,
   f7Link,
-  f7Row,
   f7List,
   f7ListItem,
   f7,
@@ -250,7 +249,6 @@ export default {
     f7Block,
     f7Button,
     f7Link,
-    f7Row,
     f7List,
     f7ListItem,
   },
@@ -272,7 +270,7 @@ export default {
             <div class="sheet-modal sheet-modal-bottom">
               <div class="toolbar">
                 <div class="toolbar-inner justify-content-flex-end">
-                  <a href="#" class="link sheet-close">Close</a>
+                  <a  class="link sheet-close">Close</a>
                 </div>
               </div>
               <div class="sheet-modal-inner">

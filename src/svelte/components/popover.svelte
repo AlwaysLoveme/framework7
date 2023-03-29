@@ -11,9 +11,11 @@
   let className = undefined;
   export { className as class };
 
+  export let style = '';
   export let opened = undefined;
   export let animate = undefined;
   export let targetEl = undefined;
+  export let arrow = undefined;
   export let backdrop = undefined;
   export let backdropEl = undefined;
   export let closeByBackdropClick = undefined;
@@ -93,6 +95,7 @@
     if (typeof closeByOutsideClick !== 'undefined')
       params.closeByOutsideClick = closeByOutsideClick;
     if (typeof closeOnEscape !== 'undefined') params.closeOnEscape = closeOnEscape;
+    if (typeof arrow !== 'undefined') params.arrow = arrow;
     if (typeof backdrop !== 'undefined') params.backdrop = backdrop;
     if (typeof backdropEl !== 'undefined') params.backdropEl = backdropEl;
     if (typeof containerEl !== 'undefined') params.containerEl = containerEl;
@@ -112,8 +115,8 @@
   });
 </script>
 
-<div class={classes} bind:this={el} {...restProps($$restProps)}>
-  <div class="popover-angle" />
+<div class={classes} bind:this={el} {style} {...restProps($$restProps)}>
+  <div class="popover-arrow" />
   <div class="popover-inner">
     <slot popover={f7Popover} />
   </div>

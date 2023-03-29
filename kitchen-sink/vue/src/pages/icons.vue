@@ -1,8 +1,7 @@
 <template>
   <f7-page>
     <f7-navbar title="Icons" back-link="Back"></f7-navbar>
-    <f7-block-title>Scroll bottom</f7-block-title>
-    <f7-block strong>
+    <f7-block strong inset>
       <p>
         Framework7 comes with the premium and free
         <a href="https://framework7.io/icons/" class="external" target="_blank">Framework7 Icons</a>
@@ -40,26 +39,26 @@
         <f7-button tab-link="#tab-md">Material Icons</f7-button>
       </f7-segmented>
     </f7-block-header>
-    <f7-block strong class="tabs">
+    <f7-block strong inset class="tabs">
       <f7-tab id="tab-f7" tab-active>
-        <f7-row>
-          <f7-col v-for="icon in f7Icons" :key="icon" width="33" medium="15" class="demo-icon">
+        <div class="grid grid-cols-3 medium-grid-cols-6 grid-gap">
+          <div v-for="icon in f7Icons" :key="icon" class="demo-icon">
             <div class="demo-icon-icon">
               <i class="f7-icons">{{ icon }}</i>
             </div>
             <div class="demo-icon-name">{{ icon }}</div>
-          </f7-col>
-        </f7-row>
+          </div>
+        </div>
       </f7-tab>
       <f7-tab id="tab-md">
-        <f7-row>
-          <f7-col v-for="icon in mdIcons" :key="icon" width="33" medium="15" class="demo-icon">
+        <div class="grid grid-cols-3 medium-grid-cols-6 grid-gap">
+          <div v-for="icon in mdIcons" :key="icon" class="demo-icon">
             <div class="demo-icon-icon">
               <i class="material-icons">{{ icon }}</i>
             </div>
             <div class="demo-icon-name">{{ icon }}</div>
-          </f7-col>
-        </f7-row>
+          </div>
+        </div>
       </f7-tab>
     </f7-block>
   </f7-page>
@@ -68,11 +67,8 @@
 import {
   f7Page,
   f7Navbar,
-  f7BlockTitle,
   f7Block,
   f7Tab,
-  f7Row,
-  f7Col,
   f7BlockHeader,
   f7Segmented,
   f7Button,
@@ -87,11 +83,8 @@ export default {
   components: {
     f7Page,
     f7Navbar,
-    f7BlockTitle,
     f7Block,
     f7Tab,
-    f7Row,
-    f7Col,
     f7BlockHeader,
     f7Segmented,
     f7Button,

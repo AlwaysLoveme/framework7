@@ -12,8 +12,7 @@ import { Searchbar } from 'framework7/types';
   id?: string | number;
   className?: string;
   style?: React.CSSProperties;
-  noShadow? : boolean
-  noHairline? : boolean
+  outline? : boolean
   form? : boolean
   placeholder? : string
   disableButton? : boolean
@@ -37,7 +36,7 @@ import { Searchbar } from 'framework7/types';
   ignore? : string
   customSearch? : boolean
   removeDiacritics? : boolean
-  hideDividers? : boolean
+  hideGroupTitles? : boolean
   hideGroups? : boolean
   init? : boolean
   COLOR_PROPS
@@ -62,8 +61,7 @@ const Searchbar = forwardRef((props, ref) => {
     className,
     id,
     style,
-    noShadow,
-    noHairline,
+    outline = true,
     form = true,
     placeholder = 'Search',
     spellcheck,
@@ -80,7 +78,7 @@ const Searchbar = forwardRef((props, ref) => {
     searchIn = '.item-title',
     searchItem = 'li',
     searchGroup = '.list-group',
-    searchGroupTitle = '.item-divider, .list-group-title',
+    searchGroupTitle = '.list-group-title',
     foundEl = '.searchbar-found',
     notFoundEl = '.searchbar-not-found',
     backdrop,
@@ -90,7 +88,7 @@ const Searchbar = forwardRef((props, ref) => {
     ignore = '.searchbar-ignore',
     customSearch = false,
     removeDiacritics = false,
-    hideDividers = true,
+    hideGroupTitles = true,
     hideGroups = true,
     init = true,
   } = props;
@@ -173,7 +171,7 @@ const Searchbar = forwardRef((props, ref) => {
         ignore,
         customSearch,
         removeDiacritics,
-        hideDividers,
+        hideGroupTitles,
         hideGroups,
         expandable,
         inline,
@@ -232,8 +230,7 @@ const Searchbar = forwardRef((props, ref) => {
     'searchbar',
     {
       'searchbar-inline': inline,
-      'no-shadow': noShadow,
-      'no-hairline': noHairline,
+      'no-outline': !outline,
       'searchbar-expandable': expandable,
     },
     colorClasses(props),

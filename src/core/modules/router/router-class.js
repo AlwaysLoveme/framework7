@@ -46,6 +46,7 @@ class Router extends Framework7Class {
         params: view.params,
         routes: view.routes,
         history: view.history,
+        propsHistory: [],
         scrollHistory: view.scrollHistory,
         cache: app.cache,
         dynamicNavbar: app.theme === 'ios' && view.params.iosDynamicNavbar,
@@ -362,7 +363,8 @@ class Router extends Framework7Class {
       if (callback) callback();
     }
 
-    (direction === 'forward' ? $newPageEl : $oldPageEl).animationEnd(() => {
+    // eslint-disable-next-line
+    (direction === 'forward' ? $newPageEl : ios ? $oldPageEl : $newPageEl).animationEnd(() => {
       onDone();
     });
 
@@ -456,7 +458,7 @@ class Router extends Framework7Class {
     return router.findElement('.page', router.tempDom);
   }
 
-  findElement(stringSelector, container, notStacked) {
+  findElement(stringSelector, container) {
     const router = this;
     const view = router.view;
     const app = router.app;
@@ -466,8 +468,7 @@ class Router extends Framework7Class {
       '.popup, .dialog, .popover, .actions-modal, .sheet-modal, .login-screen, .page';
 
     const $container = $(container);
-    let selector = stringSelector;
-    if (notStacked) selector += ':not(.stacked)';
+    const selector = stringSelector;
 
     let found = $container
       .find(selector)
@@ -485,8 +486,7 @@ class Router extends Framework7Class {
     }
     if (found.length === 1) return found;
 
-    // Try to find not stacked
-    if (!notStacked) found = router.findElement(selector, $container, true);
+    found = router.findElement(selector, $container);
     if (found && found.length === 1) return found;
     if (found && found.length > 1) return $(found[0]);
     return undefined;
@@ -649,7 +649,7 @@ class Router extends Framework7Class {
       if (matchingRoute) return;
       const keys = [];
 
-      const pathsToMatch = [route.path];
+      const pathsToMatch = [route.path || '/'];
       if (route.alias) {
         if (typeof route.alias === 'string') pathsToMatch.push(route.alias);
         else if (Array.isArray(route.alias)) {
@@ -662,7 +662,7 @@ class Router extends Framework7Class {
       let matched;
       pathsToMatch.forEach((pathToMatch) => {
         if (matched) return;
-        matched = pathToRegexp(pathToMatch, keys).exec(path);
+        matched = pathToRegexp(pathToMatch, keys).exec(path || '/');
       });
 
       if (matched) {
@@ -678,7 +678,7 @@ class Router extends Framework7Class {
 
         let parentPath;
         if (route.parentPath) {
-          parentPath = path
+          parentPath = (path || '/')
             .split('/')
             .slice(0, route.parentPath.split('/').length - 1)
             .join('/');
@@ -689,7 +689,7 @@ class Router extends Framework7Class {
           hash,
           params,
           url,
-          path,
+          path: path || '/',
           parentPath,
           route,
           name: route.name,
@@ -783,40 +783,38 @@ class Router extends Framework7Class {
           }
         }
       }
-      router.xhrAbortController = router.app.request.abortController();
-      router.app.request({
-        abortController: router.xhrAbortController,
-        url,
-        method: 'GET',
-        beforeSend(xhr) {
-          router.emit('routerAjaxStart', xhr, options);
-        },
-        complete(xhr, status) {
-          router.emit('routerAjaxComplete', xhr);
+      router.xhrAbortController = new AbortController();
+      let fetchRes;
+      fetch(url, { signal: router.xhrAbortController.signal, method: 'GET' })
+        .then((res) => {
+          fetchRes = res;
+          return res.text();
+        })
+        .then((responseText) => {
+          const { status } = fetchRes;
+          router.emit('routerAjaxComplete', fetchRes);
           if (
-            (status !== 'error' && status !== 'timeout' && xhr.status >= 200 && xhr.status < 300) ||
-            xhr.status === 0
+            (status !== 'error' && status !== 'timeout' && status >= 200 && status < 300) ||
+            status === 0
           ) {
-            if (params.xhrCache && xhr.responseText !== '') {
+            if (params.xhrCache && responseText !== '') {
               router.removeFromXhrCache(url);
               router.cache.xhr.push({
                 url,
                 time: now(),
-                content: xhr.responseText,
+                content: responseText,
               });
             }
-            router.emit('routerAjaxSuccess', xhr, options);
-            resolve(xhr.responseText);
+            router.emit('routerAjaxSuccess', fetchRes, options);
+            resolve(responseText);
           } else {
-            router.emit('routerAjaxError', xhr, options);
-            reject(xhr);
+            router.emit('routerAjaxError', fetchRes, options);
+            reject(fetchRes);
           }
-        },
-        error(xhr) {
-          router.emit('routerAjaxError', xhr, options);
-          reject(xhr);
-        },
-      });
+        })
+        .catch((err) => {
+          reject(err);
+        });
     });
   }
 
@@ -855,11 +853,9 @@ class Router extends Framework7Class {
     const theme = router.app.theme;
     let toRemove;
     if (theme === 'ios') {
-      toRemove = '.md-only, .aurora-only, .if-md, .if-aurora, .if-not-ios, .not-ios';
+      toRemove = '.md-only, .if-md, .if-not-ios, .not-ios';
     } else if (theme === 'md') {
-      toRemove = '.ios-only, .aurora-only, .if-ios, .if-aurora, .if-not-md, .not-md';
-    } else if (theme === 'aurora') {
-      toRemove = '.ios-only, .md-only, .if-ios, .if-md, .if-not-aurora, .not-aurora';
+      toRemove = '.ios-only, .if-ios, .if-not-md, .not-md';
     }
     $(el).find(toRemove).remove();
   }
@@ -1152,6 +1148,7 @@ class Router extends Framework7Class {
 
     let initialUrl = router.params.url;
     let documentUrl = location.href.split(location.origin)[1];
+
     let historyRestored;
     const { browserHistory, browserHistoryOnLoad, browserHistorySeparator } = router.params;
     let { browserHistoryRoot } = router.params;
@@ -1180,11 +1177,15 @@ class Router extends Framework7Class {
       }
     } else {
       if (browserHistoryRoot && documentUrl.indexOf(browserHistoryRoot) >= 0) {
-        documentUrl = documentUrl.split(browserHistoryRoot)[1];
+        documentUrl = documentUrl.substring(
+          documentUrl.indexOf(browserHistoryRoot) + browserHistoryRoot.length,
+        );
         if (documentUrl === '') documentUrl = '/';
       }
       if (browserHistorySeparator.length > 0 && documentUrl.indexOf(browserHistorySeparator) >= 0) {
-        initialUrl = documentUrl.split(browserHistorySeparator)[1];
+        initialUrl = documentUrl.substring(
+          documentUrl.indexOf(browserHistorySeparator) + browserHistorySeparator.length,
+        );
       } else {
         initialUrl = documentUrl;
       }
@@ -1212,7 +1213,6 @@ class Router extends Framework7Class {
 
     router.initialUrl = initialUrl;
     router.historyRestored = historyRestored;
-
     return { initialUrl, historyRestored };
   }
 
@@ -1228,8 +1228,7 @@ class Router extends Framework7Class {
     // Init Swipeback
     if (
       (view && router.params.iosSwipeBack && app.theme === 'ios') ||
-      (view && router.params.mdSwipeBack && app.theme === 'md') ||
-      (view && router.params.auroraSwipeBack && app.theme === 'aurora')
+      (view && router.params.mdSwipeBack && app.theme === 'md')
     ) {
       SwipeBack(router);
     }
@@ -1267,21 +1266,7 @@ class Router extends Framework7Class {
       }
     }
 
-    if (router.params.stackPages) {
-      router.$el.children('.page').each((pageEl) => {
-        const $pageEl = $(pageEl);
-        router.initialPages.push($pageEl[0]);
-        if (router.dynamicNavbar && $pageEl.children('.navbar').length > 0) {
-          router.initialNavbars.push($pageEl.children('.navbar')[0]);
-        }
-      });
-    }
-
-    if (
-      router.$el.children('.page:not(.stacked)').length === 0 &&
-      initialUrl &&
-      router.params.loadInitialPage
-    ) {
+    if (router.$el.children('.page').length === 0 && initialUrl && router.params.loadInitialPage) {
       // No pages presented in DOM, reload new page
       router.navigate(initialUrl, {
         initial: true,
@@ -1307,11 +1292,11 @@ class Router extends Framework7Class {
           },
         },
       });
-    } else if (router.$el.children('.page:not(.stacked)').length) {
+    } else if (router.$el.children('.page').length) {
       // Init current DOM page
       let hasTabRoute;
       router.currentRoute = currentRoute;
-      router.$el.children('.page:not(.stacked)').each((pageEl) => {
+      router.$el.children('.page').each((pageEl) => {
         const $pageEl = $(pageEl);
         let $navbarEl;
         router.setPagePosition($pageEl, 'current');

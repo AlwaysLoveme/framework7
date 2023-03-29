@@ -12,16 +12,79 @@ const getConfig = require('./get-core-config.js');
 const getOutput = require('./get-output.js');
 const banner = require('./banners/core.js');
 const fs = require('./utils/fs-extra.js');
+const coreComponents = require('./core-components-list.js');
+
+// CSS for each components
+async function buildComponentsStyles(components, rtl, cb) {
+  const config = getConfig();
+  const output = `${getOutput()}/core`;
+  const includeIosTheme = config.themes.indexOf('ios') >= 0;
+  const includeMdTheme = config.themes.indexOf('md') >= 0;
+  const includeDarkTheme = config.darkTheme;
+  const includeLightTheme = config.lightTheme;
+
+  const mainLess = fs
+    .readFileSync(path.resolve(__dirname, '../src/core/framework7.less'))
+    .split('\n')
+    .filter((line) => line.indexOf("@import './components") < 0)
+    .join('\n')
+    .replace(
+      "@import (reference) './less/mixins.less';",
+      "@import (reference) '../../less/mixins.less';",
+    )
+    .replace(
+      "@import (reference) './less/vars.less';",
+      "@import (reference) '../../less/vars.less';",
+    )
+    .replace('$includeIosTheme', includeIosTheme)
+    .replace('$includeMdTheme', includeMdTheme)
+    .replace('$includeDarkTheme', includeDarkTheme)
+    .replace('$includeLightTheme', includeLightTheme)
+    .replace('$rtl', rtl);
+
+  let cbs = 0;
+  const componentsToProcess = components.filter((component) => {
+    // eslint-disable-line
+    return (
+      fs.existsSync(
+        path.resolve(__dirname, `../src/core/components/${component}/${component}.less`),
+      ) && coreComponents.indexOf(component) < 0
+    );
+  });
+
+  componentsToProcess.forEach(async (component) => {
+    const lessContent = fs.readFileSync(
+      path.resolve(__dirname, `../src/core/components/${component}/${component}.less`),
+    );
+
+    let cssContent;
+    try {
+      cssContent = await cleanCSS(
+        await autoprefixer(
+          await less(
+            `${mainLess}\n${lessContent}`,
+            path.resolve(__dirname, `../src/core/components/${component}/`),
+          ),
+        ),
+      );
+    } catch (err) {
+      console.log(err);
+    }
+    fs.writeFileSync(
+      path.resolve(output, `components/${component}/${component}${rtl ? '-rtl' : ''}.css`),
+      cssContent,
+    );
+
+    cbs += 1;
+    if (cbs === componentsToProcess.length && cb) cb();
+  });
+}
 
 // Copy LESS
 function copyLess(config, components, cb) {
   const output = `${getOutput()}/core`;
-  const colors = `{\n${Object.keys(config.colors)
-    .map((colorName) => `  ${colorName}: ${config.colors[colorName]};`)
-    .join('\n')}\n}`;
   const includeIosTheme = config.themes.indexOf('ios') >= 0;
   const includeMdTheme = config.themes.indexOf('md') >= 0;
-  const includeAuroraTheme = config.themes.indexOf('aurora') >= 0;
   const includeDarkTheme = config.darkTheme;
   const includeLightTheme = config.lightTheme;
   const rtl = config.rtl;
@@ -32,11 +95,8 @@ function copyLess(config, components, cb) {
   lessContent = lessContent
     .replace('$includeIosTheme', includeIosTheme)
     .replace('$includeMdTheme', includeMdTheme)
-    .replace('$includeAuroraTheme', includeAuroraTheme)
     .replace('$includeDarkTheme', includeDarkTheme)
     .replace('$includeLightTheme', includeLightTheme)
-    .replace('$colors', colors)
-    .replace('$themeColor', config.themeColor)
     .replace('$rtl', rtl);
 
   fs.writeFileSync(`${output}/framework7.less`, lessContent);
@@ -67,12 +127,8 @@ function copyLess(config, components, cb) {
 // Build CSS Bundle
 async function buildBundle(config, components, themes, rtl, cb) {
   const env = process.env.NODE_ENV || 'development';
-  const colors = `{\n${Object.keys(config.colors)
-    .map((colorName) => `  ${colorName}: ${config.colors[colorName]};`)
-    .join('\n')}\n}`;
   const includeIosTheme = themes.indexOf('ios') >= 0;
   const includeMdTheme = themes.indexOf('md') >= 0;
-  const includeAuroraTheme = themes.indexOf('aurora') >= 0;
   const includeDarkTheme = config.darkTheme;
   const includeLightTheme = config.lightTheme;
   const outputFileName = `framework7-bundle${rtl ? '-rtl' : ''}`;
@@ -88,11 +144,8 @@ async function buildBundle(config, components, themes, rtl, cb) {
     )
     .replace('$includeIosTheme', includeIosTheme)
     .replace('$includeMdTheme', includeMdTheme)
-    .replace('$includeAuroraTheme', includeAuroraTheme)
     .replace('$includeDarkTheme', includeDarkTheme)
     .replace('$includeLightTheme', includeLightTheme)
-    .replace('$colors', colors)
-    .replace('$themeColor', config.themeColor)
     .replace('$rtl', rtl);
 
   let cssContent;
@@ -127,24 +180,17 @@ async function buildCore(themes, rtl, cb) {
   const env = process.env.NODE_ENV || 'development';
   const includeIosTheme = themes.indexOf('ios') >= 0;
   const includeMdTheme = themes.indexOf('md') >= 0;
-  const includeAuroraTheme = themes.indexOf('aurora') >= 0;
   const includeDarkTheme = config.darkTheme;
   const includeLightTheme = config.lightTheme;
   const output = `${getOutput()}/core`;
-  const colors = `{\n${Object.keys(config.colors)
-    .map((colorName) => `  ${colorName}: ${config.colors[colorName]};`)
-    .join('\n')}\n}`;
 
   let lessContent = fs.readFileSync(path.resolve(__dirname, '../src/core/framework7.less'));
   lessContent = lessContent
     .replace('//IMPORT_COMPONENTS', '')
     .replace('$includeIosTheme', includeIosTheme)
     .replace('$includeMdTheme', includeMdTheme)
-    .replace('$includeAuroraTheme', includeAuroraTheme)
     .replace('$includeDarkTheme', includeDarkTheme)
     .replace('$includeLightTheme', includeLightTheme)
-    .replace('$colors', colors)
-    .replace('$themeColor', config.themeColor)
     .replace('$rtl', rtl);
 
   let cssContent;
@@ -194,17 +240,20 @@ function buildLess(cb) {
   let cbs = 0;
   function onCb() {
     cbs += 1;
-    if (cbs === (env === 'development' ? 2 : 4) && cb) cb();
+    if (cbs === (env === 'development' ? 3 : 6) && cb) cb();
   }
 
   // Build development version
   if (env === 'development') {
+    buildComponentsStyles(components, false, onCb);
     buildBundle(config, components, config.themes, config.rtl, onCb);
     buildCore(config.themes, config.rtl, onCb);
     return;
   }
 
   // Build production
+  buildComponentsStyles(components, false, onCb);
+  buildComponentsStyles(components, true, onCb);
   buildBundle(config, components, config.themes, false, onCb);
   buildBundle(config, components, config.themes, true, onCb);
   buildCore(config.themes, false, onCb);

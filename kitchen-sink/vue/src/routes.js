@@ -5,7 +5,6 @@ import About from './pages/about.vue';
 
 import Accordion from './pages/accordion.vue';
 import ActionSheet from './pages/action-sheet.vue';
-import Appbar from './pages/appbar.vue';
 import AreaChart from './pages/area-chart.vue';
 import Autocomplete from './pages/autocomplete.vue';
 import Badge from './pages/badge.vue';
@@ -22,7 +21,6 @@ import ContactsList from './pages/contacts-list.vue';
 import ContentBlock from './pages/content-block.vue';
 import DataTable from './pages/data-table.vue';
 import Dialog from './pages/dialog.vue';
-import Elevation from './pages/elevation.vue';
 import Fab from './pages/fab.vue';
 import FabMorph from './pages/fab-morph.vue';
 import FormStorage from './pages/form-storage.vue';
@@ -31,12 +29,10 @@ import Grid from './pages/grid.vue';
 import Icons from './pages/icons.vue';
 import InfiniteScroll from './pages/infinite-scroll.vue';
 import Inputs from './pages/inputs.vue';
-import LazyLoad from './pages/lazy-load.vue';
 import List from './pages/list.vue';
 import ListIndex from './pages/list-index.vue';
 import LoginScreen from './pages/login-screen.vue';
 import LoginScreenPage from './pages/login-screen-page.vue';
-import Menu from './pages/menu.vue';
 import MenuList from './pages/menu-list.vue';
 import Messages from './pages/messages.vue';
 import Navbar from './pages/navbar.vue';
@@ -75,7 +71,6 @@ import Swiper3dFlip from './pages/swiper-3d-flip.vue';
 import SwiperFade from './pages/swiper-fade.vue';
 import SwiperScrollbar from './pages/swiper-scrollbar.vue';
 import SwiperGallery from './pages/swiper-gallery.vue';
-import SwiperCustomControls from './pages/swiper-custom-controls.vue';
 import SwiperParallax from './pages/swiper-parallax.vue';
 import SwiperLazy from './pages/swiper-lazy.vue';
 import SwiperPaginationProgress from './pages/swiper-pagination-progress.vue';
@@ -92,7 +87,7 @@ import Toast from './pages/toast.vue';
 import Toggle from './pages/toggle.vue';
 import ToolbarTabbar from './pages/toolbar-tabbar.vue';
 import Tabbar from './pages/tabbar.vue';
-import TabbarLabels from './pages/tabbar-labels.vue';
+import TabbarIcons from './pages/tabbar-icons.vue';
 import TabbarScrollable from './pages/tabbar-scrollable.vue';
 import ToolbarHideScroll from './pages/toolbar-hide-scroll.vue';
 import Tooltip from './pages/tooltip.vue';
@@ -124,9 +119,6 @@ export default [
   {
     path: '/',
     component: Home,
-    master(f7) {
-      return f7.theme === 'aurora';
-    },
   },
   // About page
   {
@@ -152,7 +144,7 @@ export default [
           <div class="navbar-bg"></div>
           <div class="navbar-inner sliding">
             <div class="left">
-              <a href="#" class="link back">
+              <a  class="link back">
                 <i class="icon icon-back"></i>
                 <span class="if-not-md">Back</span>
               </a>
@@ -177,7 +169,7 @@ export default [
           <div class="navbar-bg"></div>
           <div class="navbar-inner sliding">
             <div class="left">
-              <a href="#" class="link back">
+              <a  class="link back">
                 <i class="icon icon-back"></i>
                 <span class="if-not-md">Back</span>
               </a>
@@ -203,10 +195,6 @@ export default [
   {
     path: '/action-sheet/',
     component: ActionSheet,
-  },
-  {
-    path: '/appbar/',
-    component: Appbar,
   },
   {
     path: '/area-chart/',
@@ -273,10 +261,6 @@ export default [
     component: Dialog,
   },
   {
-    path: '/elevation/',
-    component: Elevation,
-  },
-  {
     path: '/fab/',
     component: Fab,
   },
@@ -309,10 +293,6 @@ export default [
     component: Inputs,
   },
   {
-    path: '/lazy-load/',
-    component: LazyLoad,
-  },
-  {
     path: '/list/',
     component: List,
   },
@@ -327,10 +307,6 @@ export default [
   {
     path: '/login-screen-page/',
     component: LoginScreenPage,
-  },
-  {
-    path: '/menu/',
-    component: Menu,
   },
   {
     path: '/menu-list/',
@@ -485,10 +461,6 @@ export default [
         component: SwiperGallery,
       },
       {
-        path: 'swiper-custom-controls/',
-        component: SwiperCustomControls,
-      },
-      {
         path: 'swiper-parallax/',
         component: SwiperParallax,
       },
@@ -593,8 +565,8 @@ export default [
         component: Tabbar,
       },
       {
-        path: 'tabbar-labels/',
-        component: TabbarLabels,
+        path: 'tabbar-icons/',
+        component: TabbarIcons,
       },
       {
         path: 'tabbar-scrollable/',

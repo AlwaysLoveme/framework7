@@ -15,7 +15,6 @@ export default {
       dropdownPlaceholderText: undefined,
       typeahead: false,
       highlightMatches: true,
-      expandInput: false,
       updateInputValueOnSelect: true,
       inputEvents: 'input',
 
@@ -33,7 +32,7 @@ export default {
       pageTitle: undefined,
       searchbarPlaceholder: 'Search...',
       searchbarDisableText: 'Cancel',
-      searchbarDisableButton: undefined,
+      searchbarDisableButton: true,
       searchbarSpellcheck: false,
 
       popupPush: false,

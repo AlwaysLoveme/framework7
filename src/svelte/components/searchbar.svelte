@@ -10,8 +10,7 @@
   let className = undefined;
   export { className as class };
 
-  export let noShadow = false;
-  export let noHairline = false;
+  export let outline = true;
   export let form = true;
   export let placeholder = 'Search';
   export let autocomplete = undefined;
@@ -32,7 +31,7 @@
   export let searchIn = '.item-title';
   export let searchItem = 'li';
   export let searchGroup = '.list-group';
-  export let searchGroupTitle = '.item-divider, .list-group-title';
+  export let searchGroupTitle = '.list-group-title';
   export let foundEl = '.searchbar-found';
   export let notFoundEl = '.searchbar-not-found';
   export let backdrop = undefined;
@@ -42,7 +41,7 @@
   export let ignore = '.searchbar-ignore';
   export let customSearch = false;
   export let removeDiacritics = false;
-  export let hideDividers = true;
+  export let hideGroupTitles = true;
   export let hideGroups = true;
   export let init = true;
 
@@ -80,8 +79,7 @@
     'searchbar',
     {
       'searchbar-inline': inline,
-      'no-shadow': noShadow,
-      'no-hairline': noHairline,
+      'no-outline': !outline,
       'searchbar-expandable': expandable,
     },
     colorClasses($$props),
@@ -137,7 +135,7 @@
         ignore,
         customSearch,
         removeDiacritics,
-        hideDividers,
+        hideGroupTitles,
         hideGroups,
         expandable,
         inline,

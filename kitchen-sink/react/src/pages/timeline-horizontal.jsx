@@ -3,8 +3,8 @@ import { Navbar, Page } from 'framework7-react';
 
 export default () => (
   <Page>
-    <Navbar noShadow title="Horizontal Timeline" backLink="Back"></Navbar>
-    <div className="timeline timeline-horizontal col-33 tablet-20">
+    <Navbar title="Horizontal Timeline" backLink="Back"></Navbar>
+    <div className="timeline timeline-horizontal timeline-cols-3 medium-timeline-cols-5">
       <div className="timeline-item">
         <div className="timeline-item-date">
           21 <small>DEC</small>
@@ -62,16 +62,16 @@ export default () => (
           24 <small>DEC</small>
         </div>
         <div className="timeline-item-content">
-          <div className="list links-list inset no-safe-areas">
+          <div className="list links-list inset list-strong list-dividers-ios no-safe-areas">
             <ul>
               <li>
-                <a href="#">Item 1</a>
+                <a>Item 1</a>
               </li>
               <li>
-                <a href="#">Item 2</a>
+                <a>Item 2</a>
               </li>
               <li>
-                <a href="#">Item 3</a>
+                <a>Item 3</a>
               </li>
             </ul>
           </div>

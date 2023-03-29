@@ -15,11 +15,32 @@
   export let ul = true;
 
   export let inset = false;
+  export let insetIos = false;
+  export let insetMd = false;
   export let xsmallInset = false;
+  export let xsmallInsetIos = false;
+  export let xsmallInsetMd = false;
   export let smallInset = false;
+  export let smallInsetIos = false;
+  export let smallInsetMd = false;
   export let mediumInset = false;
+  export let mediumInsetIos = false;
+  export let mediumInsetMd = false;
   export let largeInset = false;
+  export let largeInsetIos = false;
+  export let largeInsetMd = false;
   export let xlargeInset = false;
+  export let xlargeInsetIos = false;
+  export let xlargeInsetMd = false;
+  export let strong = false;
+  export let strongIos = false;
+  export let strongMd = false;
+  export let outline = false;
+  export let outlineIos = false;
+  export let outlineMd = false;
+  export let dividers = false;
+  export let dividersIos = false;
+  export let dividersMd = false;
   export let mediaList = false;
   export let sortable = false;
   export let sortableTapHold = false;
@@ -33,15 +54,6 @@
   export let linksList = false;
   export let menuList = false;
 
-  export let noHairlines = false;
-  export let noHairlinesBetween = false;
-  export let noHairlinesMd = false;
-  export let noHairlinesBetweenMd = false;
-  export let noHairlinesIos = false;
-  export let noHairlinesBetweenIos = false;
-  export let noHairlinesAurora = false;
-  export let noHairlinesBetweenAurora = false;
-
   // Links Chevron (Arrow) Icon
   export let noChevron = false;
   export let chevronCenter = false;
@@ -53,7 +65,6 @@
   // Form
   export let form = false;
   export let formStoreData = false;
-  export let inlineLabels = false;
 
   // Virtual List
   export let virtualList = false;
@@ -74,11 +85,32 @@
     'list',
     {
       inset,
+      'inset-ios': insetIos,
+      'inset-md': insetMd,
       'xsmall-inset': xsmallInset,
+      'xsmall-inset-ios': xsmallInsetIos,
+      'xsmall-inset-md': xsmallInsetMd,
       'small-inset': smallInset,
+      'small-inset-ios': smallInsetIos,
+      'small-inset-md': smallInsetMd,
       'medium-inset': mediumInset,
+      'medium-inset-ios': mediumInsetIos,
+      'medium-inset-md': mediumInsetMd,
       'large-inset': largeInset,
+      'large-inset-ios': largeInsetIos,
+      'large-inset-md': largeInsetMd,
       'xlarge-inset': xlargeInset,
+      'xlarge-inset-ios': xlargeInsetIos,
+      'xlarge-inset-md': xlargeInsetMd,
+      'list-strong': strong,
+      'list-strong-ios': strongIos,
+      'list-strong-md': strongMd,
+      'list-outline': outline,
+      'list-outline-ios': outlineIos,
+      'list-outline-md': outlineMd,
+      'list-dividers': dividers,
+      'list-dividers-ios': dividersIos,
+      'list-dividers-md': dividersMd,
       'media-list': mediaList,
       'simple-list': simpleList,
       'links-list': linksList,
@@ -93,16 +125,7 @@
       'virtual-list': virtualList,
       tab,
       'tab-active': tabActive,
-      'no-hairlines': noHairlines,
-      'no-hairlines-md': noHairlinesMd,
-      'no-hairlines-ios': noHairlinesIos,
-      'no-hairlines-aurora': noHairlinesAurora,
-      'no-hairlines-between': noHairlinesBetween,
-      'no-hairlines-between-md': noHairlinesBetweenMd,
-      'no-hairlines-between-ios': noHairlinesBetweenIos,
-      'no-hairlines-between-aurora': noHairlinesBetweenAurora,
       'form-store-data': formStoreData,
-      'inline-labels': inlineLabels,
       'no-chevron': noChevron,
       'chevron-center': chevronCenter,
     },

@@ -18,6 +18,7 @@ import { Panel } from 'framework7/types';
   cover? : boolean
   reveal? : boolean
   push? : boolean
+  floating? : boolean
   left? : boolean
   right? : boolean
   opened? : boolean
@@ -32,6 +33,7 @@ import { Panel } from 'framework7/types';
   swipeActiveArea? : number
   swipeThreshold? : number
   containerEl? : string | object
+  closeByBackdropClick?: boolean;
   COLOR_PROPS
   onPanelOpen? : (event?: any) => void
   onPanelOpened? : (event?: any) => void
@@ -60,6 +62,7 @@ const Panel = forwardRef((props, ref) => {
     cover,
     reveal,
     push,
+    floating,
     left,
     // right,
     opened,
@@ -67,6 +70,7 @@ const Panel = forwardRef((props, ref) => {
     backdrop = true,
     backdropEl,
     containerEl,
+    closeByBackdropClick,
     visibleBreakpoint,
     collapsedBreakpoint,
     swipe,
@@ -178,6 +182,7 @@ const Panel = forwardRef((props, ref) => {
         swipeOnlyClose,
         swipeActiveArea,
         swipeThreshold,
+        closeByBackdropClick,
       });
       f7Panel.current = f7.panel.create(params);
       modalEvents('on');
@@ -208,7 +213,8 @@ const Panel = forwardRef((props, ref) => {
 
   const sideComputed = side || (left ? 'left' : 'right');
   // eslint-disable-next-line
-  const effectComputed = effect || (reveal ? 'reveal' : push ? 'push' : 'cover');
+  const effectComputed =
+    effect || (reveal ? 'reveal' : push ? 'push' : floating ? 'floating' : 'cover');
   const classes = classNames(
     className,
     'panel',

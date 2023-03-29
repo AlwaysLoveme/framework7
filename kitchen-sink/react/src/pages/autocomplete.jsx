@@ -10,7 +10,6 @@ import {
   BlockHeader,
   ListItem,
   ListInput,
-  theme,
   f7,
 } from 'framework7-react';
 
@@ -18,7 +17,6 @@ export default () => {
   const fruits = 'Apple Apricot Avocado Banana Melon Orange Peach Pear Pineapple'.split(' ');
 
   const autocompleteDropdownSimple = useRef(null);
-  const autocompleteDropdownExpand = useRef(null);
   const autocompleteDropdownAll = useRef(null);
   const autocompleteDropdownPlaceholder = useRef(null);
   const autocompleteDropdownTypeahead = useRef(null);
@@ -33,7 +31,6 @@ export default () => {
   const onPageBeforeRemove = () => {
     // Destroy all autocompletes
     autocompleteDropdownSimple.current.destroy();
-    autocompleteDropdownExpand.current.destroy();
     autocompleteDropdownAll.current.destroy();
     autocompleteDropdownPlaceholder.current.destroy();
     autocompleteDropdownTypeahead.current.destroy();
@@ -52,26 +49,6 @@ export default () => {
     autocompleteDropdownSimple.current = f7.autocomplete.create({
       inputEl: '#autocomplete-dropdown',
       openIn: 'dropdown',
-      source(query, render) {
-        const results = [];
-        if (query.length === 0) {
-          render(results);
-          return;
-        }
-        // Find matched items
-        for (let i = 0; i < fruits.length; i += 1) {
-          if (fruits[i].toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(fruits[i]);
-        }
-        // Render items by passing array with result items
-        render(results);
-      },
-    });
-
-    // Dropdown with input expand
-    autocompleteDropdownExpand.current = f7.autocomplete.create({
-      inputEl: '#autocomplete-dropdown-expand',
-      openIn: 'dropdown',
-      expandInput: true, // expand input
       source(query, render) {
         const results = [];
         if (query.length === 0) {
@@ -164,15 +141,9 @@ export default () => {
         autocomplete.preloaderShow();
 
         // Do Ajax request to Autocomplete data
-        f7.request({
-          url: './autocomplete-languages.json',
-          method: 'GET',
-          dataType: 'json',
-          // send "query" to server. Useful in case you generate response dynamically
-          data: {
-            query,
-          },
-          success(data) {
+        fetch(`./js/autocomplete-languages.json?query=${query}`)
+          .then((res) => res.json())
+          .then((data) => {
             // Find matched items
             for (let i = 0; i < data.length; i += 1) {
               if (data[i].name.toLowerCase().indexOf(query.toLowerCase()) >= 0)
@@ -182,8 +153,7 @@ export default () => {
             autocomplete.preloaderHide();
             // Render items by passing array with result items
             render(results);
-          },
-        });
+          });
       },
     });
 
@@ -209,26 +179,19 @@ export default () => {
         autocomplete.preloaderShow();
 
         // Do Ajax request to Autocomplete data
-        f7.request({
-          url: './autocomplete-languages.json',
-          method: 'GET',
-          dataType: 'json',
-          // send "query" to server. Useful in case you generate response dynamically
-          data: {
-            query,
-          },
-          success(data) {
+        fetch(`./js/autocomplete-languages.json?query=${query}`)
+          .then((res) => res.json())
+          .then((data) => {
             // Find matched items
             for (let i = 0; i < data.length; i += 1) {
-              if (data[i].name.toLowerCase().indexOf(query.toLowerCase()) === 0)
+              if (data[i].name.toLowerCase().indexOf(query.toLowerCase()) >= 0)
                 results.push(data[i]);
             }
             // Hide Preoloader
             autocomplete.preloaderHide();
             // Render items by passing array with result items
             render(results);
-          },
-        });
+          });
       },
     });
 
@@ -335,15 +298,9 @@ export default () => {
         // Show Preloader
         autocomplete.preloaderShow();
         // Do Ajax request to Autocomplete data
-        f7.request({
-          url: './autocomplete-languages.json',
-          method: 'GET',
-          dataType: 'json',
-          // send "query" to server. Useful in case you generate response dynamically
-          data: {
-            query,
-          },
-          success(data) {
+        fetch(`./js/autocomplete-languages.json?query=${query}`)
+          .then((res) => res.json())
+          .then((data) => {
             // Find matched items
             for (let i = 0; i < data.length; i += 1) {
               if (data[i].name.toLowerCase().indexOf(query.toLowerCase()) >= 0)
@@ -353,8 +310,7 @@ export default () => {
             autocomplete.preloaderHide();
             // Render items by passing array with result items
             render(results);
-          },
-        });
+          });
       },
       on: {
         change(value) {
@@ -406,7 +362,7 @@ export default () => {
     <Page onPageInit={onPageInit} onPageBeforeRemove={onPageBeforeRemove}>
       <Navbar title="Autocomplete" backLink="Back">
         <Subnavbar inner={false}>
-          <Searchbar init={false} id="searchbar-autocomplete" disableButton={!theme.aurora} />
+          <Searchbar init={false} id="searchbar-autocomplete" disableButton={true} />
         </Subnavbar>
       </Navbar>
 
@@ -417,28 +373,12 @@ export default () => {
           options in addition to free-type value.
         </p>
       </Block>
-      <List noHairlinesMd>
+      <List strongIos outlineIos>
         <BlockHeader>Simple Dropdown Autocomplete</BlockHeader>
-        <ListInput
-          label="Fruit"
-          inlineLabel
-          type="text"
-          placeholder="Fruit"
-          inputId="autocomplete-dropdown"
-        />
+        <ListInput label="Fruit" type="text" placeholder="Fruit" inputId="autocomplete-dropdown" />
       </List>
 
-      <List noHairlinesMd>
-        <BlockHeader>Dropdown With Input Expand</BlockHeader>
-        <ListInput
-          label="Fruit"
-          inlineLabel
-          type="text"
-          placeholder="Fruit"
-          inputId="autocomplete-dropdown-expand"
-        />
-      </List>
-      <List noHairlinesMd>
+      <List strongIos outlineIos>
         <BlockHeader>Dropdown With All Values</BlockHeader>
         <ListInput
           label="Fruit"
@@ -447,7 +387,7 @@ export default () => {
           inputId="autocomplete-dropdown-all"
         />
       </List>
-      <List noHairlinesMd>
+      <List strongIos outlineIos>
         <BlockHeader>Dropdown With Placeholder</BlockHeader>
         <ListInput
           label="Fruit"
@@ -456,7 +396,7 @@ export default () => {
           inputId="autocomplete-dropdown-placeholder"
         />
       </List>
-      <List noHairlinesMd>
+      <List strongIos outlineIos>
         <BlockHeader>Dropdown With Typeahead</BlockHeader>
         <ListInput
           label="Fruit"
@@ -465,7 +405,7 @@ export default () => {
           inputId="autocomplete-dropdown-typeahead"
         />
       </List>
-      <List noHairlinesMd>
+      <List strongIos outlineIos>
         <BlockHeader>Dropdown With Ajax-Data</BlockHeader>
         <ListInput
           label="Language"
@@ -474,7 +414,7 @@ export default () => {
           inputId="autocomplete-dropdown-ajax"
         />
       </List>
-      <List noHairlinesMd>
+      <List strongIos outlineIos>
         <BlockHeader>Dropdown With Ajax-Data + Typeahead</BlockHeader>
         <ListInput
           label="Language"
@@ -490,25 +430,25 @@ export default () => {
           Good to use when you need to get strict values without allowing free-type values.
         </p>
       </Block>
-      <List>
+      <List strong outlineIos>
         <BlockHeader>Simple Standalone Autocomplete</BlockHeader>
         <ListItem link="#" id="autocomplete-standalone" title="Favorite Fruite" after=" ">
           <input type="hidden" />
         </ListItem>
       </List>
-      <List>
+      <List strong outlineIos>
         <BlockHeader>Popup Autocomplete</BlockHeader>
         <ListItem link="#" id="autocomplete-standalone-popup" title="Favorite Fruite" after=" ">
           <input type="hidden" />
         </ListItem>
       </List>
-      <List>
+      <List strong outlineIos>
         <BlockHeader>Multiple Values</BlockHeader>
         <ListItem link="#" id="autocomplete-standalone-multiple" title="Favorite Fruite" after=" ">
           <input type="hidden" />
         </ListItem>
       </List>
-      <List>
+      <List strong outlineIos>
         <BlockHeader>With Ajax-Data</BlockHeader>
         <ListItem link="#" id="autocomplete-standalone-ajax" title="Language" after=" ">
           <input type="hidden" />

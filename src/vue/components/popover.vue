@@ -1,6 +1,6 @@
 <template>
   <div ref="elRef" :class="classes">
-    <div class="popover-angle" />
+    <div class="popover-arrow" />
     <div class="popover-inner"><slot /></div>
   </div>
 </template>
@@ -21,6 +21,10 @@ export default {
     },
     targetEl: {
       type: [String, Object],
+      default: undefined,
+    },
+    arrow: {
+      type: Boolean,
       default: undefined,
     },
     backdrop: {
@@ -109,6 +113,7 @@ export default {
         closeByBackdropClick,
         closeByOutsideClick,
         closeOnEscape,
+        arrow,
         backdrop,
         backdropEl,
         containerEl,
@@ -120,6 +125,7 @@ export default {
       if (typeof closeByOutsideClick !== 'undefined')
         popoverParams.closeByOutsideClick = closeByOutsideClick;
       if (typeof closeOnEscape !== 'undefined') popoverParams.closeOnEscape = closeOnEscape;
+      if (typeof arrow !== 'undefined') popoverParams.arrow = arrow;
       if (typeof backdrop !== 'undefined') popoverParams.backdrop = backdrop;
       if (typeof backdropEl !== 'undefined') popoverParams.backdropEl = backdropEl;
       if (typeof containerEl !== 'undefined') popoverParams.containerEl = containerEl;

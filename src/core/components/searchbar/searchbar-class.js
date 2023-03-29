@@ -22,16 +22,16 @@ class Searchbar extends FrameworkClass {
       searchItem: 'li', // single item selector, CSS selector
       searchIn: undefined, // where to search in item, CSS selector
       searchGroup: '.list-group',
-      searchGroupTitle: '.item-divider, .list-group-title',
+      searchGroupTitle: '.list-group-title',
       ignore: '.searchbar-ignore',
       foundEl: '.searchbar-found',
       notFoundEl: '.searchbar-not-found',
       hideOnEnableEl: '.searchbar-hide-on-enable',
       hideOnSearchEl: '.searchbar-hide-on-search',
-      backdrop: undefined,
+      backdrop: true,
       removeDiacritics: true,
       customSearch: false,
-      hideDividers: true,
+      hideGroupTitles: true,
       hideGroups: true,
       disableOnBackdropClick: true,
       expandable: false,
@@ -100,8 +100,7 @@ class Searchbar extends FrameworkClass {
     const inline = sb.params.inline || $el.hasClass('searchbar-inline');
 
     if (typeof sb.params.backdrop === 'undefined') {
-      if (!inline) sb.params.backdrop = app.theme !== 'aurora';
-      else sb.params.backdrop = false;
+      sb.params.backdrop = !inline;
     }
 
     let $backdropEl;
@@ -193,13 +192,6 @@ class Searchbar extends FrameworkClass {
     }
     function onInputBlur() {
       sb.$el.removeClass('searchbar-focused');
-      if (
-        app.theme === 'aurora' &&
-        (!$disableButtonEl || !$disableButtonEl.length || !sb.params.disableButton) &&
-        !sb.query
-      ) {
-        sb.disable();
-      }
     }
     function onInputChange() {
       const value = sb.$inputEl.val().trim();
@@ -616,7 +608,7 @@ class Searchbar extends FrameworkClass {
           }
         });
 
-      if (sb.params.hideDividers) {
+      if (sb.params.hideGroupTitles) {
         $searchContainer.find(sb.params.searchGroupTitle).each((titleEl) => {
           const $titleEl = $(titleEl);
           const $nextElements = $titleEl.nextAll(sb.params.searchItem);

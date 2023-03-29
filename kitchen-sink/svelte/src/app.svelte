@@ -9,6 +9,8 @@
     theme = document.location.search.split('theme=')[1].split('&')[0];
   }
 
+  const needsBrowserHistory = document.location.href.includes('example-preview');
+
   const f7Params = {
     id: 'io.framework7.testapp',
     theme,
@@ -30,11 +32,20 @@
 </script>
 
 <App {...f7Params}>
-  <Panel left cover resizable>
+  <Panel left floating resizable>
     <View url="/panel-left/" links-view=".view-main" />
   </Panel>
-  <Panel right reveal resizable>
+  <Panel right floating resizable>
     <View url="/panel-right/" />
   </Panel>
-  <View url="/" main={true} class="safe-areas" masterDetailBreakpoint={768} />
+  <View
+    url="/"
+    main={true}
+    class="safe-areas"
+    masterDetailBreakpoint={768}
+    browserHistory={needsBrowserHistory}
+    browserHistoryRoot={needsBrowserHistory ? '/kitchen-sink/react/dist/' : ''}
+    preloadPreviousPage={!needsBrowserHistory}
+    iosSwipeBack={!needsBrowserHistory}
+  />
 </App>

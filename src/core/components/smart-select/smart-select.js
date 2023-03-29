@@ -21,11 +21,12 @@ export default {
       pageBackLinkText: 'Back',
       popupCloseLinkText: 'Close',
       popupTabletFullscreen: false,
+      closeByBackdropClick: true,
       sheetCloseLinkText: 'Done',
       searchbar: false,
       searchbarPlaceholder: 'Search',
       searchbarDisableText: 'Cancel',
-      searchbarDisableButton: undefined,
+      searchbarDisableButton: true,
       searchbarSpellcheck: false,
       closeOnSelect: false,
       virtualList: false,
@@ -35,6 +36,7 @@ export default {
       navbarColorTheme: undefined,
       routableModals: false,
       url: 'select/',
+      inputIconPosition: 'start',
       cssClass: '',
       /*
         Custom render functions

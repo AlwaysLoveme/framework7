@@ -4,7 +4,6 @@ import PanelRight from './pages/panel-right.jsx';
 import About from './pages/about.jsx';
 import Accordion from './pages/accordion.jsx';
 import ActionSheet from './pages/action-sheet.jsx';
-import Appbar from './pages/appbar.jsx';
 import AreaChart from './pages/area-chart.jsx';
 import Autocomplete from './pages/autocomplete.jsx';
 import Badge from './pages/badge.jsx';
@@ -21,7 +20,6 @@ import ContactsList from './pages/contacts-list.jsx';
 import ContentBlock from './pages/content-block.jsx';
 import DataTable from './pages/data-table.jsx';
 import Dialog from './pages/dialog.jsx';
-import Elevation from './pages/elevation.jsx';
 import Fab from './pages/fab.jsx';
 import FabMorph from './pages/fab-morph.jsx';
 import FormStorage from './pages/form-storage.jsx';
@@ -30,12 +28,10 @@ import Grid from './pages/grid.jsx';
 import Icons from './pages/icons.jsx';
 import InfiniteScroll from './pages/infinite-scroll.jsx';
 import Inputs from './pages/inputs.jsx';
-import LazyLoad from './pages/lazy-load.jsx';
 import List from './pages/list.jsx';
 import ListIndex from './pages/list-index.jsx';
 import LoginScreen from './pages/login-screen.jsx';
 import LoginScreenPage from './pages/login-screen-page.jsx';
-import Menu from './pages/menu.jsx';
 import MenuList from './pages/menu-list.jsx';
 import Messages from './pages/messages.jsx';
 import Navbar from './pages/navbar.jsx';
@@ -74,7 +70,6 @@ import Swiper3dFlip from './pages/swiper-3d-flip.jsx';
 import SwiperFade from './pages/swiper-fade.jsx';
 import SwiperScrollbar from './pages/swiper-scrollbar.jsx';
 import SwiperGallery from './pages/swiper-gallery.jsx';
-import SwiperCustomControls from './pages/swiper-custom-controls.jsx';
 import SwiperParallax from './pages/swiper-parallax.jsx';
 import SwiperLazy from './pages/swiper-lazy.jsx';
 import SwiperPaginationProgress from './pages/swiper-pagination-progress.jsx';
@@ -91,7 +86,7 @@ import Toast from './pages/toast.jsx';
 import Toggle from './pages/toggle.jsx';
 import ToolbarTabbar from './pages/toolbar-tabbar.jsx';
 import Tabbar from './pages/tabbar.jsx';
-import TabbarLabels from './pages/tabbar-labels.jsx';
+import TabbarIcons from './pages/tabbar-icons.jsx';
 import TabbarScrollable from './pages/tabbar-scrollable.jsx';
 import ToolbarHideScroll from './pages/toolbar-hide-scroll.jsx';
 import Tooltip from './pages/tooltip.jsx';
@@ -123,10 +118,6 @@ export default [
   {
     path: '/',
     component: Home,
-    master(f7) {
-      console.log(f7.theme);
-      return f7.theme === 'aurora';
-    },
   },
   // About page
   {
@@ -152,7 +143,7 @@ export default [
           <div class="navbar-bg"></div>
           <div class="navbar-inner sliding">
             <div class="left">
-              <a href="#" class="link back">
+              <a  class="link back">
                 <i class="icon icon-back"></i>
                 <span class="if-not-md">Back</span>
               </a>
@@ -177,7 +168,7 @@ export default [
           <div class="navbar-bg"></div>
           <div class="navbar-inner sliding">
             <div class="left">
-              <a href="#" class="link back">
+              <a  class="link back">
                 <i class="icon icon-back"></i>
                 <span class="if-not-md">Back</span>
               </a>
@@ -202,10 +193,6 @@ export default [
   {
     path: '/action-sheet/',
     component: ActionSheet,
-  },
-  {
-    path: '/appbar/',
-    component: Appbar,
   },
   {
     path: '/area-chart/',
@@ -272,10 +259,6 @@ export default [
     component: Dialog,
   },
   {
-    path: '/elevation/',
-    component: Elevation,
-  },
-  {
     path: '/fab/',
     component: Fab,
   },
@@ -308,10 +291,6 @@ export default [
     component: Inputs,
   },
   {
-    path: '/lazy-load/',
-    component: LazyLoad,
-  },
-  {
     path: '/list/',
     component: List,
   },
@@ -326,10 +305,6 @@ export default [
   {
     path: '/login-screen-page/',
     component: LoginScreenPage,
-  },
-  {
-    path: '/menu/',
-    component: Menu,
   },
   {
     path: '/menu-list/',
@@ -484,10 +459,6 @@ export default [
         component: SwiperGallery,
       },
       {
-        path: 'swiper-custom-controls/',
-        component: SwiperCustomControls,
-      },
-      {
         path: 'swiper-parallax/',
         component: SwiperParallax,
       },
@@ -592,8 +563,8 @@ export default [
         component: Tabbar,
       },
       {
-        path: 'tabbar-labels/',
-        component: TabbarLabels,
+        path: 'tabbar-icons/',
+        component: TabbarIcons,
       },
       {
         path: 'tabbar-scrollable/',

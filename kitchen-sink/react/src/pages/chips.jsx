@@ -13,7 +13,7 @@ export default () => {
     <Page>
       <Navbar title="Chips" backLink="Back"></Navbar>
       <BlockTitle>Chips With Text</BlockTitle>
-      <Block strong>
+      <Block strongIos outlineIos>
         <Chip text="Example Chip" />
         <Chip text="Another Chip" />
         <Chip text="One More Chip" />
@@ -21,7 +21,7 @@ export default () => {
         <Chip text="Last One" />
       </Block>
       <BlockTitle>Outline Chips</BlockTitle>
-      <Block strong>
+      <Block strongIos outlineIos>
         <Chip outline text="Example Chip" />
         <Chip outline text="Another Chip" />
         <Chip outline text="One More Chip" />
@@ -29,24 +29,19 @@ export default () => {
         <Chip outline text="Last One" />
       </Block>
       <BlockTitle>Icon Chips</BlockTitle>
-      <Block strong>
+      <Block strongIos outlineIos>
         <Chip text="Add Contact" mediaBgColor="blue">
-          <Icon
-            slot="media"
-            ios="f7:plus_circle"
-            aurora="f7:plus_circle"
-            md="material:add_circle"
-          />
+          <Icon slot="media" ios="f7:plus_circle" md="material:add_circle" />
         </Chip>
         <Chip text="London" mediaBgColor="green">
-          <Icon slot="media" ios="f7:compass" aurora="f7:compass" md="material:location_on" />
+          <Icon slot="media" ios="f7:compass" md="material:location_on" />
         </Chip>
         <Chip text="John Doe" mediaBgColor="red">
-          <Icon slot="media" ios="f7:person" aurora="f7:person" md="material:person" />
+          <Icon slot="media" ios="f7:person" md="material:person" />
         </Chip>
       </Block>
       <BlockTitle>Contact Chips</BlockTitle>
-      <Block strong>
+      <Block strongIos outlineIos>
         <Chip text="Jane Doe">
           <img slot="media" src="https://cdn.framework7.io/placeholder/people-100x100-9.jpg" />
         </Chip>
@@ -61,7 +56,7 @@ export default () => {
         <Chip text="Kate" mediaBgColor="red" media="K" />
       </Block>
       <BlockTitle>Deletable Chips / Tags</BlockTitle>
-      <Block strong>
+      <Block strongIos outlineIos>
         <Chip text="Example Chip" deleteable onDelete={deleteChip} />
         <Chip
           text="Chris"
@@ -81,7 +76,7 @@ export default () => {
         </Chip>
       </Block>
       <BlockTitle>Color Chips</BlockTitle>
-      <Block strong>
+      <Block strongIos outlineIos>
         <Chip text="Red Chip" color="red" />
         <Chip text="Green Chip" color="green" />
         <Chip text="Blue Chip" color="blue" />

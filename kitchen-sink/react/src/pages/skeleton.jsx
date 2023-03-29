@@ -8,7 +8,6 @@ import {
   ListItem,
   Card,
   SkeletonBlock,
-  Row,
   Button,
 } from 'framework7-react';
 
@@ -27,7 +26,7 @@ export default () => {
   return (
     <Page>
       <Navbar title="Skeleton Elements" backLink="Back"></Navbar>
-      <Block strong>
+      <Block strongIos outlineIos>
         <p>
           Skeleton (or Ghost) elements designed to improve perceived performance and make app feels
           faster.
@@ -42,7 +41,7 @@ export default () => {
       </Block>
 
       <BlockTitle>Skeleton List</BlockTitle>
-      <List mediaList className="skeleton-text">
+      <List strongIos outlineIos dividersIos mediaList className="skeleton-text">
         <ListItem
           title="Title"
           subtitle="Subtitle"
@@ -67,6 +66,7 @@ export default () => {
 
       <BlockTitle>Skeleton Card</BlockTitle>
       <Card
+        outline
         className="skeleton-text"
         title="Card Header"
         content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis et massa ac interdum. Cras consequat felis at consequat hendrerit."
@@ -74,22 +74,22 @@ export default () => {
       ></Card>
 
       <BlockTitle>Loading Effects</BlockTitle>
-      <Block strong>
+      <Block strongIos outlineIos>
         <p>It supports few loading effects:</p>
-        <Row tag="p">
-          <Button fill small round className="col" onClick={() => load('fade')}>
+        <p className="grid grid-cols-3 grid-gap">
+          <Button fill small round onClick={() => load('fade')}>
             Fade
           </Button>
-          <Button fill small round className="col" onClick={() => load('wave')}>
+          <Button fill small round onClick={() => load('wave')}>
             Wave
           </Button>
-          <Button fill small round className="col" onClick={() => load('pulse')}>
+          <Button fill small round onClick={() => load('pulse')}>
             Pulse
           </Button>
-        </Row>
+        </p>
       </Block>
       {loading ? (
-        <List mediaList v-if="loading">
+        <List strongIos outlineIos dividersIos mediaList v-if="loading">
           {[1, 2, 3].map((n) => (
             <ListItem
               key={n}
@@ -106,7 +106,7 @@ export default () => {
           ))}
         </List>
       ) : (
-        <List mediaList>
+        <List strongIos outlineIos dividersIos mediaList>
           <ListItem
             title="John Doe"
             subtitle="CEO"

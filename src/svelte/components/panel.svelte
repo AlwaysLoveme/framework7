@@ -16,6 +16,7 @@
   export let cover = false;
   export let reveal = false;
   export let push = false;
+  export let floating = false;
   export let left = false;
   export let right = false;
   export let opened = false;
@@ -24,6 +25,7 @@
   export let backdrop = true;
   export let backdropEl = undefined;
   export let containerEl = undefined;
+  export let closeByBackdropClick = undefined;
   export let visibleBreakpoint = undefined;
   export let collapsedBreakpoint = undefined;
   export let swipe = false;
@@ -51,7 +53,8 @@
   // eslint-disable-next-line
   $: sideComputed = side || (left ? 'left' : right ? 'right' : 'left');
   // eslint-disable-next-line
-  $: effectComputed = effect || (reveal ? 'reveal' : push ? 'push' : 'cover');
+  $: effectComputed =
+    effect || (reveal ? 'reveal' : push ? 'push' : floating ? 'floating' : 'cover');
   $: classes = classNames(
     className,
     'panel',
@@ -163,6 +166,7 @@
         backdrop,
         backdropEl,
         containerEl,
+        closeByBackdropClick,
         visibleBreakpoint,
         collapsedBreakpoint,
         swipe,

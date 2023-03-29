@@ -18,6 +18,7 @@ export default {
     cover: Boolean,
     reveal: Boolean,
     push: Boolean,
+    floating: Boolean,
     left: Boolean,
     right: Boolean,
     opened: Boolean,
@@ -32,6 +33,10 @@ export default {
     },
     containerEl: {
       type: String,
+      default: undefined,
+    },
+    closeByBackdropClick: {
+      type: Boolean,
       default: undefined,
     },
     visibleBreakpoint: {
@@ -153,6 +158,7 @@ export default {
           backdrop: props.backdrop,
           backdropEl: props.backdropEl,
           containerEl: props.containerEl,
+          closeByBackdropClick: props.containerEl,
           visibleBreakpoint: props.visibleBreakpoint,
           collapsedBreakpoint: props.collapsedBreakpoint,
           swipe: props.swipe,
@@ -190,7 +196,8 @@ export default {
     const classes = computed(() => {
       const sideComputed = props.side || (props.left ? 'left' : 'right');
       const effectComputed =
-        props.effect || (props.reveal ? 'reveal' : props.push ? 'push' : 'cover'); // eslint-disable-line
+        props.effect ||
+        (props.reveal ? 'reveal' : props.push ? 'push' : props.floating ? 'floating' : 'cover'); // eslint-disable-line
       return classNames(
         'panel',
         {

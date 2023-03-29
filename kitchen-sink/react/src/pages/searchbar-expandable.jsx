@@ -1,30 +1,24 @@
 import React from 'react';
-import { Navbar, Page, Searchbar, List, ListItem, Link, NavRight, theme } from 'framework7-react';
+import { Navbar, Page, Searchbar, List, ListItem, Link, NavRight } from 'framework7-react';
 
 export default () => {
   return (
     <Page>
       <Navbar backLink="Back" title="Searchbar">
         <NavRight>
-          <Link
-            searchbarEnable=".searchbar-demo"
-            iconIos="f7:search"
-            iconMd="material:search"
-            iconAurora="f7:search"
-          />
+          <Link searchbarEnable=".searchbar-demo" iconIos="f7:search" iconMd="material:search" />
         </NavRight>
         <Searchbar
           className="searchbar-demo"
           expandable
           searchContainer=".search-list"
           searchIn=".item-title"
-          disableButton={!theme.aurora}
         />
       </Navbar>
-      <List className="searchbar-not-found">
+      <List strongIos outlineIos dividersIos className="searchbar-not-found">
         <ListItem title="Nothing found" />
       </List>
-      <List className="search-list searchbar-found">
+      <List strongIos outlineIos dividersIos className="search-list searchbar-found">
         <ListItem title="Acura" />
         <ListItem title="Audi" />
         <ListItem title="BMW" />

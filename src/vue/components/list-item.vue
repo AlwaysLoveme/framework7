@@ -210,7 +210,6 @@ export default {
 
     mediaItem: Boolean,
     mediaList: Boolean,
-    divider: Boolean,
     groupTitle: Boolean,
     swipeout: Boolean,
     swipeoutOpened: Boolean,
@@ -237,6 +236,7 @@ export default {
     checkbox: Boolean,
     radio: Boolean,
     radioIcon: String,
+    checkboxIcon: String,
     checked: Boolean,
     indeterminate: Boolean,
     name: String,
@@ -479,6 +479,8 @@ export default {
         {
           'item-checkbox': props.checkbox,
           'item-radio': props.radio,
+          'item-checkbox-icon-start': props.checkbox && props.checkboxIcon === 'start',
+          'item-checkbox-icon-end': props.checkbox && props.checkboxIcon === 'end',
           'item-radio-icon-start': props.radio && props.radioIcon === 'start',
           'item-radio-icon-end': props.radio && props.radioIcon === 'end',
         },
@@ -489,7 +491,6 @@ export default {
     const liClasses = computed(() =>
       classNames(
         {
-          'item-divider': props.divider,
           'list-group-title': props.groupTitle,
           'media-item': isMediaComputed.value,
           swipeout: props.swipeout,
@@ -534,7 +535,7 @@ export default {
         }
       }
 
-      if (props.divider || props.groupTitle) {
+      if (props.groupTitle) {
         return h(
           'li',
           {

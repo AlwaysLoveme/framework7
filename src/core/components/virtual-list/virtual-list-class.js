@@ -16,8 +16,6 @@ class VirtualList extends Framework7Class {
       defaultHeight = 48;
     } else if (app.theme === 'ios') {
       defaultHeight = 44;
-    } else if (app.theme === 'aurora') {
-      defaultHeight = 38;
     }
 
     const defaults = {
@@ -107,7 +105,6 @@ class VirtualList extends Framework7Class {
       itemsWrapEl: $itemsWrapEl[0],
       // DOM cached items
       domCache: {},
-      displayDomCache: {},
       // Temporary DOM Element
       tempDomElement: document.createElement('ul'),
       // Last repain position
@@ -142,7 +139,7 @@ class VirtualList extends Framework7Class {
         .parents('.tab')
         .filter((tabEl) => {
           return (
-            $(tabEl).parent('.tabs').parent('.tabs-animated-wrap, .tabs-swipeable-wrap').length ===
+            $(tabEl).parent('.tabs').parent('.tabs-animated-wrap, swiper-container.tabs').length ===
             0
           );
         })

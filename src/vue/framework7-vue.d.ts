@@ -6,10 +6,9 @@ import { Store } from 'framework7/types';
 export interface Framework7Theme {
   ios: boolean;
   md: boolean;
-  aurora: boolean;
 }
 
-/** Object with boolean properties with information about currently used theme (iOS, MD or Aurora) */
+/** Object with boolean properties with information about currently used theme (`ios` and `md`) */
 declare const theme: Framework7Theme;
 
 /** Main Framework7's initialized instance. It allows you to use any of Framework7 APIs */
@@ -20,8 +19,6 @@ declare const f7ready: (callback: (f7: Framework7) => void) => void;
 
 declare const Framework7Vue: Framework7Plugin;
 
-declare const registerComponents: (app: any) => void;
-
 interface useStore {
   (store: Store, getter: string): any;
   (getter: string): any;
@@ -30,5 +27,5 @@ interface useStore {
 declare const useStore: useStore;
 
 // EXPORT_COMPONENTS
-export { f7, f7ready, theme, registerComponents, useStore };
+export { f7, f7ready, theme, useStore };
 export default Framework7Vue;

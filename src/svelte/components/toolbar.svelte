@@ -13,20 +13,16 @@
   export { className as class };
 
   export let tabbar = false;
-  export let labels = false;
+  export let icons = false;
   export let scrollable = false;
   export let hidden = false;
-  export let noShadow = false;
-  export let noHairline = false;
-  export let noBorder = false;
+  export let outline = true;
   export let position = undefined;
   export let topMd = undefined;
   export let topIos = undefined;
-  export let topAurora = undefined;
   export let top = undefined;
   export let bottomMd = undefined;
   export let bottomIos = undefined;
-  export let bottomAurora = undefined;
   export let bottom = undefined;
   export let inner = true;
 
@@ -38,7 +34,7 @@
   });
 
   setReactiveContext('TabbarContext', () => ({
-    tabbarHasLabels: labels,
+    tabbarHasIcons: icons,
   }));
 
   $: classes = classNames(
@@ -49,20 +45,14 @@
       'toolbar-bottom':
         (theme && theme.md && bottomMd) ||
         (theme && theme.ios && bottomIos) ||
-        (theme && theme.aurora && bottomAurora) ||
         bottom ||
         position === 'bottom',
       'toolbar-top':
-        (theme && theme.md && topMd) ||
-        (theme && theme.ios && topIos) ||
-        (theme && theme.aurora && topAurora) ||
-        top ||
-        position === 'top',
-      'tabbar-labels': labels,
+        (theme && theme.md && topMd) || (theme && theme.ios && topIos) || top || position === 'top',
+      'tabbar-icons': icons,
       'tabbar-scrollable': scrollable,
       'toolbar-hidden': hidden,
-      'no-shadow': noShadow,
-      'no-hairline': noHairline || noBorder,
+      'no-outline': !outline,
     },
     colorClasses($$props),
   );

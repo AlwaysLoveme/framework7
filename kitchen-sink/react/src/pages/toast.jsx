@@ -50,10 +50,9 @@ export default () => {
     // Create toast
     if (!toastIcon.current) {
       toastIcon.current = f7.toast.create({
-        icon:
-          theme.ios || theme.aurora
-            ? '<i class="f7-icons">star_fill</i>'
-            : '<i class="material-icons">star</i>',
+        icon: theme.ios
+          ? '<i class="f7-icons">star_fill</i>'
+          : '<i class="material-icons">star</i>',
         text: "I'm on center",
         position: 'center',
         closeTimeout: 2000,
@@ -131,7 +130,7 @@ export default () => {
   return (
     <Page onPageBeforeRemove={onPageBeforeRemove} onPageBeforeOut={onPageBeforeOut}>
       <Navbar title="Toast" backLink="Back"></Navbar>
-      <Block strong>
+      <Block strongIos outlineIos>
         <p>Toasts provide brief feedback about an operation through a message on the screen.</p>
         <p>
           <Button fill onClick={showToastBottom}>

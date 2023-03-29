@@ -24,7 +24,13 @@
       : '')
   ).replace(';;', ';');
 
-  $: classes = classNames(className, 'preloader', colorClasses($$props));
+  $: classes = classNames(
+    className,
+    {
+      preloader: true,
+    },
+    colorClasses($$props),
+  );
 </script>
 
 <span style={preloaderStyle} class={classes} {...restProps($$restProps)}>
@@ -45,7 +51,5 @@
       <span class="preloader-inner-line" />
       <span class="preloader-inner-line" />
     </span>
-  {:else if theme && theme.aurora}
-    <span class="preloader-inner"> <span class="preloader-inner-circle" /> </span>
   {:else}<span class="preloader-inner" />{/if}
 </span>

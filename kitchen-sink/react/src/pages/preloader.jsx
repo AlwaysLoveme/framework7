@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Page, BlockTitle, Block, Preloader, Col, f7 } from 'framework7-react';
+import { Navbar, Page, BlockTitle, Block, Preloader, f7 } from 'framework7-react';
 
 export default () => {
   const openIndicator = () => {
@@ -31,44 +31,48 @@ export default () => {
       </Block>
 
       <BlockTitle>Default</BlockTitle>
-      <Block strong className="row demo-preloaders align-items-stretch text-align-center">
-        <Col>
+      <Block
+        strongIos
+        outlineIos
+        className="grid grid-cols-4 grid-gap demo-preloaders align-items-stretch text-align-center"
+      >
+        <div>
           <Preloader />
-        </Col>
-        <Col style={{ background: '#000' }}>
+        </div>
+        <div style={{ background: '#000' }}>
           <Preloader color="white" />
-        </Col>
-        <Col>
+        </div>
+        <div>
           <Preloader size={42} />
-        </Col>
-        <Col style={{ background: '#000' }}>
+        </div>
+        <div style={{ background: '#000' }}>
           <Preloader size={42} color="white" />
-        </Col>
+        </div>
       </Block>
 
       <BlockTitle>Color Preloaders</BlockTitle>
-      <Block strong className="row text-align-center">
-        <Col>
+      <Block strongIos outlineIos className="grid grid-cols-4 grid-gap text-align-center">
+        <div>
           <Preloader color="red" />
-        </Col>
-        <Col>
+        </div>
+        <div>
           <Preloader color="green" />
-        </Col>
-        <Col>
+        </div>
+        <div>
           <Preloader color="orange" />
-        </Col>
-        <Col>
+        </div>
+        <div>
           <Preloader color="blue" />
-        </Col>
+        </div>
       </Block>
 
       <BlockTitle>Multi-color</BlockTitle>
-      <Block strong className="text-align-center">
+      <Block strongIos outlineIos className="text-align-center">
         <Preloader color="multi" />
       </Block>
 
       <BlockTitle>Preloader Modals</BlockTitle>
-      <Block strong>
+      <Block strongIos outlineIos>
         <p>
           With <b>app.preloader.show()</b> you can show small overlay with preloader indicator.
         </p>

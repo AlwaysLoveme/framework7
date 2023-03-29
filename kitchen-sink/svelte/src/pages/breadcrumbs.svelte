@@ -18,7 +18,7 @@
 
 <Page>
   <Navbar sliding backLink="Back" title="Breadcrumbs" />
-  <Block strong>
+  <Block strongIos outlineIos>
     <p>
       Breadcrumbs allow users to keep track and maintain awareness of their locations within the app
       or website. They should be used for large sites and apps with hierarchically arranged pages.
@@ -26,7 +26,7 @@
   </Block>
 
   <BlockTitle>Basic</BlockTitle>
-  <Block strong>
+  <Block strongIos outlineIos>
     <Breadcrumbs>
       <BreadcrumbsItem>
         <Link>Home</Link>
@@ -42,7 +42,7 @@
 
   <BlockTitle>Scrollable</BlockTitle>
   <BlockHeader>Breadcrumbs will be scrollable if they don't fit the screen</BlockHeader>
-  <Block strong>
+  <Block strongIos outlineIos>
     <Breadcrumbs>
       <BreadcrumbsItem>
         <Link>Home</Link>
@@ -65,7 +65,7 @@
   </Block>
 
   <BlockTitle>Collapsed</BlockTitle>
-  <Block strong>
+  <Block strongIos outlineIos>
     <Breadcrumbs>
       <BreadcrumbsItem>
         <Link>Home</Link>
@@ -86,33 +86,18 @@
   </Block>
 
   <BlockTitle>With Icons</BlockTitle>
-  <Block strong>
+  <Block strongIos outlineIos>
     <Breadcrumbs>
       <BreadcrumbsItem>
-        <Link
-          iconIos="f7:house_fill"
-          iconAurora="f7:house_fill"
-          iconMd="material:home"
-          text="Home"
-        />
+        <Link iconIos="f7:house_fill" iconMd="material:home" text="Home" />
       </BreadcrumbsItem>
       <BreadcrumbsSeparator />
       <BreadcrumbsItem>
-        <Link
-          iconIos="f7:square_list_fill"
-          iconAurora="f7:square_list_fill"
-          iconMd="material:list_alt"
-          text="Catalog"
-        />
+        <Link iconIos="f7:square_list_fill" iconMd="material:list_alt" text="Catalog" />
       </BreadcrumbsItem>
       <BreadcrumbsSeparator />
       <BreadcrumbsItem>
-        <Link
-          iconIos="f7:device_phone_portrait"
-          iconAurora="f7:device_phone_portrait"
-          iconMd="material:smartphone"
-          text="Phones"
-        />
+        <Link iconIos="f7:device_phone_portrait" iconMd="material:smartphone" text="Phones" />
       </BreadcrumbsItem>
       <BreadcrumbsSeparator />
       <BreadcrumbsItem>

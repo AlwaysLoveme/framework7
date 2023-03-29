@@ -23,7 +23,7 @@ export default () => {
     <Page>
       <Navbar title="Checkbox" backLink="Back" />
       <BlockTitle>Inline</BlockTitle>
-      <Block strong>
+      <Block strongIos outlineIos>
         <p>
           Lorem <Checkbox name="checkbox-1"></Checkbox> ipsum dolor sit amet, consectetur
           adipisicing elit. Alias beatae illo nihil aut eius commodi sint eveniet aliquid eligendi{' '}
@@ -33,15 +33,22 @@ export default () => {
       </Block>
 
       <BlockTitle>Checkbox Group</BlockTitle>
-      <List>
+      <List strongIos outlineIos dividersIos>
         <ListItem checkbox title="Books" name="demo-checkbox" defaultChecked />
         <ListItem checkbox title="Movies" name="demo-checkbox" />
         <ListItem checkbox title="Food" name="demo-checkbox" />
         <ListItem checkbox title="Drinks" name="demo-checkbox" />
       </List>
 
+      <List strongIos outlineIos dividersIos>
+        <ListItem checkbox checkboxIcon="end" title="Books" name="demo-checkbox" defaultChecked />
+        <ListItem checkbox checkboxIcon="end" title="Movies" name="demo-checkbox" />
+        <ListItem checkbox checkboxIcon="end" title="Food" name="demo-checkbox" />
+        <ListItem checkbox checkboxIcon="end" title="Drinks" name="demo-checkbox" />
+      </List>
+
       <BlockTitle>Indeterminate State</BlockTitle>
-      <List>
+      <List strongIos outlineIos dividersIos>
         <ListItem
           checkbox
           title="Movies"
@@ -72,7 +79,7 @@ export default () => {
       </List>
 
       <BlockTitle>With Media Lists</BlockTitle>
-      <List mediaList>
+      <List mediaList strongIos outlineIos dividersIos>
         <ListItem
           checkbox
           defaultChecked

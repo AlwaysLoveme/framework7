@@ -18,10 +18,6 @@ class SmartSelect extends Framework7Class {
       app.params.smartSelect,
     );
 
-    if (typeof defaults.searchbarDisableButton === 'undefined') {
-      defaults.searchbarDisableButton = app.theme !== 'aurora';
-    }
-
     // Extend defaults with modules params
     ss.useModulesParams(defaults);
 
@@ -138,7 +134,7 @@ class SmartSelect extends Framework7Class {
 
       ss.$selectEl.trigger('change');
       if (ss.params.setValueText) {
-        ss.$valueEl.text(ss.formatValueText(optionText));
+        ss.formatValueTextContent(optionText);
       }
       if (ss.params.closeOnSelect && ss.inputType === 'radio') {
         ss.close();
@@ -203,7 +199,7 @@ class SmartSelect extends Framework7Class {
       ss.selectEl.value = newValue;
     }
     if (ss.params.setValueText) {
-      ss.$valueEl.text(ss.formatValueText(optionText));
+      ss.formatValueTextContent(optionText);
     }
     ss.$selectEl.trigger('change');
     return ss;
@@ -212,7 +208,7 @@ class SmartSelect extends Framework7Class {
   unsetValue() {
     const ss = this;
     if (ss.params.setValueText) {
-      ss.$valueEl.text(ss.formatValueText([]));
+      ss.formatValueTextContent([]);
     }
     ss.$selectEl.find('option').each((optionEl) => {
       optionEl.selected = false;
@@ -266,6 +262,16 @@ class SmartSelect extends Framework7Class {
     }
   }
 
+  formatValueTextContent(values) {
+    const ss = this;
+    const valueFormatted = ss.formatValueText(values);
+    if (valueFormatted.includes('<') && valueFormatted.includes('>')) {
+      ss.$valueEl.html(valueFormatted);
+    } else {
+      ss.$valueEl.text(valueFormatted);
+    }
+  }
+
   formatValueText(values) {
     const ss = this;
     let textValue;
@@ -302,7 +308,7 @@ class SmartSelect extends Framework7Class {
       });
     }
     if (ss.params.setValueText) {
-      ss.$valueEl.text(ss.formatValueText(valueArray));
+      ss.formatValueTextContent(valueArray);
     }
   }
 
@@ -319,10 +325,10 @@ class SmartSelect extends Framework7Class {
       const optionIconIos =
         theme === 'ios' && (optionData.optionIconIos || ss.params.optionIconIos);
       const optionIconMd = theme === 'md' && (optionData.optionIconMd || ss.params.optionIconMd);
-      const optionIconAurora =
-        theme === 'aurora' && (optionData.optionIconAurora || ss.params.optionIconAurora);
-      const optionHasMedia =
-        optionImage || optionIcon || optionIconIos || optionIconMd || optionIconAurora;
+      const optionInputIconPosition =
+        optionData.inputIconPosition || ss.params.inputIconPosition || '';
+
+      const optionHasMedia = optionImage || optionIcon || optionIconIos || optionIconMd;
       const optionColor = optionData.optionColor;
 
       let optionClassName = optionData.optionClass || '';
@@ -349,7 +355,7 @@ class SmartSelect extends Framework7Class {
         icon: optionIcon,
         iconIos: optionIconIos,
         iconMd: optionIconMd,
-        iconAurora: optionIconAurora,
+        inputIconPosition: optionInputIconPosition,
         color: optionColor,
         className: optionClassName,
         disabled: $optionEl[0].disabled,
@@ -410,7 +416,7 @@ class SmartSelect extends Framework7Class {
 
     let itemHtml;
     if (item.isLabel) {
-      itemHtml = `<li class="item-divider">${item.groupLabel}</li>`;
+      itemHtml = `<li class="list-group-title">${item.groupLabel}</li>`;
     } else {
       let selected = item.selected;
       let disabled;
@@ -422,14 +428,18 @@ class SmartSelect extends Framework7Class {
         }
       }
 
-      const { icon, iconIos, iconMd, iconAurora } = item;
-      const hasIcon = icon || iconIos || iconMd || iconAurora;
-      const iconContent = getIconContent(icon || iconIos || iconMd || iconAurora || '');
-      const iconClass = getIconClass(icon || iconIos || iconMd || iconAurora || '');
+      const { icon, iconIos, iconMd } = item;
+      const hasIcon = icon || iconIos || iconMd;
+      const iconContent = getIconContent(icon || iconIos || iconMd || '');
+      const iconClass = getIconClass(icon || iconIos || iconMd || '');
 
       itemHtml = (
         <li class={`${item.className || ''}${disabled ? ' disabled' : ''}`}>
-          <label class={`item-${item.inputType} item-content`}>
+          <label
+            class={`item-${item.inputType} ${
+              item.inputIconPosition ? `item-${item.inputType}-icon-${item.inputIconPosition}` : ''
+            } item-content`}
+          >
             <input
               type={item.inputType}
               name={item.inputName}
@@ -503,9 +513,11 @@ class SmartSelect extends Framework7Class {
         {ss.params.searchbar && <div class="searchbar-backdrop"></div>}
         <div class="page-content">
           <div
-            class={`list smart-select-list-${ss.id} ${
-              ss.params.virtualList ? ' virtual-list' : ''
-            } ${ss.params.formColorTheme ? `color-${ss.params.formColorTheme}` : ''}`}
+            class={`list list-outline-ios list-strong-ios list-dividers-ios smart-select-list-${
+              ss.id
+            } ${ss.params.virtualList ? ' virtual-list' : ''} ${
+              ss.params.formColorTheme ? `color-${ss.params.formColorTheme}` : ''
+            }`}
           >
             <ul>{!ss.params.virtualList && ss.renderItems(ss.items)}</ul>
           </div>
@@ -557,9 +569,11 @@ class SmartSelect extends Framework7Class {
             {ss.params.searchbar && <div class="searchbar-backdrop"></div>}
             <div class="page-content">
               <div
-                class={`list smart-select-list-${ss.id} ${
-                  ss.params.virtualList ? ' virtual-list' : ''
-                } ${ss.params.formColorTheme ? `color-${ss.params.formColorTheme}` : ''}`}
+                class={`list list-outline-ios list-strong-ios list-dividers-ios smart-select-list-${
+                  ss.id
+                } ${ss.params.virtualList ? ' virtual-list' : ''} ${
+                  ss.params.formColorTheme ? `color-${ss.params.formColorTheme}` : ''
+                }`}
               >
                 <ul>{!ss.params.virtualList && ss.renderItems(ss.items)}</ul>
               </div>
@@ -587,7 +601,7 @@ class SmartSelect extends Framework7Class {
         </div>
         <div class="sheet-modal-inner">
           <div class="page-content">
-            <div class={`list smart-select-list-${ss.id} ${ss.params.virtualList ? ' virtual-list' : ''} ${ss.params.formColorTheme ? `color-${ss.params.formColorTheme}` : ''}`}>
+            <div class={`list list-strong-ios list-dividers-ios smart-select-list-${ss.id} ${ss.params.virtualList ? ' virtual-list' : ''} ${ss.params.formColorTheme ? `color-${ss.params.formColorTheme}` : ''}`}>
               <ul>{!ss.params.virtualList && ss.renderItems(ss.items)}</ul>
             </div>
           </div>
@@ -604,7 +618,7 @@ class SmartSelect extends Framework7Class {
     return (
       <div class={`popover smart-select-popover ${cssClass}`} data-select-name={ss.selectName}>
         <div class="popover-inner">
-          <div class={`list smart-select-list-${ss.id} ${ss.params.virtualList ? ' virtual-list' : ''} ${ss.params.formColorTheme ? `color-${ss.params.formColorTheme}` : ''}`}>
+          <div class={`list list-strong-ios list-dividers-ios smart-select-list-${ss.id} ${ss.params.virtualList ? ' virtual-list' : ''} ${ss.params.formColorTheme ? `color-${ss.params.formColorTheme}` : ''}`}>
             <ul>{!ss.params.virtualList && ss.renderItems(ss.items)}</ul>
           </div>
         </div>
@@ -812,6 +826,7 @@ class SmartSelect extends Framework7Class {
       content: popupHtml,
       push: ss.params.popupPush,
       swipeToClose: ss.params.popupSwipeToClose,
+      closeByBackdropClick: ss.params.closeByBackdropClick,
       on: {
         popupOpen(popup) {
           ss.onOpen('popup', popup.el);
@@ -855,6 +870,7 @@ class SmartSelect extends Framework7Class {
       closeByOutsideClick: true,
       push: ss.params.sheetPush,
       swipeToClose: ss.params.sheetSwipeToClose,
+      closeByBackdropClick: ss.params.closeByBackdropClick,
       on: {
         sheetOpen(sheet) {
           ss.onOpen('sheet', sheet.el);
@@ -893,6 +909,7 @@ class SmartSelect extends Framework7Class {
     const popoverParams = {
       content: popoverHtml,
       targetEl: ss.$el,
+      closeByBackdropClick: ss.params.closeByBackdropClick,
       on: {
         popoverOpen(popover) {
           ss.onOpen('popover', popover.el);

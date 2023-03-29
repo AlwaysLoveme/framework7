@@ -11,6 +11,7 @@
   let className = undefined;
   export { className as class };
 
+  export let style = '';
   export let tabletFullscreen = undefined;
   export let opened = undefined;
   export let animate = undefined;
@@ -125,7 +126,7 @@
     f7ready(() => {
       f7Popup = app.f7.popup.create(popupParams);
       if (opened) {
-        f7Popup.open(false);
+        f7Popup.open(false, true);
       }
     });
   });
@@ -135,6 +136,6 @@
   });
 </script>
 
-<div class={classes} bind:this={el} {...restProps($$restProps)}>
+<div class={classes} bind:this={el} {style} {...restProps($$restProps)}>
   <slot popup={f7Popup} />
 </div>

@@ -35,9 +35,11 @@ export default () => {
         </p>
       </Block>
 
-      <List>
+      {/* example-hidden-start */}
+      <List strong insetMd outlineIos>
         <ListItem link="/login-screen-page/" title="As Separate Page"></ListItem>
       </List>
+      {/* example-hidden-end */}
 
       <Block>
         <Button raised large fill loginScreenOpen=".demo-login-screen">
@@ -51,7 +53,7 @@ export default () => {
           large
           fill
           onClick={() => {
-            this.setState({ loginScreenOpened: true });
+            setLoginScreenOpened(true);
           }}
         >
           Open Via Prop Change
@@ -87,7 +89,7 @@ export default () => {
               }}
             />
           </List>
-          <List>
+          <List inset>
             <ListButton onClick={signIn}>Sign In</ListButton>
             <BlockFooter>
               Some text about login information.

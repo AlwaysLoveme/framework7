@@ -37,8 +37,7 @@ import { f7ready, f7 } from '../shared/f7.js';
 export default {
   name: 'f7-searchbar',
   props: {
-    noShadow: Boolean,
-    noHairline: Boolean,
+    outline: { type: Boolean, default: true },
     form: {
       type: Boolean,
       default: true,
@@ -88,7 +87,7 @@ export default {
     },
     searchGroupTitle: {
       type: String,
-      default: '.item-divider, .list-group-title',
+      default: '.list-group-title',
     },
     foundEl: {
       type: [String, Object],
@@ -123,7 +122,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    hideDividers: {
+    hideGroupTitles: {
       type: Boolean,
       default: true,
     },
@@ -220,7 +219,7 @@ export default {
           ignore: props.ignore,
           customSearch: props.customSearch,
           removeDiacritics: props.removeDiacritics,
-          hideDividers: props.hideDividers,
+          hideGroupTitles: props.hideGroupTitles,
           hideGroups: props.hideGroups,
           expandable: props.expandable,
           inline: props.inline,
@@ -258,8 +257,7 @@ export default {
         'searchbar',
         {
           'searchbar-inline': props.inline,
-          'no-shadow': props.noShadow,
-          'no-hairline': props.noHairline,
+          'no-outline': !props.outline,
           'searchbar-expandable': props.expandable,
         },
         colorClasses(props),

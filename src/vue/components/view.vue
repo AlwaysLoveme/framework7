@@ -27,10 +27,6 @@ export default {
       type: Boolean,
       default: undefined,
     },
-    stackPages: {
-      type: Boolean,
-      default: undefined,
-    },
     xhrCache: {
       type: Boolean,
       default: undefined,
@@ -108,20 +104,6 @@ export default {
     },
     mdSwipeBackActiveArea: Number,
     mdSwipeBackThreshold: Number,
-    auroraSwipeBack: {
-      type: Boolean,
-      default: undefined,
-    },
-    auroraSwipeBackAnimateShadow: {
-      type: Boolean,
-      default: undefined,
-    },
-    auroraSwipeBackAnimateOpacity: {
-      type: Boolean,
-      default: undefined,
-    },
-    auroraSwipeBackActiveArea: Number,
-    auroraSwipeBackThreshold: Number,
     // Push State
     browserHistory: {
       type: Boolean,
@@ -182,6 +164,8 @@ export default {
     // Routes hooks
     routesBeforeEnter: [Function, Array],
     routesBeforeLeave: [Function, Array],
+
+    unloadTabContent: { type: Boolean, default: undefined },
 
     init: {
       type: Boolean,
@@ -389,7 +373,11 @@ export default {
       const { component: pageComponent, props: pageProps } = page;
       let keys = [];
       const passProps = {};
-      if (pageComponent && pageComponent.props) keys = Object.keys(pageComponent.props);
+      if (pageComponent && pageComponent.props) {
+        if (Array.isArray(pageComponent.props))
+          keys = pageComponent.props.filter((prop) => typeof prop === 'string');
+        else keys = Object.keys(pageComponent.props);
+      }
       keys.forEach((key) => {
         if (key in pageProps) passProps[key] = pageProps[key];
       });

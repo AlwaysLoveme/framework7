@@ -10,7 +10,6 @@
     Block,
     Button,
     Link,
-    Row,
     List,
     ListItem,
   } from 'framework7-svelte';
@@ -30,7 +29,7 @@
           <div class="sheet-modal sheet-modal-bottom">
             <div class="toolbar">
               <div class="toolbar-inner justify-content-flex-end">
-                <a href="#" class="link sheet-close">Close</a>
+                <a  class="link sheet-close">Close</a>
               </div>
             </div>
             <div class="sheet-modal-inner">
@@ -62,25 +61,25 @@
 
 <Page {onPageBeforeOut} {onPageBeforeRemove}>
   <Navbar title="Sheet Modal" backLink="Back" />
-  <Block strong>
+  <Block strongIos outlineIos>
     <p>
       Sheet Modals slide up from the bottom of the screen to reveal more content. Such modals allow
       to create custom overlays with custom content.
     </p>
-    <Row tag="p">
-      <Button class="col" fill sheetOpen=".demo-sheet">Open Sheet</Button>
-      <Button class="col" fill onClick={createSheet}>Create Dynamic Sheet</Button>
-    </Row>
-    <p>
-      <Button class="col" fill sheetOpen=".demo-sheet-top">Top Sheet</Button>
+    <p class="grid grid-cols-2 grid-gap">
+      <Button fill sheetOpen=".demo-sheet">Open Sheet</Button>
+      <Button fill onClick={createSheet}>Dynamic Sheet</Button>
     </p>
     <p>
-      <Button class="col" fill onClick={() => (sheetOpened = true)}>Open Via Prop Change</Button>
+      <Button fill sheetOpen=".demo-sheet-top">Top Sheet</Button>
+    </p>
+    <p>
+      <Button fill onClick={() => (sheetOpened = true)}>Open Via Prop Change</Button>
     </p>
   </Block>
 
   <BlockTitle>Push View</BlockTitle>
-  <Block strong>
+  <Block strongIos outlineIos>
     <p>
       Sheet can push view behind on open. By default it has effect only when `safe-area-inset-top`
       is more than zero (iOS fullscreen webapp or iOS cordova app)
@@ -91,7 +90,7 @@
   </Block>
 
   <BlockTitle>Swipeable Sheet</BlockTitle>
-  <Block strong>
+  <Block strongIos outlineIos>
     <p>
       Sheet modal can be closed with swipe to top (for top Sheet) or bottom (for default Bottom
       sheet):
@@ -259,7 +258,7 @@
       </div>
     </div>
     <BlockTitle medium class="margin-top">Your order:</BlockTitle>
-    <List noHairlines>
+    <List>
       <ListItem title="Item 1"><b slot="after" class="text-color-black">$200</b></ListItem>
       <ListItem title="Item 2"><b slot="after" class="text-color-black">$180</b></ListItem>
       <ListItem title="Delivery"><b slot="after" class="text-color-black">$120</b></ListItem>

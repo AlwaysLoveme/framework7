@@ -1,7 +1,7 @@
 <template>
   <f7-page @page:beforeremove="onPageBeforeRemove" @page:beforeout="onPageBeforeOut">
     <f7-navbar title="Toast" back-link="Back"></f7-navbar>
-    <f7-block strong>
+    <f7-block strong-ios outline-ios>
       <p>Toasts provide brief feedback about an operation through a message on the screen.</p>
       <p>
         <f7-button fill @click="showToastBottom">Toast on Bottom</f7-button>
@@ -84,10 +84,9 @@ export default {
       // Create toast
       if (!self.toastIcon) {
         self.toastIcon = f7.toast.create({
-          icon:
-            theme.ios || theme.aurora
-              ? '<i class="f7-icons">star_fill</i>'
-              : '<i class="material-icons">star</i>',
+          icon: theme.ios
+            ? '<i class="f7-icons">star_fill</i>'
+            : '<i class="material-icons">star</i>',
           text: "I'm on center",
           position: 'center',
           closeTimeout: 2000,

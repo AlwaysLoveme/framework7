@@ -15,9 +15,6 @@
       <span class="preloader-inner-line" />
       <span class="preloader-inner-line" />
     </span>
-    <span v-else-if="theme && theme.aurora" class="preloader-inner">
-      <span class="preloader-inner-circle" />
-    </span>
     <span v-else-if="!theme" class="preloader-inner" />
   </div>
 </template>
@@ -35,7 +32,15 @@ export default {
   },
   setup(props) {
     const theme = useTheme();
-    const classes = computed(() => classNames('preloader', colorClasses(props)));
+    const classes = computed(() =>
+      classNames(
+        'preloader',
+        {
+          preloader: true,
+        },
+        colorClasses(props),
+      ),
+    );
     const style = computed(() => {
       const preloaderStyle = {};
       let sizeComputed = props.size;

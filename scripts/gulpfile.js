@@ -7,11 +7,11 @@ const buildClean = require('./build-clean.js');
 
 const buildKsCore = require('./build-ks-core.js');
 
+const buildMaterialColorUtils = require('./build-material-color-utils.js');
 const buildCoreJs = require('./build-core-js.js');
 const buildCoreTypings = require('./build-core-typings.js');
 const buildCoreLess = require('./build-core-styles.js');
 const buildCoreComponents = require('./build-core-components.js');
-const buildCoreLazyComponents = require('./build-core-lazy-components.js');
 
 const buildVue = require('./build-vue.js');
 const buildVueTypings = require('./build-vue-typings.js');
@@ -26,11 +26,11 @@ const env = process.env.NODE_ENV || 'development';
 gulp.task('ks-core', buildKsCore);
 
 gulp.task('core-clean', (cb) => buildClean('core', cb));
+gulp.task('core-material-color-utils', buildMaterialColorUtils);
 gulp.task('core-js', buildCoreJs);
 gulp.task('core-typings', buildCoreTypings);
 gulp.task('core-styles', buildCoreLess);
 gulp.task('core-components', buildCoreComponents);
-gulp.task('core-lazy-components', buildCoreLazyComponents);
 
 gulp.task('react-clean', (cb) => buildClean('react', cb));
 gulp.task('react', buildReact);
@@ -49,7 +49,7 @@ gulp.task(
   'build-core',
   gulp.series([
     'core-clean',
-    ...(env === 'development' ? [] : ['core-lazy-components']),
+    'core-material-color-utils',
     'core-components',
     'core-js',
     'core-typings',
@@ -68,23 +68,9 @@ const watch = {
     gulp.watch('./src/core/**/*.less', gulp.series('core-styles', 'core-components'));
   },
   core() {
-    gulp.watch(
-      ['./src/core/**/*.js'],
-      gulp.series([
-        'core-js',
-        'core-components',
-        ...(env === 'development' ? [] : ['core-lazy-components']),
-      ]),
-    );
+    gulp.watch(['./src/core/**/*.js'], gulp.series(['core-js', 'core-components']));
     gulp.watch(['./src/core/**/*.d.ts'], gulp.series('core-typings'));
-    gulp.watch(
-      './src/**/**/*.less',
-      gulp.series([
-        'core-styles',
-        'core-components',
-        ...(env === 'development' ? [] : ['core-lazy-components']),
-      ]),
-    );
+    gulp.watch('./src/**/**/*.less', gulp.series(['core-styles', 'core-components']));
   },
   react() {
     gulp.watch(['./src/core/**/*.js'], gulp.series('core-js', 'core-components'));

@@ -6,7 +6,7 @@ import { colorClasses } from '../shared/mixins.js';
   id: string | number;
   className: string;
   style: React.CSSProperties;
-  bold: boolean;
+  strong: boolean;
   onClick?: (event?: any) => void
   ref?: React.MutableRefObject<{el: HTMLElement | null}>;
   children?: React.ReactNode;
@@ -14,7 +14,7 @@ import { colorClasses } from '../shared/mixins.js';
 */
 
 const ActionsLabel = forwardRef((props, ref) => {
-  const { className, id, style, children, bold } = props;
+  const { className, id, style, children, strong } = props;
   const extraAttrs = getExtraAttrs(props);
 
   const elRef = useRef(null);
@@ -26,7 +26,7 @@ const ActionsLabel = forwardRef((props, ref) => {
     className,
     'actions-label',
     {
-      'actions-button-bold': bold,
+      'actions-button-strong': strong,
     },
     colorClasses(props),
   );

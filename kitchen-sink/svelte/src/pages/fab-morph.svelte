@@ -5,56 +5,37 @@
 <!-- svelte-ignore a11y-invalid-attribute -->
 <Page>
   <Navbar title="Floating Action Button Morph" backLink="Back" />
-  <Toolbar tabbar labels bottom class="fab-morph-target">
-    <Link
-      tabLink
-      tabLinkActive
-      iconIos="f7:envelope_fill"
-      iconAurora="f7:envelope_fill"
-      iconMd="material:email"
-      text="Inbox"
-    />
-    <Link
-      tabLink
-      iconIos="f7:calendar_fill"
-      iconAurora="f7:calendar_fill"
-      iconMd="material:today"
-      text="Calendar"
-    />
-    <Link
-      tabLink
-      iconIos="f7:cloud_upload_fill"
-      iconAurora="f7:cloud_upload_fill"
-      iconMd="material:file_upload"
-      text="Upload"
-    />
+  <Toolbar tabbar icons bottom class="fab-morph-target">
+    <Link tabLink tabLinkActive iconIos="f7:envelope_fill" iconMd="material:email" text="Inbox" />
+    <Link tabLink iconIos="f7:calendar_fill" iconMd="material:today" text="Calendar" />
+    <Link tabLink iconIos="f7:cloud_upload_fill" iconMd="material:file_upload" text="Upload" />
   </Toolbar>
   <Fab position="right-bottom" morphTo=".toolbar.fab-morph-target">
-    <Icon ios="f7:plus" aurora="f7:plus" md="material:add" />
+    <Icon ios="f7:plus" md="material:add" />
   </Fab>
   <Fab position="left-bottom" morphTo=".demo-fab-sheet.fab-morph-target">
-    <Icon ios="f7:plus" aurora="f7:plus" md="material:add" />
+    <Icon ios="f7:plus" md="material:add" />
   </Fab>
   <Fab position="center-bottom" morphTo=".demo-fab-fullscreen-sheet.fab-morph-target">
-    <Icon ios="f7:plus" aurora="f7:plus" md="material:add" />
+    <Icon ios="f7:plus" md="material:add" />
   </Fab>
   <svelte:fragment slot="fixed">
     <div class="list links-list demo-fab-sheet fab-morph-target">
       <ul>
-        <li><a href="#" class="fab-close">Link 1</a></li>
-        <li><a href="#" class="fab-close">Link 2</a></li>
-        <li><a href="#" class="fab-close">Link 3</a></li>
-        <li><a href="#" class="fab-close">Link 4</a></li>
+        <li><a class="fab-close">Link 1</a></li>
+        <li><a class="fab-close">Link 2</a></li>
+        <li><a class="fab-close">Link 3</a></li>
+        <li><a class="fab-close">Link 4</a></li>
       </ul>
     </div>
     <div class="demo-fab-fullscreen-sheet fab-morph-target">
       <BlockTitle>Choose Something</BlockTitle>
       <div class="list links-list">
         <ul>
-          <li><a href="#" class="fab-close">Link 1</a></li>
-          <li><a href="#" class="fab-close">Link 2</a></li>
-          <li><a href="#" class="fab-close">Link 3</a></li>
-          <li><a href="#" class="fab-close">Link 4</a></li>
+          <li><a class="fab-close">Link 1</a></li>
+          <li><a class="fab-close">Link 2</a></li>
+          <li><a class="fab-close">Link 3</a></li>
+          <li><a class="fab-close">Link 4</a></li>
         </ul>
       </div>
     </div>

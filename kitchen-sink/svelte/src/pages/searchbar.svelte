@@ -1,20 +1,17 @@
 <script>
-  import { theme, Navbar, Page, Searchbar, Subnavbar, List, ListItem } from 'framework7-svelte';
+  import { Navbar, Page, Searchbar, Subnavbar, List, ListItem } from 'framework7-svelte';
 </script>
 
 <Page>
   <Navbar backLink="Back" title="Searchbar">
     <Subnavbar inner={false}>
-      <Searchbar
-        searchContainer=".search-list"
-        searchIn=".item-title"
-        disableButton={!theme.aurora} />
+      <Searchbar searchContainer=".search-list" searchIn=".item-title" />
     </Subnavbar>
   </Navbar>
-  <List class="searchbar-not-found">
+  <List strongIos outlineIos dividersIos class="searchbar-not-found">
     <ListItem title="Nothing found" />
   </List>
-  <List class="search-list searchbar-found">
+  <List strongIos outlineIos dividersIos class="search-list searchbar-found">
     <ListItem title="Acura" />
     <ListItem title="Audi" />
     <ListItem title="BMW" />

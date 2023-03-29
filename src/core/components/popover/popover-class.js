@@ -62,13 +62,13 @@ class Popover extends Modal {
       }
     }
 
-    // Find Angle
-    let $angleEl;
-    if ($el.find('.popover-angle').length === 0) {
-      $angleEl = $('<div class="popover-angle"></div>');
-      $el.prepend($angleEl);
+    // Find Arrow
+    let $arrowEl;
+    if ($el.find('.popover-arrow').length === 0 && popover.params.arrow) {
+      $arrowEl = $('<div class="popover-arrow"></div>');
+      $el.prepend($arrowEl);
     } else {
-      $angleEl = $el.find('.popover-angle');
+      $arrowEl = $el.find('.popover-arrow');
     }
 
     // Open
@@ -80,8 +80,8 @@ class Popover extends Modal {
       el: $el[0],
       $targetEl,
       targetEl: $targetEl[0],
-      $angleEl,
-      angleEl: $angleEl[0],
+      $arrowEl,
+      arrowEl: $arrowEl[0],
       $backdropEl,
       backdropEl: $backdropEl && $backdropEl[0],
       type: 'popover',
@@ -184,23 +184,24 @@ class Popover extends Modal {
 
   resize() {
     const popover = this;
-    const { app, $el, $targetEl, $angleEl } = popover;
+    const { app, $el, $targetEl, $arrowEl } = popover;
     const { targetX, targetY, verticalPosition } = popover.params;
     $el.css({ left: '', top: '' });
     const [width, height] = [$el.width(), $el.height()];
-    let angleSize = 0;
-    let angleLeft;
-    let angleTop;
-    if (app.theme === 'ios' || app.theme === 'aurora') {
-      $angleEl.removeClass('on-left on-right on-top on-bottom').css({ left: '', top: '' });
-      angleSize = $angleEl.width() / 2;
-    } else {
-      $el
-        .removeClass(
-          'popover-on-left popover-on-right popover-on-top popover-on-bottom popover-on-middle',
-        )
-        .css({ left: '', top: '' });
+    let arrowSize = 0;
+    let arrowLeft;
+    let arrowTop;
+    const hasArrow = $arrowEl.length > 0;
+    const arrowMin = app.theme === 'ios' ? 13 : 24;
+    if (hasArrow) {
+      $arrowEl.removeClass('on-left on-right on-top on-bottom').css({ left: '', top: '' });
+      arrowSize = $arrowEl.width() / 2;
     }
+    $el
+      .removeClass(
+        'popover-on-left popover-on-right popover-on-top popover-on-bottom popover-on-middle',
+      )
+      .css({ left: '', top: '' });
 
     let targetWidth;
     let targetHeight;
@@ -234,101 +235,78 @@ class Popover extends Modal {
     let [left, top, diff] = [0, 0, 0];
     // Top Position
     const forcedPosition = verticalPosition === 'auto' ? false : verticalPosition;
-    let position = forcedPosition || (app.theme === 'md' ? 'bottom' : 'top');
-    if (app.theme === 'md') {
-      if (
-        forcedPosition === 'bottom' ||
-        (!forcedPosition && height < app.height - targetOffsetTop - targetHeight)
-      ) {
-        // On bottom
-        position = 'bottom';
-        top = targetOffsetTop + targetHeight;
-      } else if (
-        forcedPosition === 'top' ||
-        (!forcedPosition && height < targetOffsetTop - safeAreaTop)
-      ) {
-        // On top
-        top = targetOffsetTop - height;
-        position = 'top';
-      } else {
-        // On middle
-        position = 'middle';
-        top = targetHeight / 2 + targetOffsetTop - height / 2;
-      }
-      top = Math.max(8, Math.min(top, app.height - height - 8));
+    let position = forcedPosition || 'top';
 
-      // Horizontal Position
-      let hPosition;
-      if (targetOffsetLeft < app.width / 2) {
-        hPosition = 'right';
-        left = position === 'middle' ? targetOffsetLeft + targetWidth : targetOffsetLeft;
-      } else {
-        hPosition = 'left';
-        left =
-          position === 'middle' ? targetOffsetLeft - width : targetOffsetLeft + targetWidth - width;
-      }
-      left = Math.max(8, Math.min(left, app.width - width - 8 - safeAreaRight), safeAreaLeft);
-      $el.addClass(`popover-on-${position} popover-on-${hPosition}`);
+    if (
+      forcedPosition === 'top' ||
+      (!forcedPosition && height + arrowSize < targetOffsetTop - safeAreaTop)
+    ) {
+      // On top
+      top = targetOffsetTop - height - arrowSize;
+    } else if (
+      forcedPosition === 'bottom' ||
+      (!forcedPosition && height + arrowSize < app.height - targetOffsetTop - targetHeight)
+    ) {
+      // On bottom
+      position = 'bottom';
+      top = targetOffsetTop + targetHeight + arrowSize;
     } else {
-      // ios and aurora
-      if (
-        forcedPosition === 'top' ||
-        (!forcedPosition && height + angleSize < targetOffsetTop - safeAreaTop)
-      ) {
-        // On top
-        top = targetOffsetTop - height - angleSize;
-      } else if (
-        forcedPosition === 'bottom' ||
-        (!forcedPosition && height + angleSize < app.height - targetOffsetTop - targetHeight)
-      ) {
-        // On bottom
-        position = 'bottom';
-        top = targetOffsetTop + targetHeight + angleSize;
-      } else {
-        // On middle
-        position = 'middle';
-        top = targetHeight / 2 + targetOffsetTop - height / 2;
-        diff = top;
-        top = Math.max(5, Math.min(top, app.height - height - 5));
-        diff -= top;
+      // On middle
+      position = 'middle';
+      top = targetHeight / 2 + targetOffsetTop - height / 2;
+      diff = top;
+      top = Math.max(5, Math.min(top, app.height - height - 5));
+      diff -= top;
+    }
+
+    // Horizontal Position
+    if (position === 'top' || position === 'bottom') {
+      left = targetWidth / 2 + targetOffsetLeft - width / 2;
+      diff = left;
+      left = Math.max(5, Math.min(left, app.width - width - 5));
+      if (safeAreaLeft) {
+        left = Math.max(left, safeAreaLeft);
+      }
+      if (safeAreaRight && left + width > app.width - 5 - safeAreaRight) {
+        left = app.width - 5 - safeAreaRight - width;
       }
 
-      // Horizontal Position
-      if (position === 'top' || position === 'bottom') {
-        left = targetWidth / 2 + targetOffsetLeft - width / 2;
-        diff = left;
-        left = Math.max(5, Math.min(left, app.width - width - 5));
-        if (safeAreaLeft) {
-          left = Math.max(left, safeAreaLeft);
-        }
-        if (safeAreaRight && left + width > app.width - 5 - safeAreaRight) {
-          left = app.width - 5 - safeAreaRight - width;
-        }
+      diff -= left;
+      if (hasArrow) {
         if (position === 'top') {
-          $angleEl.addClass('on-bottom');
+          $arrowEl.addClass('on-bottom');
         }
         if (position === 'bottom') {
-          $angleEl.addClass('on-top');
+          $arrowEl.addClass('on-top');
         }
-        diff -= left;
-        angleLeft = width / 2 - angleSize + diff;
-        angleLeft = Math.max(Math.min(angleLeft, width - angleSize * 2 - 13), 13);
-        $angleEl.css({ left: `${angleLeft}px` });
-      } else if (position === 'middle') {
-        left = targetOffsetLeft - width - angleSize;
-        $angleEl.addClass('on-right');
-        if (left < 5 || left + width + safeAreaRight > app.width || left < safeAreaLeft) {
-          if (left < 5) left = targetOffsetLeft + targetWidth + angleSize;
-          if (left + width + safeAreaRight > app.width)
-            left = app.width - width - 5 - safeAreaRight;
-          if (left < safeAreaLeft) left = safeAreaLeft;
-          $angleEl.removeClass('on-right').addClass('on-left');
-        }
-        angleTop = height / 2 - angleSize + diff;
-        angleTop = Math.max(Math.min(angleTop, height - angleSize * 2 - 13), 13);
-        $angleEl.css({ top: `${angleTop}px` });
+        arrowLeft = width / 2 - arrowSize + diff;
+        arrowLeft = Math.max(Math.min(arrowLeft, width - arrowSize * 2 - arrowMin), arrowMin);
+        $arrowEl.css({ left: `${arrowLeft}px` });
+      }
+    } else if (position === 'middle') {
+      left = targetOffsetLeft - width - arrowSize;
+      if (hasArrow) $arrowEl.addClass('on-right');
+      if (left < 5 || left + width + safeAreaRight > app.width || left < safeAreaLeft) {
+        if (left < 5) left = targetOffsetLeft + targetWidth + arrowSize;
+        if (left + width + safeAreaRight > app.width) left = app.width - width - 5 - safeAreaRight;
+        if (left < safeAreaLeft) left = safeAreaLeft;
+        if (hasArrow) $arrowEl.removeClass('on-right').addClass('on-left');
+      }
+      if (hasArrow) {
+        arrowTop = height / 2 - arrowSize + diff;
+        arrowTop = Math.max(Math.min(arrowTop, height - arrowSize * 2 - arrowMin), arrowMin);
+        $arrowEl.css({ top: `${arrowTop}px` });
       }
     }
+
+    // Horizontal Position
+    let hPosition;
+    if (targetOffsetLeft < app.width / 2) {
+      hPosition = 'right';
+    } else {
+      hPosition = 'left';
+    }
+    $el.addClass(`popover-on-${position} popover-on-${hPosition}`);
 
     // Apply Styles
     $el.css({ top: `${top}px`, left: `${left}px` });

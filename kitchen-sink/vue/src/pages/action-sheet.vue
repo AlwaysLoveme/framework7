@@ -1,12 +1,12 @@
 <template>
   <f7-page @page:beforeremove="onPageBeforeRemove">
     <f7-navbar title="Action Sheet" back-link="Back"></f7-navbar>
-    <f7-block strong>
-      <p class="row">
+    <f7-block strong inset>
+      <p class="grid grid-cols-2 grid-gap">
         <!-- One group, open by direct accessing instance .open() method -->
-        <f7-button class="col" fill actions-open="#actions-one-group">One group</f7-button>
+        <f7-button fill actions-open="#actions-one-group">One group</f7-button>
         <!-- Two groups, open by "actions-open" attribute -->
-        <f7-button class="col" fill actions-open="#actions-two-groups">Two groups</f7-button>
+        <f7-button fill actions-open="#actions-two-groups">Two groups</f7-button>
       </p>
       <p>
         <!-- Actions Grid, open by changing actionGridOpened prop -->
@@ -15,7 +15,7 @@
     </f7-block>
 
     <f7-block-title>Action Sheet To Popover</f7-block-title>
-    <f7-block strong>
+    <f7-block strong inset>
       <p>
         Action Sheet can be automatically converted to Popover (for tablets). This button will open
         Popover on tablets and Action Sheet on phones:
@@ -32,7 +32,7 @@
     <f7-actions id="actions-one-group">
       <f7-actions-group>
         <f7-actions-label>Do something</f7-actions-label>
-        <f7-actions-button bold>Button 1</f7-actions-button>
+        <f7-actions-button strong>Button 1</f7-actions-button>
         <f7-actions-button>Button 2</f7-actions-button>
         <f7-actions-button color="red">Cancel</f7-actions-button>
       </f7-actions-group>
@@ -42,7 +42,7 @@
     <f7-actions id="actions-two-groups">
       <f7-actions-group>
         <f7-actions-label>Do something</f7-actions-label>
-        <f7-actions-button bold>Button 1</f7-actions-button>
+        <f7-actions-button strong>Button 1</f7-actions-button>
         <f7-actions-button>Button 2</f7-actions-button>
       </f7-actions-group>
       <f7-actions-group>
@@ -165,7 +165,7 @@ export default {
             },
             {
               text: 'Button 1',
-              bold: true,
+              strong: true,
             },
             {
               text: 'Button 2',

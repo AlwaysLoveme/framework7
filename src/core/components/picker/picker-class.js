@@ -172,9 +172,6 @@ class Picker extends Framework7Class {
       if (app.width >= 768) {
         return true;
       }
-      if (device.desktop && app.theme === 'aurora') {
-        return true;
-      }
     }
     return false;
   }
@@ -267,7 +264,7 @@ class Picker extends Framework7Class {
     const picker = this;
     if (picker.params.renderToolbar) return picker.params.renderToolbar.call(picker, picker);
     return (
-      <div class="toolbar toolbar-top no-shadow">
+      <div class="toolbar toolbar-top">
         <div class="toolbar-inner">
           <div class="left"></div>
           <div class="right">

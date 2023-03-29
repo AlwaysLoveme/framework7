@@ -1,12 +1,11 @@
 import { isStringProp } from './utils.js';
 
 export function colorClasses(props) {
-  const { color, colorTheme, textColor, bgColor, borderColor, rippleColor, dark } = props;
+  const { color, textColor, bgColor, borderColor, rippleColor, dark } = props;
 
   return {
     dark,
     [`color-${color}`]: color,
-    [`color-theme-${colorTheme}`]: colorTheme,
     [`text-color-${textColor}`]: textColor,
     [`bg-color-${bgColor}`]: bgColor,
     [`border-color-${borderColor}`]: borderColor,
@@ -155,7 +154,6 @@ export function actionsClasses(props) {
     cardOpen,
     cardPreventOpen,
     cardClose,
-    menuClose,
   } = props;
 
   return {
@@ -182,6 +180,5 @@ export function actionsClasses(props) {
     'card-close': cardClose || cardClose === '',
     'card-open': cardOpen || cardOpen === '',
     'card-prevent-open': cardPreventOpen || cardPreventOpen === '',
-    'menu-close': menuClose || menuClose === '',
   };
 }

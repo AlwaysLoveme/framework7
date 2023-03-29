@@ -26,8 +26,6 @@ const Navbar = {
     if (!needCenterTitle && !needLeftTitle) return;
 
     if (
-      $el.hasClass('stacked') ||
-      $el.parents('.stacked').length > 0 ||
       $el.parents('.tab:not(.tab-active)').length > 0 ||
       $el.parents('.popup:not(.modal-in)').length > 0
     ) {
@@ -347,16 +345,14 @@ const Navbar = {
           navbarTitleLargeHeight = $titleLargeEl[0].offsetHeight;
         } else if (Number.isNaN(navbarTitleLargeHeight)) {
           if (app.theme === 'ios') navbarTitleLargeHeight = 52;
-          else if (app.theme === 'md') navbarTitleLargeHeight = 48;
-          else if (app.theme === 'aurora') navbarTitleLargeHeight = 38;
+          else if (app.theme === 'md') navbarTitleLargeHeight = 88;
         }
       } else if ($titleLargeEl.length) {
         navbarTitleLargeHeight = $titleLargeEl[0].offsetHeight;
       } else {
         // eslint-disable-next-line
         if (app.theme === 'ios') navbarTitleLargeHeight = 52;
-        else if (app.theme === 'md') navbarTitleLargeHeight = 48;
-        else if (app.theme === 'aurora') navbarTitleLargeHeight = 38;
+        else if (app.theme === 'md') navbarTitleLargeHeight = 88;
       }
     }
 
@@ -476,6 +472,7 @@ const Navbar = {
       const inSearchbarExpanded = $navbarEl.hasClass('with-searchbar-expandable-enabled');
       if (inSearchbarExpanded) return;
       navbarCollapsed = $navbarEl.hasClass('navbar-large-collapsed');
+      const $bgEl = $navbarEl.find('.navbar-bg');
       if (collapseProgress === 0 && navbarCollapsed) {
         app.navbar.expandLargeTitle($navbarEl[0]);
       } else if (collapseProgress === 1 && !navbarCollapsed) {
@@ -492,32 +489,31 @@ const Navbar = {
         }
         $navbarEl.find('.title').css('opacity', '');
         $navbarEl.find('.title-large-text, .subnavbar').css('transform', '');
+        $navbarEl.find('.title-large-text').css('opacity', '');
         if (isLargeTransparent) {
-          $navbarEl.find('.navbar-bg').css('opacity', '');
-        } else {
-          $navbarEl.find('.navbar-bg').css('transform', '');
+          $bgEl.css('opacity', '');
         }
+        $bgEl.css('transform', '');
       } else if (collapseProgress > 0 && collapseProgress < 1) {
         if (app.theme === 'md') {
           $navbarEl.find('.navbar-inner').css('overflow', 'visible');
         }
-        $navbarEl.find('.title').css('opacity', collapseProgress);
+        $navbarEl.find('.title').css('opacity', -0.5 + collapseProgress * 1.5);
         $navbarEl
           .find('.title-large-text, .subnavbar')
           .css(
             'transform',
             `translate3d(0px, ${-1 * collapseProgress * navbarTitleLargeHeight}px, 0)`,
           );
+        $navbarEl.find('.title-large-text').css('opacity', 1 - collapseProgress * 2);
+
         if (isLargeTransparent) {
-          $navbarEl.find('.navbar-bg').css('opacity', collapseProgress);
-        } else {
-          $navbarEl
-            .find('.navbar-bg')
-            .css(
-              'transform',
-              `translate3d(0px, ${-1 * collapseProgress * navbarTitleLargeHeight}px, 0)`,
-            );
+          $bgEl.css('opacity', collapseProgress);
         }
+        $bgEl.css(
+          'transform',
+          `translate3d(0px, ${-1 * collapseProgress * navbarTitleLargeHeight}px, 0)`,
+        );
       }
 
       if (snapPageScrollToLargeTitle) {
@@ -652,7 +648,6 @@ export default {
       scrollTopOnTitleClick: true,
       iosCenterTitle: true,
       mdCenterTitle: false,
-      auroraCenterTitle: true,
       hideOnPageScroll: false,
       showOnPageScrollEnd: true,
       showOnPageScrollTop: true,
@@ -755,14 +750,14 @@ export default {
     },
     'panelOpen panelSwipeOpen modalOpen': function onPanelModalOpen(instance) {
       const app = this;
-      instance.$el.find('.navbar:not(.navbar-previous):not(.stacked)').each((navbarEl) => {
+      instance.$el.find('.navbar:not(.navbar-previous)').each((navbarEl) => {
         app.navbar.size(navbarEl);
       });
     },
     tabShow(tabEl) {
       const app = this;
       $(tabEl)
-        .find('.navbar:not(.navbar-previous):not(.stacked)')
+        .find('.navbar:not(.navbar-previous)')
         .each((navbarEl) => {
           app.navbar.size(navbarEl);
         });
@@ -791,16 +786,14 @@ export default {
         }
         // Through Layout iOS
         if ($pageContentEl.length === 0 && $navbarsEl.length) {
-          if ($navbarsEl.nextAll('.page-current:not(.stacked)').length > 0) {
-            $pageContentEl = $navbarsEl
-              .nextAll('.page-current:not(.stacked)')
-              .find('.page-content');
+          if ($navbarsEl.nextAll('.page-current').length > 0) {
+            $pageContentEl = $navbarsEl.nextAll('.page-current').find('.page-content');
           }
         }
         // Through Layout
         if ($pageContentEl.length === 0) {
-          if ($navbarEl.nextAll('.page-current:not(.stacked)').length > 0) {
-            $pageContentEl = $navbarEl.nextAll('.page-current:not(.stacked)').find('.page-content');
+          if ($navbarEl.nextAll('.page-current').length > 0) {
+            $pageContentEl = $navbarEl.nextAll('.page-current').find('.page-content');
           }
         }
       }

@@ -65,8 +65,7 @@ export default {
     title: String,
     subtitle: String,
     hidden: Boolean,
-    noShadow: Boolean,
-    noHairline: Boolean,
+    outline: { type: Boolean, default: true },
     innerClass: String,
     innerClassName: String,
     large: Boolean,
@@ -195,9 +194,7 @@ export default {
     );
 
     const addCenterTitleClass = computed(
-      () =>
-        (theme.value && theme.value.md && f7 && f7.params.navbar.mdCenterTitle) ||
-        (theme.value && theme.value.aurora && f7 && f7.params.navbar.auroraCenterTitle),
+      () => theme.value && theme.value.md && f7 && f7.params.navbar.mdCenterTitle,
     );
 
     const isLarge = computed(() => props.large || props.largeTransparent);
@@ -220,8 +217,7 @@ export default {
           'navbar-master-detail': routerNavbarRole === 'detail',
           'navbar-master-detail-root': routerNavbarRoleDetailRoot === true,
           'navbar-master-stacked': routerNavbarMasterStack === true,
-          'no-shadow': props.noShadow,
-          'no-hairline': props.noHairline,
+          'no-outline': !props.outline,
         },
         colorClasses(props),
       ),

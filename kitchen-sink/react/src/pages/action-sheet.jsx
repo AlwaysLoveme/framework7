@@ -36,7 +36,7 @@ export default () => {
           },
           {
             text: 'Button 1',
-            bold: true,
+            strong: true,
           },
           {
             text: 'Button 2',
@@ -58,14 +58,14 @@ export default () => {
   return (
     <Page>
       <Navbar title="Action Sheet" backLink="Back"></Navbar>
-      <Block strong>
-        <p className="row">
+      <Block strong inset>
+        <p className="grid grid-cols-2 grid-gap">
           {/* One group, open by changing actionsOneGroupOpened property */}
-          <Button className="col" fill onClick={() => setActionsOneGroupOpened(true)}>
+          <Button fill onClick={() => setActionsOneGroupOpened(true)}>
             One group
           </Button>
           {/*  Two groups, open by "actionsOpen" attribute */}
-          <Button className="col" fill actionsOpen="#actions-two-groups">
+          <Button fill actionsOpen="#actions-two-groups">
             Two groups
           </Button>
         </p>
@@ -78,7 +78,7 @@ export default () => {
       </Block>
 
       <BlockTitle>Action Sheet To Popover</BlockTitle>
-      <Block strong>
+      <Block strong inset>
         <p ref={buttonToPopoverWrapper}>
           Action Sheet can be automatically converted to Popover (for tablets). This button will
           open Popover on tablets and Action Sheet on phones:
@@ -99,7 +99,7 @@ export default () => {
       >
         <ActionsGroup>
           <ActionsLabel>Do something</ActionsLabel>
-          <ActionsButton bold>Button 1</ActionsButton>
+          <ActionsButton strong>Button 1</ActionsButton>
           <ActionsButton>Button 2</ActionsButton>
           <ActionsButton color="red">Cancel</ActionsButton>
         </ActionsGroup>
@@ -109,7 +109,7 @@ export default () => {
       <Actions id="actions-two-groups">
         <ActionsGroup>
           <ActionsLabel>Do something</ActionsLabel>
-          <ActionsButton bold>Button 1</ActionsButton>
+          <ActionsButton strong>Button 1</ActionsButton>
           <ActionsButton>Button 2</ActionsButton>
         </ActionsGroup>
         <ActionsGroup>

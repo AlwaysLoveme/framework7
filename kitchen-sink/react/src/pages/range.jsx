@@ -1,19 +1,9 @@
 import React, { useState } from 'react';
-import {
-  Navbar,
-  Page,
-  BlockTitle,
-  Range,
-  List,
-  ListItem,
-  ListItemCell,
-  Icon,
-  Block,
-} from 'framework7-react';
+import { Navbar, Page, BlockTitle, Range, List, ListItem, Icon, Block } from 'framework7-react';
 
 export default () => {
   const [priceMin, setPriceMin] = useState(200);
-  const [priceMax, setPriceMax] = useState(200);
+  const [priceMax, setPriceMax] = useState(400);
 
   const onPriceChange = (values) => {
     setPriceMin(values[0]);
@@ -25,32 +15,32 @@ export default () => {
       <Navbar title="Range Slider" backLink="Back"></Navbar>
 
       <BlockTitle>Volume</BlockTitle>
-      <List simpleList>
+      <List simpleList outlineIos strongIos>
         <ListItem>
-          <ListItemCell className="width-auto flex-shrink-0">
-            <Icon ios="f7:speaker_fill" aurora="f7:speaker_fill" md="material:volume_mute" />
-          </ListItemCell>
-          <ListItemCell className="flex-shrink-3">
+          <div>
+            <Icon ios="f7:speaker_fill" md="material:volume_mute" />
+          </div>
+          <div style={{ width: '100%', margin: '0 16px' }}>
             <Range min={0} max={100} step={1} value={10} />
-          </ListItemCell>
-          <ListItemCell className="width-auto flex-shrink-0">
-            <Icon ios="f7:speaker_3_fill" aurora="f7:speaker_3_fill" md="material:volume_up" />
-          </ListItemCell>
+          </div>
+          <div>
+            <Icon ios="f7:speaker_3_fill" md="material:volume_up" />
+          </div>
         </ListItem>
       </List>
 
       <BlockTitle>Brightness</BlockTitle>
-      <List simpleList>
+      <List simpleList outlineIos strongIos>
         <ListItem>
-          <ListItemCell className="width-auto flex-shrink-0">
-            <Icon ios="f7:sun_min" aurora="f7:sun_min" md="material:brightness_low" />
-          </ListItemCell>
-          <ListItemCell className="flex-shrink-3">
+          <div>
+            <Icon ios="f7:sun_min" md="material:brightness_low" />
+          </div>
+          <div style={{ width: '100%', margin: '0 16px' }}>
             <Range min={0} max={100} step={1} value={50} label={true} color="orange" />
-          </ListItemCell>
-          <ListItemCell className="width-auto flex-shrink-0">
-            <Icon ios="f7:sun_max_fill" aurora="f7:sun_max_fill" md="material:brightness_high" />
-          </ListItemCell>
+          </div>
+          <div>
+            <Icon ios="f7:sun_max_fill" md="material:brightness_high" />
+          </div>
         </ListItem>
       </List>
 
@@ -60,16 +50,12 @@ export default () => {
           ${priceMin} - ${priceMax}
         </span>
       </BlockTitle>
-      <List simpleList>
+      <List simpleList outlineIos strongIos>
         <ListItem>
-          <ListItemCell className="width-auto flex-shrink-0">
-            <Icon
-              ios="f7:money_dollar_circle"
-              aurora="f7:money_dollar_circle"
-              md="material:attach_money"
-            />
-          </ListItemCell>
-          <ListItemCell className="flex-shrink-3">
+          <div>
+            <Icon ios="f7:money_dollar_circle" md="material:attach_money" />
+          </div>
+          <div style={{ width: '100%', margin: '0 16px' }}>
             <Range
               min={0}
               max={500}
@@ -80,19 +66,15 @@ export default () => {
               color="green"
               onRangeChange={onPriceChange}
             />
-          </ListItemCell>
-          <ListItemCell className="width-auto flex-shrink-0">
-            <Icon
-              ios="f7:money_dollar_circle_fill"
-              aurora="f7:money_dollar_circle_fill"
-              md="material:monetization_on"
-            />
-          </ListItemCell>
+          </div>
+          <div>
+            <Icon ios="f7:money_dollar_circle_fill" md="material:monetization_on" />
+          </div>
         </ListItem>
       </List>
 
       <BlockTitle>With Scale</BlockTitle>
-      <Block strong>
+      <Block strongIos outlineIos>
         <Range
           min={0}
           max={100}
@@ -106,7 +88,7 @@ export default () => {
       </Block>
 
       <BlockTitle>Vertical</BlockTitle>
-      <Block strong className="display-flex justify-content-center">
+      <Block strongIos outlineIos className="display-flex justify-content-center">
         <Range
           className="margin-right"
           style={{ height: '160px' }}
@@ -151,7 +133,7 @@ export default () => {
       </Block>
 
       <BlockTitle>Vertical Reversed</BlockTitle>
-      <Block strong className="display-flex justify-content-center">
+      <Block strongIos outlineIos className="display-flex justify-content-center">
         <Range
           className="margin-right"
           color="red"

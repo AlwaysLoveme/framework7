@@ -17,12 +17,10 @@ export default {
   name: 'f7-toolbar',
   props: {
     tabbar: Boolean,
-    labels: Boolean,
+    icons: Boolean,
     scrollable: Boolean,
     hidden: Boolean,
-    noShadow: Boolean,
-    noHairline: Boolean,
-    noBorder: Boolean,
+    outline: { type: Boolean, default: true },
     position: {
       type: String,
       default: undefined,
@@ -35,10 +33,6 @@ export default {
       type: Boolean,
       default: undefined,
     },
-    topAurora: {
-      type: Boolean,
-      default: undefined,
-    },
     top: {
       type: Boolean,
       default: undefined,
@@ -48,10 +42,6 @@ export default {
       default: undefined,
     },
     bottomIos: {
-      type: Boolean,
-      default: undefined,
-    },
-    bottomAurora: {
       type: Boolean,
       default: undefined,
     },
@@ -101,7 +91,7 @@ export default {
     });
 
     const TabbarContext = computed(() => ({
-      tabbarHasLabels: props.labels,
+      tabbarHasIcons: props.icons,
     }));
 
     provide('TabbarContext', TabbarContext);
@@ -111,19 +101,15 @@ export default {
         tabbar,
         bottomMd,
         bottomIos,
-        bottomAurora,
         bottom,
         position,
         topMd,
         topIos,
-        topAurora,
         top,
-        labels,
+        icons,
         scrollable,
         hidden,
-        noShadow,
-        noHairline,
-        noBorder,
+        outline,
       } = props;
       return classNames(
         'toolbar',
@@ -132,20 +118,17 @@ export default {
           'toolbar-bottom':
             (theme.value && theme.value.md && bottomMd) ||
             (theme.value && theme.value.ios && bottomIos) ||
-            (theme.value && theme.value.aurora && bottomAurora) ||
             bottom ||
             position === 'bottom',
           'toolbar-top':
             (theme.value && theme.value.md && topMd) ||
             (theme.value && theme.value.ios && topIos) ||
-            (theme.value && theme.value.aurora && topAurora) ||
             top ||
             position === 'top',
-          'tabbar-labels': labels,
+          'tabbar-icons': icons,
           'tabbar-scrollable': scrollable,
           'toolbar-hidden': hidden,
-          'no-shadow': noShadow,
-          'no-hairline': noHairline || noBorder,
+          'no-outline': !outline,
         },
         colorClasses(props),
       );

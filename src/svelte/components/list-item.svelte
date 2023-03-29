@@ -47,7 +47,6 @@
 
   export let mediaItem = false;
   export let mediaList = false;
-  export let divider = false;
   export let groupTitle = false;
   export let swipeout = false;
   export let swipeoutOpened = false;
@@ -66,6 +65,7 @@
 
   // Inputs
   export let checkbox = undefined;
+  export let checkboxIcon = undefined;
   export let radio = undefined;
   export let radioIcon = undefined;
   export let checked = undefined;
@@ -103,7 +103,6 @@
   $: liClasses = classNames(
     className,
     {
-      'item-divider': divider,
       'list-group-title': groupTitle,
       'media-item': isMedia,
       swipeout,
@@ -123,6 +122,8 @@
     {
       'item-checkbox': checkbox,
       'item-radio': radio,
+      'item-checkbox-icon-start': checkbox && checkboxIcon === 'start',
+      'item-checkbox-icon-end': checkbox && checkboxIcon === 'end',
       'item-radio-icon-start': radio && radioIcon === 'start',
       'item-radio-icon-end': radio && radioIcon === 'end',
     },
@@ -315,7 +316,7 @@
 </script>
 
 <!-- svelte-ignore a11y-missing-attribute -->
-{#if divider || groupTitle}
+{#if groupTitle}
   <li
     on:click={onClick}
     bind:this={el}

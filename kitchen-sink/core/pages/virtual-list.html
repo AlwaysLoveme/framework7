@@ -4,7 +4,7 @@
       <div class="navbar-bg"></div>
       <div class="navbar-inner sliding">
         <div class="left">
-          <a href="#" class="link back">
+          <a class="link back">
             <i class="icon icon-back"></i>
             <span class="if-not-md">Back</span>
           </a>
@@ -19,7 +19,7 @@
                 <i class="searchbar-icon"></i>
                 <span class="input-clear-button"></span>
               </div>
-              <span class="searchbar-disable-button if-not-aurora">Cancel</span>
+              <span class="searchbar-disable-button">Cancel</span>
             </div>
           </form>
         </div>
@@ -33,19 +33,20 @@
           (swipe-to-delete) and Sortable.</p>
         <p>Here is the example of virtual list with 10 000 items:</p>
       </div>
-      <div class="list links-list">
+      <div class="list list-strong list-outline-ios inset-md list-dividers-ios links-list">
         <ul>
           <li>
             <a href="/virtual-list-vdom/">Virtual List VDOM</a>
           </li>
         </ul>
       </div>
-      <div class="list simple-list searchbar-not-found">
+      <div class="list list-strong list-outline-ios inset-md list-dividers-ios simple-list searchbar-not-found">
         <ul>
           <li>Nothing found</li>
         </ul>
       </div>
-      <div class="list virtual-list media-list searchbar-found"></div>
+      <div class="list list-strong list-outline-ios inset-md list-dividers-ios virtual-list media-list searchbar-found">
+      </div>
     </div>
   </div>
 </template>
@@ -77,7 +78,7 @@
         renderItem(item) {
           return `
           <li>
-            <a href="#" class="item-link item-content">
+            <a  class="item-link item-content">
               <div class="item-inner">
                 <div class="item-title-row">
                   <div class="item-title">${item.title}</div>
@@ -88,7 +89,7 @@
           </li>`;
         },
         // Item height
-        height: $theme.ios ? 63 : ($theme.md ? 73 : 77),
+        height: $theme.ios ? 65 : 69,
       });
     });
 

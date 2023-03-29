@@ -1,5 +1,5 @@
 <script>
-  import { f7, Navbar, Page, BlockTitle, Block, Button, Row } from 'framework7-svelte';
+  import { f7, Navbar, Page, BlockTitle, Block, Button } from 'framework7-svelte';
 
   function openAlert() {
     f7.dialog.alert('Hello!');
@@ -88,43 +88,43 @@
 
 <Page>
   <Navbar title="Dialog" backLink="Back" />
-  <Block strong>
+  <Block strongIos outlineIos>
     <p>
       There are 1:1 replacements of native Alert, Prompt and Confirm modals. They support callbacks,
       have very easy api and can be combined with each other. Check these examples:
     </p>
-    <Row tag="p">
-      <Button fill class="col" onClick={openAlert}>Alert</Button>
-      <Button fill class="col" onClick={openConfirm}>Confirm</Button>
-      <Button fill class="col" onClick={openPrompt}>Prompt</Button>
-    </Row>
-    <Row tag="p">
-      <Button fill class="col" onClick={openLogin}>Login</Button>
-      <Button fill class="col" onClick={openPassword}>Password</Button>
-    </Row>
+    <p class="grid grid-cols-3 grid-gap">
+      <Button fill onClick={openAlert}>Alert</Button>
+      <Button fill onClick={openConfirm}>Confirm</Button>
+      <Button fill onClick={openPrompt}>Prompt</Button>
+    </p>
+    <p class="grid grid-cols-2 grid-gap">
+      <Button fill onClick={openLogin}>Login</Button>
+      <Button fill onClick={openPassword}>Password</Button>
+    </p>
   </Block>
   <BlockTitle>Vertical Buttons</BlockTitle>
-  <Block strong>
+  <Block strongIos outlineIos>
     <p>
       <Button fill onClick={openVerticalButtons}>Vertical Buttons</Button>
     </p>
   </Block>
   <BlockTitle>Preloader Dialog</BlockTitle>
-  <Block strong>
-    <Row tag="p">
-      <Button fill class="col" onClick={openPreloader}>Preloader</Button>
-      <Button fill class="col" onClick={openCustomPreloader}>Custom Text</Button>
-    </Row>
+  <Block strongIos outlineIos>
+    <p class="grid grid-cols-2 grid-gap">
+      <Button fill onClick={openPreloader}>Preloader</Button>
+      <Button fill onClick={openCustomPreloader}>Custom Text</Button>
+    </p>
   </Block>
   <BlockTitle>Progress Dialog</BlockTitle>
-  <Block strong>
-    <Row tag="p">
-      <Button fill class="col" onClick={openInfiniteProgress}>Infinite</Button>
-      <Button fill class="col" onClick={openDeterminedProgress}>Determined</Button>
-    </Row>
+  <Block strongIos outlineIos>
+    <p class="grid grid-cols-2 grid-gap">
+      <Button fill onClick={openInfiniteProgress}>Infinite</Button>
+      <Button fill onClick={openDeterminedProgress}>Determined</Button>
+    </p>
   </Block>
   <BlockTitle>Dialogs Stack</BlockTitle>
-  <Block strong>
+  <Block strongIos outlineIos>
     <p>
       This feature doesn't allow to open multiple dialogs at the same time, and will automatically
       open next dialog when you close the current one. Such behavior is similar to browser native

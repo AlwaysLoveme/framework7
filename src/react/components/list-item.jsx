@@ -44,7 +44,6 @@ import { SmartSelect } from 'framework7/types';
   badgeColor? : string
   mediaItem? : boolean
   mediaList? : boolean
-  divider? : boolean
   groupTitle? : boolean
   swipeout? : boolean
   swipeoutOpened? : boolean
@@ -57,6 +56,7 @@ import { SmartSelect } from 'framework7/types';
   noChevron? : boolean
   chevronCenter? : boolean
   checkbox? : boolean
+  checkboxIcon? : boolean
   radio? : boolean
   radioIcon? : string
   checked? : boolean
@@ -122,6 +122,7 @@ const ListItemContent = ({
     after,
     badge,
     badgeColor,
+    checkboxIcon,
     radioIcon,
     swipeout,
     sortable,
@@ -144,7 +145,6 @@ const ListItem = forwardRef((props, ref) => {
     selected,
     mediaItem,
     mediaList,
-    divider,
     groupTitle,
     swipeout,
     swipeoutOpened,
@@ -380,7 +380,6 @@ const ListItem = forwardRef((props, ref) => {
   const liClasses = classNames(
     className,
     {
-      'item-divider': divider,
       'list-group-title': groupTitle,
       'media-item': isMediaComputed,
       swipeout,
@@ -394,7 +393,7 @@ const ListItem = forwardRef((props, ref) => {
     colorClasses(props),
   );
 
-  if (divider || groupTitle) {
+  if (groupTitle) {
     return (
       <li
         ref={elRef}

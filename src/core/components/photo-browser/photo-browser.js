@@ -6,6 +6,7 @@ export default {
   params: {
     photoBrowser: {
       photos: [],
+      thumbs: [],
       exposition: true,
       expositionHideCaptions: false,
       type: 'standalone',
@@ -17,13 +18,16 @@ export default {
       popupPush: false,
       swipeToClose: true,
       pageBackLinkText: 'Back',
-      popupCloseLinkText: 'Close',
+      popupCloseLinkText: undefined,
+      popupCloseLinkIcon: true,
       navbarOfText: 'of',
       navbarShowCount: undefined,
       view: undefined,
       url: 'photos/',
       routableModals: false,
       virtualSlides: true,
+      lazy: true,
+      closeByBackdropClick: true,
 
       renderNavbar: undefined,
       renderToolbar: undefined,
@@ -31,16 +35,17 @@ export default {
       renderObject: undefined,
       renderLazyPhoto: undefined,
       renderPhoto: undefined,
+      renderThumb: undefined,
       renderPage: undefined,
       renderPopup: undefined,
       renderStandalone: undefined,
 
       swiper: {
+        cssMode: false,
         initialSlide: 0,
         spaceBetween: 20,
         speed: 300,
         loop: false,
-        preloadImages: true,
         keyboard: {
           enabled: true,
         },
@@ -52,9 +57,6 @@ export default {
           enabled: true,
           maxRatio: 3,
           minRatio: 1,
-        },
-        lazy: {
-          enabled: true,
         },
       },
     },

@@ -11,20 +11,16 @@ import { TabbarContext } from '../shared/tabbar-context.js';
   className?: string;
   style?: React.CSSProperties;
   tabbar? : boolean
-  labels? : boolean
+  icons? : boolean
   scrollable? : boolean
   hidden? : boolean
-  noShadow? : boolean
-  noHairline? : boolean
-  noBorder? : boolean
+  outline? : boolean
   position? : string
   topMd? : boolean
   topIos? : boolean
-  topAurora? : boolean
   top? : boolean
   bottomMd? : boolean
   bottomIos? : boolean
-  bottomAurora? : boolean
   bottom? : boolean
   inner? : boolean
   COLOR_PROPS
@@ -40,20 +36,16 @@ const Toolbar = forwardRef((props, ref) => {
     id,
     style,
     tabbar,
-    labels,
+    icons,
     scrollable,
     hidden,
-    noShadow,
-    noHairline,
-    noBorder,
+    outline = true,
     position,
     topMd,
     topIos,
-    topAurora,
     top,
     bottomMd,
     bottomIos,
-    bottomAurora,
     bottom,
     inner = true,
   } = props;
@@ -109,20 +101,14 @@ const Toolbar = forwardRef((props, ref) => {
       'toolbar-bottom':
         (theme && theme.md && bottomMd) ||
         (theme && theme.ios && bottomIos) ||
-        (theme && theme.aurora && bottomAurora) ||
         bottom ||
         position === 'bottom',
       'toolbar-top':
-        (theme && theme.md && topMd) ||
-        (theme && theme.ios && topIos) ||
-        (theme && theme.aurora && topAurora) ||
-        top ||
-        position === 'top',
-      'tabbar-labels': labels,
+        (theme && theme.md && topMd) || (theme && theme.ios && topIos) || top || position === 'top',
+      'tabbar-icons': icons,
       'tabbar-scrollable': scrollable,
       'toolbar-hidden': hidden,
-      'no-shadow': noShadow,
-      'no-hairline': noHairline || noBorder,
+      'no-outline': !outline,
     },
     colorClasses(props),
   );
@@ -133,7 +119,7 @@ const Toolbar = forwardRef((props, ref) => {
     <div id={id} style={style} className={classes} ref={elRef} {...extraAttrs}>
       <TabbarContext.Provider
         value={{
-          tabbarHasLabels: labels,
+          tabbarHasIcons: icons,
         }}
       >
         {slots['before-inner']}

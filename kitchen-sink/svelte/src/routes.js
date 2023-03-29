@@ -5,7 +5,6 @@ import About from './pages/about.svelte';
 
 import Accordion from './pages/accordion.svelte';
 import ActionSheet from './pages/action-sheet.svelte';
-import Appbar from './pages/appbar.svelte';
 import AreaChart from './pages/area-chart.svelte';
 import Autocomplete from './pages/autocomplete.svelte';
 import Badge from './pages/badge.svelte';
@@ -22,7 +21,6 @@ import ContactsList from './pages/contacts-list.svelte';
 import ContentBlock from './pages/content-block.svelte';
 import DataTable from './pages/data-table.svelte';
 import Dialog from './pages/dialog.svelte';
-import Elevation from './pages/elevation.svelte';
 import Fab from './pages/fab.svelte';
 import FabMorph from './pages/fab-morph.svelte';
 import FormStorage from './pages/form-storage.svelte';
@@ -31,12 +29,10 @@ import Grid from './pages/grid.svelte';
 import Icons from './pages/icons.svelte';
 import InfiniteScroll from './pages/infinite-scroll.svelte';
 import Inputs from './pages/inputs.svelte';
-import LazyLoad from './pages/lazy-load.svelte';
 import List from './pages/list.svelte';
 import ListIndex from './pages/list-index.svelte';
 import LoginScreen from './pages/login-screen.svelte';
 import LoginScreenPage from './pages/login-screen-page.svelte';
-import Menu from './pages/menu.svelte';
 import MenuList from './pages/menu-list.svelte';
 import Messages from './pages/messages.svelte';
 import Navbar from './pages/navbar.svelte';
@@ -75,7 +71,6 @@ import Swiper3dFlip from './pages/swiper-3d-flip.svelte';
 import SwiperFade from './pages/swiper-fade.svelte';
 import SwiperScrollbar from './pages/swiper-scrollbar.svelte';
 import SwiperGallery from './pages/swiper-gallery.svelte';
-import SwiperCustomControls from './pages/swiper-custom-controls.svelte';
 import SwiperParallax from './pages/swiper-parallax.svelte';
 import SwiperLazy from './pages/swiper-lazy.svelte';
 import SwiperPaginationProgress from './pages/swiper-pagination-progress.svelte';
@@ -92,7 +87,7 @@ import Toast from './pages/toast.svelte';
 import Toggle from './pages/toggle.svelte';
 import ToolbarTabbar from './pages/toolbar-tabbar.svelte';
 import Tabbar from './pages/tabbar.svelte';
-import TabbarLabels from './pages/tabbar-labels.svelte';
+import TabbarIcons from './pages/tabbar-icons.svelte';
 import TabbarScrollable from './pages/tabbar-scrollable.svelte';
 import ToolbarHideScroll from './pages/toolbar-hide-scroll.svelte';
 import Tooltip from './pages/tooltip.svelte';
@@ -124,9 +119,6 @@ export default [
   {
     path: '/',
     component: Home,
-    master(f7) {
-      return f7.theme === 'aurora';
-    },
   },
   // About page
   {
@@ -152,7 +144,7 @@ export default [
           <div class="navbar-bg"></div>
           <div class="navbar-inner sliding">
             <div class="left">
-              <a href="#" class="link back">
+              <a  class="link back">
                 <i class="icon icon-back"></i>
                 <span class="if-not-md">Back</span>
               </a>
@@ -177,7 +169,7 @@ export default [
           <div class="navbar-bg"></div>
           <div class="navbar-inner sliding">
             <div class="left">
-              <a href="#" class="link back">
+              <a  class="link back">
                 <i class="icon icon-back"></i>
                 <span class="if-not-md">Back</span>
               </a>
@@ -203,10 +195,6 @@ export default [
   {
     path: '/action-sheet/',
     component: ActionSheet,
-  },
-  {
-    path: '/appbar/',
-    component: Appbar,
   },
   {
     path: '/area-chart/',
@@ -273,10 +261,6 @@ export default [
     component: Dialog,
   },
   {
-    path: '/elevation/',
-    component: Elevation,
-  },
-  {
     path: '/fab/',
     component: Fab,
   },
@@ -309,10 +293,6 @@ export default [
     component: Inputs,
   },
   {
-    path: '/lazy-load/',
-    component: LazyLoad,
-  },
-  {
     path: '/list/',
     component: List,
   },
@@ -327,10 +307,6 @@ export default [
   {
     path: '/login-screen-page/',
     component: LoginScreenPage,
-  },
-  {
-    path: '/menu/',
-    component: Menu,
   },
   {
     path: '/menu-list/',
@@ -485,10 +461,6 @@ export default [
         component: SwiperGallery,
       },
       {
-        path: 'swiper-custom-controls/',
-        component: SwiperCustomControls,
-      },
-      {
         path: 'swiper-parallax/',
         component: SwiperParallax,
       },
@@ -593,8 +565,8 @@ export default [
         component: Tabbar,
       },
       {
-        path: 'tabbar-labels/',
-        component: TabbarLabels,
+        path: 'tabbar-icons/',
+        component: TabbarIcons,
       },
       {
         path: 'tabbar-scrollable/',

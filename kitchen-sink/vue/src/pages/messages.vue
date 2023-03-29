@@ -12,18 +12,12 @@
       <template #inner-start>
         <f7-link
           icon-ios="f7:camera_fill"
-          icon-aurora="f7:camera_fill"
           icon-md="material:camera_alt"
           @click="sheetVisible = !sheetVisible"
         />
       </template>
       <template #inner-end>
-        <f7-link
-          icon-ios="f7:arrow_up_circle_fill"
-          icon-aurora="f7:arrow_up_circle_fill"
-          icon-md="material:send"
-          @click="sendMessage"
-        />
+        <f7-link icon-ios="f7:arrow_up_circle_fill" icon-md="material:send" @click="sendMessage" />
       </template>
       <f7-messagebar-attachments>
         <f7-messagebar-attachment
@@ -57,9 +51,9 @@
         :last="isLastMessage(message, index)"
         :tail="isTailMessage(message, index)"
       >
-        <template #text>
+        <template v-if="message.text" #text>
           <!-- eslint-disable-next-line -->
-          <span v-if="message.text" v-html="message.text"></span>
+          <span v-html="message.text"></span>
         </template>
       </f7-message>
       <f7-message

@@ -1,9 +1,4 @@
-import {
-  extend,
-  iosPreloaderContent,
-  mdPreloaderContent,
-  auroraPreloaderContent,
-} from '../../shared/utils.js';
+import { extend, iosPreloaderContent, mdPreloaderContent } from '../../shared/utils.js';
 import Dialog from './dialog-class.js';
 import ModalMethods from '../../shared/modal-methods.js';
 
@@ -45,6 +40,7 @@ export default {
           },
         }
       : {};
+    const isIosTheme = app.theme === 'ios';
 
     app.dialog = extend(
       ModalMethods({
@@ -65,7 +61,7 @@ export default {
             buttons: [
               {
                 text: app.params.dialog.buttonOk,
-                bold: true,
+                strong: isIosTheme,
                 onClick: callbackOk,
                 keyCodes: keyboardActions ? [13, 27] : null,
               },
@@ -88,11 +84,11 @@ export default {
               {
                 text: app.params.dialog.buttonCancel,
                 keyCodes: keyboardActions ? [27] : null,
-                color: app.theme === 'aurora' ? 'gray' : null,
+                color: null,
               },
               {
                 text: app.params.dialog.buttonOk,
-                bold: true,
+                strong: isIosTheme,
                 keyCodes: keyboardActions ? [13] : null,
               },
             ],
@@ -118,11 +114,11 @@ export default {
                 text: app.params.dialog.buttonCancel,
                 onClick: callbackCancel,
                 keyCodes: keyboardActions ? [27] : null,
-                color: app.theme === 'aurora' ? 'gray' : null,
+                color: null,
               },
               {
                 text: app.params.dialog.buttonOk,
-                bold: true,
+                strong: isIosTheme,
                 onClick: callbackOk,
                 keyCodes: keyboardActions ? [13] : null,
               },
@@ -150,11 +146,11 @@ export default {
               {
                 text: app.params.dialog.buttonCancel,
                 keyCodes: keyboardActions ? [27] : null,
-                color: app.theme === 'aurora' ? 'gray' : null,
+                color: null,
               },
               {
                 text: app.params.dialog.buttonOk,
-                bold: true,
+                strong: isIosTheme,
                 keyCodes: keyboardActions ? [13] : null,
               },
             ],
@@ -185,11 +181,11 @@ export default {
               {
                 text: app.params.dialog.buttonCancel,
                 keyCodes: keyboardActions ? [27] : null,
-                color: app.theme === 'aurora' ? 'gray' : null,
+                color: null,
               },
               {
                 text: app.params.dialog.buttonOk,
-                bold: true,
+                strong: isIosTheme,
                 keyCodes: keyboardActions ? [13] : null,
               },
             ],
@@ -206,7 +202,6 @@ export default {
           const preloaders = {
             iosPreloaderContent,
             mdPreloaderContent,
-            auroraPreloaderContent,
           };
           const preloaderInner = preloaders[`${app.theme}PreloaderContent`] || '';
           return new Dialog(app, {

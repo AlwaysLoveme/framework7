@@ -23,7 +23,6 @@ import { RouterContext } from '../shared/router-context.js';
   linksView? : Object | string
   url? : string
   main? : boolean
-  stackPages? : boolean
   xhrCache? : boolean
   xhrCacheIgnore? : Array<any>
   xhrCacheIgnoreGetParameters? : boolean
@@ -38,6 +37,7 @@ import { RouterContext } from '../shared/router-context.js';
   removeElementsWithTimeout? : boolean
   removeElementsTimeout? : number
   restoreScrollTopOnBack? : boolean
+  unloadTabContent? : boolean
   loadInitialPage? : boolean
   iosSwipeBack? : boolean
   iosSwipeBackAnimateShadow? : boolean
@@ -49,11 +49,6 @@ import { RouterContext } from '../shared/router-context.js';
   mdSwipeBackAnimateOpacity? : boolean
   mdSwipeBackActiveArea? : number
   mdSwipeBackThreshold? : number
-  auroraSwipeBack? : boolean
-  auroraSwipeBackAnimateShadow? : boolean
-  auroraSwipeBackAnimateOpacity? : boolean
-  auroraSwipeBackActiveArea? : number
-  auroraSwipeBackThreshold? : number
   browserHistory? : boolean
   browserHistoryRoot? : string
   browserHistoryAnimate? : boolean

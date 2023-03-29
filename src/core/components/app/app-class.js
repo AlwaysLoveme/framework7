@@ -10,6 +10,7 @@ import ConstructorMethods from '../../shared/constructor-methods.js';
 import ModalMethods from '../../shared/modal-methods.js';
 import $ from '../../shared/dom7.js';
 import loadModule from './load-module.js';
+import $jsx from '../../shared/$jsx.js';
 
 class Framework7 extends Framework7Class {
   constructor(params = {}) {
@@ -36,23 +37,37 @@ class Framework7 extends Framework7Class {
 
     // Default
     const defaults = {
-      version: '1.0.0',
-      id: 'io.framework7.myapp',
       el: 'body',
       theme: 'auto',
-      language: w.navigator.language,
       routes: [],
       name: 'Framework7',
       lazyModulesPath: null,
       initOnDeviceReady: true,
       init: true,
-      autoDarkMode: false,
+      darkMode: undefined,
       iosTranslucentBars: true,
       iosTranslucentModals: true,
       component: undefined,
       componentUrl: undefined,
       userAgent: null,
       url: null,
+      colors: {
+        primary: '#007aff',
+        red: '#ff3b30',
+        green: '#4cd964',
+        blue: '#2196f3',
+        pink: '#ff2d55',
+        yellow: '#ffcc00',
+        orange: '#ff9500',
+        purple: '#9c27b0',
+        deeppurple: '#673ab7',
+        lightblue: '#5ac8fa',
+        teal: '#009688',
+        lime: '#cddc39',
+        deeporange: '#ff6b22',
+        white: '#ffffff',
+        black: '#000000',
+      },
     };
 
     // Extend defaults with modules params
@@ -62,22 +77,15 @@ class Framework7 extends Framework7Class {
     app.params = extend(defaults, params);
 
     extend(app, {
-      // App Id
-      id: app.params.id,
       // App Name
       name: app.params.name,
-      // App version
-      version: app.params.version,
       // Routes
       routes: app.params.routes,
-      // Lang
-      language: app.params.language,
 
       // Theme
       theme: (function getTheme() {
         if (app.params.theme === 'auto') {
           if (device.ios) return 'ios';
-          if (device.desktop && device.electron) return 'aurora';
           return 'md';
         }
         return app.params.theme;
@@ -86,6 +94,8 @@ class Framework7 extends Framework7Class {
       // Initially passed parameters
       passedParams,
       online: w.navigator.onLine,
+      colors: app.params.colors,
+      darkMode: app.params.darkMode,
     });
 
     if (params.store) app.params.store = params.store;
@@ -114,6 +124,24 @@ class Framework7 extends Framework7Class {
 
     // Return app instance
     return app;
+  }
+
+  setColorTheme(color) {
+    if (!color) return;
+    const app = this;
+    app.colors.primary = color;
+    app.setColors();
+  }
+
+  setColors() {
+    const app = this;
+    const document = getDocument();
+    if (!app.colorsStyleEl) {
+      app.colorsStyleEl = document.createElement('style');
+      document.head.appendChild(app.colorsStyleEl);
+    }
+
+    app.colorsStyleEl.textContent = app.utils.colorThemeCSSStyles(app.colors);
   }
 
   mount(rootEl) {
@@ -192,6 +220,17 @@ class Framework7 extends Framework7Class {
     if (app.mq.light) app.mq.light.removeListener(app.colorSchemeListener);
   }
 
+  setDarkMode(mode) {
+    const app = this;
+    if (mode === 'auto') {
+      app.enableAutoDarkMode();
+    } else {
+      app.disableAutoDarkMode();
+      $('html')[mode ? 'addClass' : 'removeClass']('dark');
+      app.darkMode = mode;
+    }
+  }
+
   initAppComponent(callback) {
     const app = this;
     app.router.componentLoader(
@@ -212,6 +251,7 @@ class Framework7 extends Framework7Class {
   init(rootEl) {
     const app = this;
 
+    app.setColors();
     app.mount(rootEl);
 
     const init = () => {
@@ -225,8 +265,10 @@ class Framework7 extends Framework7Class {
       }
 
       // Auto Dark Mode
-      if (app.params.autoDarkMode) {
-        app.enableAutoDarkMode();
+      if (typeof app.params.darkMode === 'undefined') {
+        app.darkMode = $('html').hasClass('dark');
+      } else {
+        app.setDarkMode(app.params.darkMode);
       }
 
       // Watch for online/offline state
@@ -246,7 +288,7 @@ class Framework7 extends Framework7Class {
       app.$el.addClass('framework7-root');
 
       // Theme class
-      $('html').removeClass('ios md aurora').addClass(app.theme);
+      $('html').removeClass('ios md').addClass(app.theme);
 
       // iOS Translucent
       const device = app.device;
@@ -321,6 +363,7 @@ class Framework7 extends Framework7Class {
   }
 }
 
+Framework7.$jsx = $jsx;
 Framework7.ModalMethods = ModalMethods;
 Framework7.ConstructorMethods = ConstructorMethods;
 

@@ -1,5 +1,5 @@
 <script>
-  import { Navbar, Page, PhotoBrowser, Block, Row, Col, Button } from 'framework7-svelte';
+  import { Navbar, Page, PhotoBrowser, Block, Button } from 'framework7-svelte';
 
   let standalone;
   let popup;
@@ -25,11 +25,19 @@
       caption: 'Beautiful mountains in Zhangjiajie, China',
     },
   ];
+
+  const thumbs = [
+    'img/beach.jpg',
+    'http://placekitten.com/1024/1024',
+    'img/lock.jpg',
+    'img/monkey.jpg',
+    'img/mountains.jpg',
+  ];
 </script>
 
 <Page>
   <Navbar title="Photo Browser" backLink="Back" />
-  <Block strong>
+  <Block strongIos outlineIos>
     <p>
       Photo Browser is a standalone and highly configurable component that allows to open window
       with photo viewer and navigation elements with the following features:
@@ -41,49 +49,51 @@
       <li>Single click on photo to toggle Exposition mode</li>
     </ul>
   </Block>
-  <Block strong>
+  <Block strongIos outlineIos>
     <p>
       Photo Browser could be opened in a three ways - as a Standalone component (Popup
       modification), in Popup, and as separate Page:
     </p>
-    <Row>
-      <Col>
-        <PhotoBrowser {photos} bind:this={standalone} />
+    <div class="grid grid-cols-3 grid-gap">
+      <div>
+        <PhotoBrowser {photos} {thumbs} bind:this={standalone} />
         <Button fill onClick={() => standalone.open()}>Standalone</Button>
-      </Col>
-      <Col>
-        <PhotoBrowser {photos} type="popup" bind:this={popup} />
+      </div>
+      <div>
+        <PhotoBrowser {photos} {thumbs} type="popup" bind:this={popup} />
         <Button fill onClick={() => popup.open()}>Popup</Button>
-      </Col>
-      <Col>
-        <PhotoBrowser {photos} type="page" pageBackLinkText="Back" bind:this={page} />
+      </div>
+      <div>
+        <PhotoBrowser {photos} {thumbs} type="page" pageBackLinkText="Back" bind:this={page} />
         <Button fill onClick={() => page.open()}>Page</Button>
-      </Col>
-    </Row>
+      </div>
+    </div>
   </Block>
-  <Block strong>
+  <Block strongIos outlineIos>
     <p>
       Photo Browser supports 2 default themes - default Light (like in previous examples) and Dark
       theme. Here is a Dark theme examples:
     </p>
-    <Row>
-      <Col>
-        <PhotoBrowser {photos} theme="dark" bind:this={standaloneDark} />
+    <div class="grid grid-cols-3 grid-gap">
+      <div>
+        <PhotoBrowser {photos} {thumbs} theme="dark" bind:this={standaloneDark} />
         <Button fill onClick={() => standaloneDark.open()}>Standalone</Button>
-      </Col>
-      <Col>
-        <PhotoBrowser {photos} theme="dark" type="popup" bind:this={popupDark} />
+      </div>
+      <div>
+        <PhotoBrowser {photos} {thumbs} theme="dark" type="popup" bind:this={popupDark} />
         <Button fill onClick={() => popupDark.open()}>Popup</Button>
-      </Col>
-      <Col>
+      </div>
+      <div>
         <PhotoBrowser
           {photos}
+          {thumbs}
           theme="dark"
           type="page"
           pageBackLinkText="Back"
-          bind:this={pageDark} />
+          bind:this={pageDark}
+        />
         <Button fill onClick={() => pageDark.open()}>Page</Button>
-      </Col>
-    </Row>
+      </div>
+    </div>
   </Block>
 </Page>

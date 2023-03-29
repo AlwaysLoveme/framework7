@@ -58,17 +58,17 @@ const Preloader = forwardRef((props, ref) => {
         <span className="preloader-inner-line" />
       </span>
     );
-  } else if (theme && theme.aurora) {
-    innerEl = (
-      <span className="preloader-inner">
-        <span className="preloader-inner-circle" />
-      </span>
-    );
   } else if (!theme) {
     innerEl = <span className="preloader-inner" />;
   }
 
-  const classes = classNames(className, 'preloader', colorClasses(props));
+  const classes = classNames(
+    className,
+    {
+      preloader: true,
+    },
+    colorClasses(props),
+  );
   return (
     <span id={id} style={preloaderStyle} className={classes} ref={elRef} {...extraAttrs}>
       {innerEl}

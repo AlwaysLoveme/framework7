@@ -31,12 +31,7 @@ export default () => {
     <Page>
       <Navbar title="Virtual List" backLink="Back">
         <Subnavbar inner={false}>
-          <Searchbar
-            searchContainer=".virtual-list"
-            searchItem="li"
-            searchIn=".item-title"
-            disableButton={!theme.aurora}
-          />
+          <Searchbar searchContainer=".virtual-list" searchItem="li" searchIn=".item-title" />
         </Subnavbar>
       </Navbar>
       <Block>
@@ -47,10 +42,14 @@ export default () => {
         </p>
         <p>Here is the example of virtual list with 10 000 items:</p>
       </Block>
-      <List className="searchbar-not-found">
+      <List strong outlineIos insetMd dividersIos className="searchbar-not-found">
         <ListItem title="Nothing found" />
       </List>
       <List
+        strong
+        outlineIos
+        insetMd
+        dividersIos
         className="searchbar-found"
         medialList
         virtualList

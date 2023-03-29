@@ -9,7 +9,6 @@ import {
   Block,
   Button,
   Link,
-  Row,
   List,
   ListItem,
   f7,
@@ -31,7 +30,7 @@ export default () => {
           <div class="sheet-modal sheet-modal-bottom">
             <div class="toolbar">
               <div class="toolbar-inner justify-content-flex-end">
-                <a href="#" class="link sheet-close">Close</a>
+                <a  class="link sheet-close">Close</a>
               </div>
             </div>
             <div class="sheet-modal-inner">
@@ -63,27 +62,26 @@ export default () => {
   return (
     <Page onPageBeforeOut={onPageBeforeOut} onPageBeforeRemove={onPageBeforeRemove}>
       <Navbar title="Sheet Modal" backLink="Back"></Navbar>
-      <Block strong>
+      <Block strongIos outlineIos>
         <p>
           Sheet Modals slide up from the bottom of the screen to reveal more content. Such modals
           allow to create custom overlays with custom content.
         </p>
-        <Row tag="p">
-          <Button className="col" fill sheetOpen=".demo-sheet">
+        <p className="grid grid-cols-2 grid-gap">
+          <Button fill sheetOpen=".demo-sheet">
             Open Sheet
           </Button>
-          <Button className="col" fill onClick={createSheet}>
-            Create Dynamic Sheet
+          <Button fill onClick={createSheet}>
+            Dynamic Sheet
           </Button>
-        </Row>
+        </p>
         <p>
-          <Button className="col" fill sheetOpen=".demo-sheet-top">
+          <Button fill sheetOpen=".demo-sheet-top">
             Top Sheet
           </Button>
         </p>
         <p>
           <Button
-            className="col"
             fill
             onClick={() => {
               setSheetOpened(true);
@@ -95,7 +93,7 @@ export default () => {
       </Block>
 
       <BlockTitle>Push View</BlockTitle>
-      <Block strong>
+      <Block strongIos outlineIos>
         <p>
           Sheet can push view behind on open. By default it has effect only when
           `safe-area-inset-top` is more than zero (iOS fullscreen webapp or iOS cordova app)
@@ -108,7 +106,7 @@ export default () => {
       </Block>
 
       <BlockTitle>Swipeable Sheet</BlockTitle>
-      <Block strong>
+      <Block strongIos outlineIos>
         <p>
           Sheet modal can be closed with swipe to top (for top Sheet) or bottom (for default Bottom
           sheet):
@@ -302,7 +300,7 @@ export default () => {
         <BlockTitle medium className="margin-top">
           Your order:
         </BlockTitle>
-        <List noHairlines>
+        <List>
           <ListItem title="Item 1">
             <b slot="after" className="text-color-black">
               $200

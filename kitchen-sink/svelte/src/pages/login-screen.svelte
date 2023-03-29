@@ -34,16 +34,17 @@
     </p>
   </Block>
 
-  <List>
+  <!-- example-hidden-start -->
+  <List strong insetMd outlineIos>
     <ListItem link="/login-screen-page/" title="As Separate Page" />
   </List>
+  <!-- example-hidden-end -->
 
   <Block>
     <Button raised large fill loginScreenOpen=".demo-login-screen">As Overlay</Button>
   </Block>
 
   <Block>
-    {loginScreenOpened}
     <Button raised large fill onClick={() => (loginScreenOpened = true)}>
       Open Via Prop Change
     </Button>
@@ -75,7 +76,7 @@
           onInput={(e) => (password = e.target.value)}
         />
       </List>
-      <List>
+      <List inset>
         <ListButton onClick={signIn}>Sign In</ListButton>
       </List>
       <BlockFooter>

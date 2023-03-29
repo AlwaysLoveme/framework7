@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Navbar, Page, PhotoBrowser, Block, Row, Col, Button } from 'framework7-react';
+import { Navbar, Page, PhotoBrowser, Block, Button } from 'framework7-react';
 
 export default () => {
   const standalone = useRef(null);
@@ -24,10 +24,17 @@ export default () => {
       caption: 'Beautiful mountains in Zhangjiajie, China',
     },
   ];
+  const thumbs = [
+    'img/beach.jpg',
+    'http://placekitten.com/1024/1024',
+    'img/lock.jpg',
+    'img/monkey.jpg',
+    'img/mountains.jpg',
+  ];
   return (
     <Page>
       <Navbar title="Photo Browser" backLink="Back"></Navbar>
-      <Block strong>
+      <Block strongIos outlineIos>
         <p>
           Photo Browser is a standalone and highly configurable component that allows to open window
           with photo viewer and navigation elements with the following features:
@@ -39,53 +46,66 @@ export default () => {
           <li>Single click on photo to toggle Exposition mode</li>
         </ul>
       </Block>
-      <Block strong>
+      <Block strongIos outlineIos>
         <p>
           Photo Browser could be opened in a three ways - as a Standalone component (Popup
           modification), in Popup, and as separate Page:
         </p>
-        <Row>
-          <Col>
-            <PhotoBrowser photos={photos} ref={standalone} />
+        <div className="grid grid-cols-3 grid-gap">
+          <div>
+            <PhotoBrowser photos={photos} thumbs={thumbs} ref={standalone} />
             <Button fill onClick={() => standalone.current.open()}>
               Standalone
             </Button>
-          </Col>
-          <Col>
-            <PhotoBrowser photos={photos} type="popup" ref={popup} />
+          </div>
+          <div>
+            <PhotoBrowser photos={photos} thumbs={thumbs} type="popup" ref={popup} />
             <Button fill onClick={() => popup.current.open()}>
               Popup
             </Button>
-          </Col>
-          <Col>
-            <PhotoBrowser photos={photos} type="page" pageBackLinkText="Back" ref={page} />
+          </div>
+          <div>
+            <PhotoBrowser
+              photos={photos}
+              thumbs={thumbs}
+              type="page"
+              pageBackLinkText="Back"
+              ref={page}
+            />
             <Button fill onClick={() => page.current.open()}>
               Page
             </Button>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </Block>
-      <Block strong>
+      <Block strongIos outlineIos>
         <p>
           Photo Browser supports 2 default themes - default Light (like in previous examples) and
           Dark theme. Here is a Dark theme examples:
         </p>
-        <Row>
-          <Col>
-            <PhotoBrowser photos={photos} theme="dark" ref={standaloneDark} />
+        <div className="grid grid-cols-3 grid-gap">
+          <div>
+            <PhotoBrowser photos={photos} thumbs={thumbs} theme="dark" ref={standaloneDark} />
             <Button fill onClick={() => standaloneDark.current.open()}>
               Standalone
             </Button>
-          </Col>
-          <Col>
-            <PhotoBrowser photos={photos} theme="dark" type="popup" ref={popupDark} />
+          </div>
+          <div>
+            <PhotoBrowser
+              photos={photos}
+              thumbs={thumbs}
+              theme="dark"
+              type="popup"
+              ref={popupDark}
+            />
             <Button fill onClick={() => popupDark.current.open()}>
               Popup
             </Button>
-          </Col>
-          <Col>
+          </div>
+          <div>
             <PhotoBrowser
               photos={photos}
+              thumbs={thumbs}
               theme="dark"
               type="page"
               pageBackLinkText="Back"
@@ -94,8 +114,8 @@ export default () => {
             <Button fill onClick={() => pageDark.current.open()}>
               Page
             </Button>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </Block>
     </Page>
   );

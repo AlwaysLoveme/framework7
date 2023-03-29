@@ -1,4 +1,7 @@
 const rules = {
+  'no-bitwise': 'off',
+  'import/no-extraneous-dependencies': 'off',
+  'no-nested-ternary': 'off',
   'no-param-reassign': [
     'error',
     {
@@ -23,6 +26,7 @@ const rules = {
       allowSamePrecedence: false,
     },
   ],
+  'no-underscore-dangle': ['off'],
   'prefer-destructuring': ['off'],
   'prefer-object-spread': ['off'],
   'prefer-ob': ['off'],
@@ -35,6 +39,7 @@ const rules = {
 };
 
 module.exports = {
+  root: true,
   env: {
     browser: true,
     es6: true,

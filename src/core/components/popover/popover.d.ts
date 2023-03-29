@@ -1,5 +1,9 @@
 import { Dom7Array } from 'dom7';
-import Framework7, { CSSSelector, Framework7EventsClass, Framework7Plugin } from '../app/app-class';
+import Framework7, {
+  CSSSelector,
+  Framework7EventsClass,
+  Framework7Plugin,
+} from '../app/app-class.js';
 
 export namespace Popover {
   interface Events {
@@ -19,6 +23,8 @@ export namespace Popover {
     el?: HTMLElement | CSSSelector;
     /** Full Popover HTML layout string. Can be useful if you want to create Popover element dynamically. */
     content?: string;
+    /** Enables Popover arrow/corner. (default true) */
+    arrow?: boolean;
     /** Enables Popover backdrop (dark semi transparent layer behind). (default true) */
     backdrop?: boolean;
     /** Backdrop element to share across instances */
