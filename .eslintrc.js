@@ -1,7 +1,10 @@
 const rules = {
+  'no-lonely-if': 'off',
   'no-bitwise': 'off',
   'import/no-extraneous-dependencies': 'off',
   'no-nested-ternary': 'off',
+  'no-constructor-return': 'off',
+  'default-param-last': 'off',
   'no-param-reassign': [
     'error',
     {
@@ -40,6 +43,11 @@ const rules = {
 
 module.exports = {
   root: true,
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
   env: {
     browser: true,
     es6: true,
@@ -123,6 +131,8 @@ module.exports = {
         'vue/custom-event-name-casing': ['off'],
         'prefer-destructuring': ['off'],
         'no-restricted-globals': ['off'],
+        'vue/multi-word-component-names': 'off',
+        'vue/no-deprecated-slot-attribute': 'off',
       },
     },
     {
@@ -133,6 +143,8 @@ module.exports = {
         'import/no-extraneous-dependencies': ['off'],
         'import/extensions': ['off'],
         'no-restricted-globals': ['off'],
+        'vue/multi-word-component-names': 'off',
+        'vue/no-deprecated-slot-attribute': 'off',
       },
     },
     // SVELTE KITCHEN_SINK
@@ -148,10 +160,18 @@ module.exports = {
 
     // SVELTE
     {
-      plugins: ['svelte3'],
+      plugins: [],
       files: ['**/*.svelte'],
-      extends: ['airbnb-base'],
-      processor: 'svelte3/svelte3',
+      extends: ['airbnb-base', 'plugin:svelte/prettier'],
+      // parser: '@babel/eslint-parser',
+      // // Add an `overrides` section to add a parser configuration for svelte.
+      // overrides: [
+      //   {
+      //     files: ['*.svelte'],
+      //     parser: 'svelte-eslint-parser',
+      //   },
+      //   // ...
+      // ],
       rules: {
         ...rules,
         'no-restricted-globals': ['off'],

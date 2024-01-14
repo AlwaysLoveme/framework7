@@ -1,7 +1,9 @@
 <script>
   import { App, Panel, View } from 'framework7-svelte';
-  import routes from './routes';
-  import store from './store';
+  // eslint-disable-next-line
+  import routes from './routes.js';
+  // eslint-disable-next-line
+  import store from './store.js';
 
   // Demo Theme
   let theme = 'auto';
@@ -12,7 +14,6 @@
   const needsBrowserHistory = document.location.href.includes('example-preview');
 
   const f7Params = {
-    id: 'io.framework7.testapp',
     theme,
     routes,
     store,

@@ -1,11 +1,11 @@
+import path from 'path';
 // eslint-disable-next-line
 import svelte from 'rollup-plugin-svelte';
-import path from 'path';
 
 const buildFolder = process.env.NODE_ENV === 'production' ? 'packages' : 'build';
 
 export default {
-  plugins: [svelte()],
+  plugins: [svelte({ onwarn() {} })],
   root: './',
   base: '',
   publicDir: path.resolve(__dirname, 'public'),

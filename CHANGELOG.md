@@ -2,7 +2,104 @@
 
 # Change Log
 
-# [8.0.0] WIP
+# [8.3.0](https://github.com/framework7io/framework7/compare/v8.2.0...v8.3.0) (2023-08-18)
+
+### Bug Fixes
+
+- **popup:** fix wrong popup push position on top of tablet-full-screen push popup ([41def46](https://github.com/framework7io/framework7/commit/41def46c3d5c9aa54bbfe18bb9a18a9ccda8b0ff))
+- **popup:** prevent swiping popup when swiping over enabled sortable ([9673b0b](https://github.com/framework7io/framework7/commit/9673b0b079b04e9a3cc71520efbff39679ee8203))
+- **router:** fix props not passed to `openIn` components ([c609439](https://github.com/framework7io/framework7/commit/c609439a0500998baa18ce5e824aad50136b42bd)), closes [#4215](https://github.com/framework7io/framework7/issues/4215)
+- **sheet:** prevent swiping sheet when swiping over enabled sortable ([c92ad63](https://github.com/framework7io/framework7/commit/c92ad6313fd9acad0b4a971c4b91157c5fd6160b))
+
+### Features
+
+- **sheet:** new feature to configure opened breakpoints ([3ec8cc1](https://github.com/framework7io/framework7/commit/3ec8cc1d81547de37d6f3064e0f705f3d2b2eb5e))
+- **svelte:** types reworked for Svelte 4 ([#4216](https://github.com/framework7io/framework7/issues/4216)) ([31b94b0](https://github.com/framework7io/framework7/commit/31b94b00dec840e5a7095f99626bb3872fa485dc))
+- **swiper:** update swiper to latest 10.2.0 ([957fa87](https://github.com/framework7io/framework7/commit/957fa87367c98a2dc44484abda85beb990a9160a))
+- update to latest Swiper ([b9afba6](https://github.com/framework7io/framework7/commit/b9afba6abe765c9e88114c778a5cfefbbcba0e31))
+
+# [8.2.0](https://github.com/framework7io/framework7/compare/v8.1.0...v8.2.0) (2023-07-06)
+
+### Bug Fixes
+
+- **inputs:** fixed outline input without label misalignment ([81d2757](https://github.com/framework7io/framework7/commit/81d2757676609a2a79b85aeb586bf14489c0a449))
+- **list-view:** add "list" slot in Vue component ([f4b24bc](https://github.com/framework7io/framework7/commit/f4b24bc489ce0b3f65bcd191407600b1f993b547)), closes [#4201](https://github.com/framework7io/framework7/issues/4201) [#4195](https://github.com/framework7io/framework7/issues/4195)
+
+### Features
+
+- **panel:** limit resizable to max 100% width and support resizable floating panels ([27ae4e1](https://github.com/framework7io/framework7/commit/27ae4e12cf232387390f2a795d365019fb086eba))
+- **swiper:** update to Swiper v10 ([b6cb30a](https://github.com/framework7io/framework7/commit/b6cb30a680a49ebb3dcc9ed931e0789bb41c6d37))
+
+# [8.1.0](https://github.com/framework7io/framework7/compare/v8.0.5...v8.1.0) (2023-06-12)
+
+### Bug Fixes
+
+- **calendar:** fix range styles if same day selected ([84eaf76](https://github.com/framework7io/framework7/commit/84eaf76b46b20327018bee71f21da84e3ca095dc)), closes [#4191](https://github.com/framework7io/framework7/issues/4191)
+- **core:** hide scrollbar where required in FireFix ([f4c4c7e](https://github.com/framework7io/framework7/commit/f4c4c7e90b1b4eb2a12a587219ba59ff275e9514)), closes [#4189](https://github.com/framework7io/framework7/issues/4189)
+- **core:** translucent now applies in iOS theme not depending on iOS device ([06b8970](https://github.com/framework7io/framework7/commit/06b897020548ca73bea9c19f16a168834a3b7322))
+- **messagebar:** fix `textareaId` to be passed to textarea element ([b3b10b2](https://github.com/framework7io/framework7/commit/b3b10b235421d7c5cde0ca54dfdddc45ac1d8f4c))
+- **panel:** fix panel closed without transition when opened with swipe ([be8492c](https://github.com/framework7io/framework7/commit/be8492cba29bab92fbdaa53bc4aaf81377f180d1))
+- **popover:** fix ignored `arrow` prop in Popover components ([feaa823](https://github.com/framework7io/framework7/commit/feaa8231798f60a72ea8a3049a2b389de178c3b6))
+- **progressbar:** fix wrong style applied in Svelte component ([4604b1f](https://github.com/framework7io/framework7/commit/4604b1f861fdfe8d25b2a15696288b0d3e8f96bf)), closes [#4183](https://github.com/framework7io/framework7/issues/4183)
+- **router:** fix for correct navigate if used route path format like `/:optionalParam(any+[regexp]+)?` ([#4179](https://github.com/framework7io/framework7/issues/4179)) ([6d40482](https://github.com/framework7io/framework7/commit/6d40482d0b526ce1c368b68d83bc7abfa52823df))
+- **router:** fix routable modal destroy if modal route has `async` prop ([1234e78](https://github.com/framework7io/framework7/commit/1234e78967d3c9e9ea3055e7505d33ae4e8eb5db))
+- **searchbar:** remove unused clear button layer ([4e13c36](https://github.com/framework7io/framework7/commit/4e13c36b201140cd41e9a83ca32368bd3dd44430))
+
+### Features
+
+- **list-index:** tweak label colors in MD theme ([b797d9b](https://github.com/framework7io/framework7/commit/b797d9bdc57785ec5358e7b5d003a7df57737236))
+- **notification:** increase notifiaction transition duration and paddings in MD theme ([27f211e](https://github.com/framework7io/framework7/commit/27f211efe0fc4757e5abc39b9ad0c426e3172174))
+- **picker:** full width single column picker scrolling ([04ca371](https://github.com/framework7io/framework7/commit/04ca371f929f25d6fd8f92aeac50ac8b39d6070a))
+- **pull-to-refresh:** tweak md colors ([b014a34](https://github.com/framework7io/framework7/commit/b014a34229cf21528cb7b21b0ed3402e21c33997))
+
+# [8.0.5](https://github.com/framework7io/framework7/compare/v8.0.4...v8.0.5) (2023-05-08)
+
+### Bug Fixes
+
+- **virtual-list:** fix auto height calcs in filtered items ([1336770](https://github.com/framework7io/framework7/commit/1336770412a0e910b504e18cc929fc66ab9ae996)), closes [#4168](https://github.com/framework7io/framework7/issues/4168)
+
+# [8.0.4](https://github.com/framework7io/framework7/compare/v8.0.3...v8.0.4) (2023-05-03)
+
+### Bug Fixes
+
+- **area-chart:** fix tooltip label color in MD theme ([5d87626](https://github.com/framework7io/framework7/commit/5d87626a99ee950eb0cc6c2a386485e9e042ab1d))
+- **button:** fix iOS outline button color ([59674be](https://github.com/framework7io/framework7/commit/59674be6c64565091afdacb4adda1969eb12fa92)), closes [#4169](https://github.com/framework7io/framework7/issues/4169)
+- **chip:** fix chip media margin in iOS theme ([34f4c28](https://github.com/framework7io/framework7/commit/34f4c28a824ca6a55429d6c1edd864a8bce3b38a))
+
+# [8.0.3](https://github.com/framework7io/framework7/compare/v8.0.2...v8.0.3) (2023-04-17)
+
+### Bug Fixes
+
+- **core:** correct colors inheritance in nested dark mode ([e4f0ddc](https://github.com/framework7io/framework7/commit/e4f0ddc3f409dc7db9c74850d1ffc22e10334ff4)), closes [#4165](https://github.com/framework7io/framework7/issues/4165)
+- **core:** prevent handling of not trusted touch events ([3ea9ac5](https://github.com/framework7io/framework7/commit/3ea9ac5116ade915bc947d245803c22c3f5a3b25)), closes [#4164](https://github.com/framework7io/framework7/issues/4164)
+- **input:** fix datetime-local input width ([6253c6c](https://github.com/framework7io/framework7/commit/6253c6c39e319e4334d938e033d382dd810ba037))
+
+# [8.0.2](https://github.com/framework7io/framework7/compare/v8.0.1...v8.0.2) (2023-04-12)
+
+### Features
+
+- **app:** add `overscroll-behavior: none;` to `html` ([caa3e78](https://github.com/framework7io/framework7/commit/caa3e78d6597a4710fceb300572ee1a96fa454a6)), closes [#4048](https://github.com/framework7io/framework7/issues/4048)
+- **dialog:** tweak placeholder colors ([dfadb8d](https://github.com/framework7io/framework7/commit/dfadb8df32254f35e83e1e10871d0cd69f560944))
+- **fab:** tweak FAB md3 styles and colors ([e50a375](https://github.com/framework7io/framework7/commit/e50a37562591e8b2c8edb9354b33b19f0c35656e))
+- **input:** tweak placeholder colors ([50d8fb8](https://github.com/framework7io/framework7/commit/50d8fb86bf76896b8c593b84362674555b1da232))
+- **messagebar:** tweak placeholder colors ([29849ff](https://github.com/framework7io/framework7/commit/29849ff07bc36c098c8f173af78edecbde807993))
+- **searchbar:** tweak placeholder colors ([f8168a0](https://github.com/framework7io/framework7/commit/f8168a0218e957886e980e7b46eb1ca57ca8ab69))
+- **text-editor:** tweak placeholder colors ([490c23a](https://github.com/framework7io/framework7/commit/490c23aa429e1717bd45eca4052772928c9b9d23))
+
+# [8.0.1](https://github.com/framework7io/framework7/compare/v8.0.0...v8.0.1) (2023-04-06)
+
+### Bug Fixes
+
+- **data-table:** detach events on destroy ([396fdac](https://github.com/framework7io/framework7/commit/396fdac747ff223472e722ab77f1c594a953f008))
+
+### Features
+
+- **core:** prevent page scrolling during custom page transitions ([6453249](https://github.com/framework7io/framework7/commit/645324951a76274338ef33a813543de1b7f5ce2e))
+- **icon:** add class to Icon also specified in `icon` prop ([42b56fa](https://github.com/framework7io/framework7/commit/42b56fa4105017113b774017e80f0b2e0837c1a7))
+- **touch-ripple:** use blurred ripple wave on photo browser toolbar ([02b08b6](https://github.com/framework7io/framework7/commit/02b08b68f4b39e56c5baf84032c5448c088dbd1a))
+- update vue web types ([ee8c71d](https://github.com/framework7io/framework7/commit/ee8c71d4f6c16e16aaedbae823a09393ead3397c))
+
+# [8.0.0](https://github.com/framework7io/framework7/compare/v8.0.0...v7.1.5) (2023-04-03)
 
 ### Core
 
@@ -40,8 +137,14 @@
 
 - Removed `stackPages` functionality
 
+### Tabs
+
+- Swipeable tabs now use `<swiper-container>`
+
 ### Bug Fixes
 
+- **photo-browser:** fix `touch-action` rules ([5850615](https://github.com/framework7io/framework7/commit/58506158f655453cb35a708ea7c768b218963f3d))
+- **vue:** accept `unloadTabContent` param on View ([24025a5](https://github.com/framework7io/framework7/commit/24025a59356be6a0fd0b6d1ba33fb42f63a592ca)), closes [#4149](https://github.com/framework7io/framework7/issues/4149)
 - **svelte:** fix swipeable tabs ([9476c6a](https://github.com/framework7io/framework7/commit/9476c6a35bc64a78fdbf5126505044dc52e452b8))
 - **vue:** support for component props defined as array ([d5c70e4](https://github.com/framework7io/framework7/commit/d5c70e4631393b30d16479b678b000f3b53a257a))
 - **router:** don't try to find route with empty path ([4e4ccad](https://github.com/framework7io/framework7/commit/4e4ccad0a5230421d004d6835c1b413e0e44da54))
@@ -52,6 +155,11 @@
 
 ### Features
 
+- remove link highlights in MD theme, use only touch ripple ([e96f363](https://github.com/framework7io/framework7/commit/e96f36335b83b834d32f9966c926fb26c3a4d270))
+- **actions:** fix actions position padding in md theme with safe areas ([4d34afd](https://github.com/framework7io/framework7/commit/4d34afd9510e37bf49e278ca1ec85011493c408d))
+- **core:** tweak touch ripple ([4419887](https://github.com/framework7io/framework7/commit/4419887a475f0cb8fe3ec4b674122a1f792aef59))
+- **searchbar:** full height expandable with top safe areas ([87bcf59](https://github.com/framework7io/framework7/commit/87bcf593b541f8f374919d43b9695c5cdc8a8211))
+- **touch-ripple:** tweak touch ripple appearance ([a861e12](https://github.com/framework7io/framework7/commit/a861e12c06fbe6eaa8f6df05ec1806c46f20199f))
 - **core:** add new router component `$useState` method ([677af59](https://github.com/framework7io/framework7/commit/677af591ae76e58e62355429e1165897fcf71fa8))
 - **photo-browser:** add new swipeable Thumbs ([d3313d6](https://github.com/framework7io/framework7/commit/d3313d6ad5e5dd5f0948e41d2b5bb1a85a5963df))
 - remove `colorTheme` prop in React, Vue, Svelte components ([90ecff6](https://github.com/framework7io/framework7/commit/90ecff6bc3ddeac6fe3462a0fb11c56418d0a907))
